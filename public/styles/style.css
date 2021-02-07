@@ -1,42 +1,38 @@
-$font-family: 'Spartan', sans-serif;
-$grey: hsl(0, 0, 90%);
-$middle-grey: rgb(129, 127, 127);
-$red: #7e2013;
-
-* {
-  &,
-  &:before,
-  &:after {
-    box-sizing: border-box;
-  }
+*, *:before, *:after {
+  box-sizing: border-box;
 }
 
 body {
   max-width: 52em;
   padding: 0 1em;
   margin: 0 auto;
-  font-family: $font-family;
+  font-family: "Spartan", sans-serif;
   line-height: 2;
 }
 
 a {
-  color: $red;
+  color: #7e2013;
   text-decoration: none;
 }
 
 nav {
   display: flex;
-  a,
-  button {
-    padding: 1em 0;
-    border: 0;
-    &:not(:last-child) {
-      margin-right: 1em;
-    }
-    &:first-child {
-      margin-right: auto;
-    }
-  }
+}
+
+nav a,
+nav button {
+  padding: 1em 0;
+  border: 0;
+}
+
+nav a:not(:last-child),
+nav button:not(:last-child) {
+  margin-right: 1em;
+}
+
+nav a:first-child,
+nav button:first-child {
+  margin-right: auto;
 }
 
 h1,
@@ -45,9 +41,13 @@ h3,
 p {
   margin: 0;
   line-height: inherit;
-  &:not(:last-child) {
-    margin-bottom: 1rem;
-  }
+}
+
+h1:not(:last-child),
+h2:not(:last-child),
+h3:not(:last-child),
+p:not(:last-child) {
+  margin-bottom: 1rem;
 }
 
 img {
@@ -68,7 +68,7 @@ select,
 button,
 .btn {
   padding: 1em;
-  border: 1px solid $grey;
+  border: 1px solid #e6e6e6;
   border-radius: 0;
   margin-bottom: 1em;
   font: inherit;
@@ -86,7 +86,7 @@ label {
 }
 
 .home_view {
-  background-image: url('/images/letter.jpeg');
+  background-image: url("/images/letter.jpeg");
   height: 640px;
   width: 1460px;
   margin-left: -330px;
@@ -96,16 +96,19 @@ label {
   position: relative;
   text-align: right;
   padding-right: 18.5em;
-  h1 {
-    font-weight: 100;
-    padding-top: 12em;
-  }
-
-  p {
-    color: rgb(129, 127, 127);
-  }
-
-  span {
-    color: $middle-grey;
-  }
 }
+
+.home_view h1 {
+  font-weight: 100;
+  padding-top: 12em;
+}
+
+.home_view p {
+  color: #817f7f;
+}
+
+.home_view span {
+  color: #817f7f;
+}
+
+/*# sourceMappingURL=style.css.map */
