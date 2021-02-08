@@ -18,12 +18,12 @@ const schema = new mongoose.Schema({
   },
   role: {
     type: String,
-    enum: ['Publisher', 'Viewer'],
+    enum: ['publisher', 'viewer'],
     required: true
   },
   /*we have to figure out, how to deal best with the languages*/
-  language: {
-    type: [String]
+  department: {
+    type: String
   }
 });
 

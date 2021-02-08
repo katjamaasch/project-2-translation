@@ -12,21 +12,22 @@ router.get('/sign-up', (req, res, next) => {
 });
 
 router.post('/sign-up', (req, res, next) => {
-
-  const { name, email, password } = req.body;
-
+  const { name, email, password, role, department } = req.body;
+  console.log(req.body);
   bcryptjs
     .hash(password, 10)
     .then((hash) => {
       return User.create({
         name,
         email,
+        role,
+        department,
         passwordHashAndSalt: hash
       });
     })
     .then((user) => {
       req.session.userId = user._id;
-      res.redirect('/private');
+      res.redirect('/private', { user });
     })
     .catch((error) => {
       next(error);
