@@ -20,7 +20,9 @@ router.get('/sign-up', (req, res, next) => {
 // Shall we add code to check if the user already exists?
 // Should we redirect after sign-up to res.redirect('/sign-in')?
 router.post('/sign-up', (req, res, next) => {
+
   const { name, email, password } = req.body;
+
   bcryptjs
     .hash(password, 10)
     .then((hash) => {

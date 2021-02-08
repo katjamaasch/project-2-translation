@@ -1,5 +1,7 @@
-$font-sans: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$font-family: 'Spartan', sans-serif;
 $grey: hsl(0, 0, 90%);
+$middle-grey: rgb(129, 127, 127);
+$red: #7e2013;
 
 * {
   &,
@@ -13,13 +15,12 @@ body {
   max-width: 52em;
   padding: 0 1em;
   margin: 0 auto;
-  font-family: sans-serif;
-  font-family: $font-sans;
+  font-family: $font-family;
   line-height: 2;
 }
 
 a {
-  color: inherit;
+  color: $red;
   text-decoration: none;
 }
 
@@ -60,11 +61,12 @@ form {
 }
 
 input:not([type='checkbox']),
-input:not([type='radio']),
+// input:not([type='radio']),
 input:not([type='range']),
 textarea,
 select,
 button,
+fieldset,
 .btn {
   padding: 1em;
   border: 1px solid $grey;
@@ -75,6 +77,38 @@ button,
   background-color: transparent;
 }
 
+/* why is this not working but only radio-buttons?: 
+input [type='radio'] {
+    margin-right: 2em;
+}
+*/
+.radio-buttons {
+  margin-right: 1.5em;
+}
+
+/*sign-up: why is dropdown and file upload text color black?*/
+
+.custom-file-upload {
+  border: 1px solid $grey;
+  display: inline-block;
+  padding: 1em;
+  border-radius: 0;
+  cursor: pointer;
+  margin-bottom: 1em;
+  color: $middle-grey;
+}
+
+.role-select {
+  color: $middle-grey;
+  padding: 1.3em;
+}
+
+.selected-option {
+  color: black;
+}
+
+/*why is selected role not displayed in black?*/
+
 textarea {
   min-height: 8em;
   resize: vertical;
@@ -82,4 +116,29 @@ textarea {
 
 label {
   margin-bottom: 0.5em;
+}
+
+.home_view {
+  background-image: url('/images/letter.jpeg');
+  height: 640px;
+  width: 1460px;
+  margin-left: -330px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  text-align: right;
+  padding-right: 18.5em;
+  h1 {
+    font-weight: 100;
+    padding-top: 12em;
+  }
+
+  p {
+    color: rgb(129, 127, 127);
+  }
+
+  span {
+    color: $middle-grey;
+  }
 }

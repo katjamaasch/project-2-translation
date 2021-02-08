@@ -6,13 +6,21 @@ body {
   max-width: 52em;
   padding: 0 1em;
   margin: 0 auto;
+<<<<<<< HEAD
   font-family: sans-serif;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+=======
+  font-family: "Spartan", sans-serif;
+>>>>>>> 3cc0e9ee1af946c258ce656e3c99a525af9aae48
   line-height: 2;
 }
 
 a {
+<<<<<<< HEAD
   color: inherit;
+=======
+  color: #7e2013;
+>>>>>>> 3cc0e9ee1af946c258ce656e3c99a525af9aae48
   text-decoration: none;
 }
 
@@ -62,11 +70,18 @@ form {
 }
 
 input:not([type='checkbox']),
+<<<<<<< HEAD
 input:not([type='radio']),
+=======
+>>>>>>> 3cc0e9ee1af946c258ce656e3c99a525af9aae48
 input:not([type='range']),
 textarea,
 select,
 button,
+<<<<<<< HEAD
+=======
+fieldset,
+>>>>>>> 3cc0e9ee1af946c258ce656e3c99a525af9aae48
 .btn {
   padding: 1em;
   border: 1px solid #e6e6e6;
@@ -77,6 +92,39 @@ button,
   background-color: transparent;
 }
 
+<<<<<<< HEAD
+=======
+/* why is this not working but only radio-buttons?: 
+input [type='radio'] {
+    margin-right: 2em;
+}
+*/
+.radio-buttons {
+  margin-right: 1.5em;
+}
+
+/*sign-up: why is dropdown and file upload text color black?*/
+.custom-file-upload {
+  border: 1px solid #e6e6e6;
+  display: inline-block;
+  padding: 1em;
+  border-radius: 0;
+  cursor: pointer;
+  margin-bottom: 1em;
+  color: #817f7f;
+}
+
+.role-select {
+  color: #817f7f;
+  padding: 1.3em;
+}
+
+.selected-option {
+  color: black;
+}
+
+/*why is selected role not displayed in black?*/
+>>>>>>> 3cc0e9ee1af946c258ce656e3c99a525af9aae48
 textarea {
   min-height: 8em;
   resize: vertical;
@@ -86,4 +134,33 @@ label {
   margin-bottom: 0.5em;
 }
 
+<<<<<<< HEAD
+=======
+.home_view {
+  background-image: url("/images/letter.jpeg");
+  height: 640px;
+  width: 1460px;
+  margin-left: -330px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  text-align: right;
+  padding-right: 18.5em;
+}
+
+.home_view h1 {
+  font-weight: 100;
+  padding-top: 12em;
+}
+
+.home_view p {
+  color: #817f7f;
+}
+
+.home_view span {
+  color: #817f7f;
+}
+
+>>>>>>> 3cc0e9ee1af946c258ce656e3c99a525af9aae48
 /*# sourceMappingURL=style.css.map */

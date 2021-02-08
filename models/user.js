@@ -2,6 +2,8 @@
 
 const mongoose = require('mongoose');
 
+// Shall we add required for name, password ?
+// Do we want to have a profile picture? Or only in the wish list and not the MVP?
 const schema = new mongoose.Schema({
   name: {
     type: String,
@@ -15,6 +17,16 @@ const schema = new mongoose.Schema({
   },
   passwordHashAndSalt: {
     type: String
+  },
+  role: {
+    type: String,
+    enum: ['Publisher', 'Interpreter'],
+    required: true
+  },
+  /*we have to figure out, how to deal best with the languages*/
+
+  language: {
+    type: [String]
   }
 });
 
