@@ -61,11 +61,12 @@ form {
 }
 
 input:not([type='checkbox']),
-input:not([type='radio']),
+// input:not([type='radio']),
 input:not([type='range']),
 textarea,
 select,
 button,
+fieldset,
 .btn {
   padding: 1em;
   border: 1px solid $grey;
@@ -75,6 +76,38 @@ button,
   color: inherit;
   background-color: transparent;
 }
+
+/* why is this not working but only radio-buttons?: 
+input [type='radio'] {
+    margin-right: 2em;
+}
+*/
+.radio-buttons {
+  margin-right: 1.5em;
+}
+
+/*sign-up: why is dropdown and file upload text color black?*/
+
+.custom-file-upload {
+  border: 1px solid $grey;
+  display: inline-block;
+  padding: 1em;
+  border-radius: 0;
+  cursor: pointer;
+  margin-bottom: 1em;
+  color: $middle-grey;
+}
+
+.role-select {
+  color: $middle-grey;
+  padding: 1.3em;
+}
+
+.selected-option {
+  color: black;
+}
+
+/*why is selected role not displayed in black?*/
 
 textarea {
   min-height: 8em;

@@ -15,6 +15,15 @@ const schema = new mongoose.Schema({
   },
   passwordHashAndSalt: {
     type: String
+  },
+  role: {
+    type: String,
+    enum: ['Publisher', 'Interpreter'],
+    required: true
+  },
+  /*we have to figure out, how to deal best with the languages*/
+  language: {
+    type: [String]
   }
 });
 

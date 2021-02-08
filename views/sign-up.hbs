@@ -6,12 +6,55 @@
 
   <label for="input-email">Email</label>
   <input type="email" id="input-email" name="email" placeholder="Your Email" />
+
+<!--
+  <label for="profile-pic" class="custom-file-upload">Upload Profile Picture</label>
+  <input type="file" id="profile-pic" name="profile-pic" placeholder="Your Profile Picture" />
+-->
+
   
   <label for="role-select">Role</label>
-  <select name="roles" id="role-select">
+  <select name="roles" id="role-select" onchange="yesnoCheck(this)" class="role-select">
     <option value="">--Please choose an option--</option>
-    <option value="publisher">Publisher</option>
-    <option value="interpreter">Interpreter</option>
+    <option value="publisher" class="selected-option">Publisher</option>
+    <option id="languageOption" value="interpreter" class="selected-option">Interpreter</option>
+</select>
+
+<div id="interpreterCheck" style="display:none">
+<p>Interpretation languages</p>
+<fieldset>
+    <label for="en-us">English (US)</label> 
+    <input type="radio" id="en-us" name="en-us" value="en-us" class="radio-buttons">
+    <label for="en-gb">English (GB)</label> 
+    <input type="radio" id="en-gb" name="en-gb" value="en-gb" class="radio-buttons">
+    <label for="ZH">Chinese</label> 
+    <input type="radio" id="zh" name="zh" value="zh" class="radio-buttons">
+    <label for="fr">French</label> 
+    <input type="radio" id="fr" name="fr" value="fr" class="radio-buttons">
+    <label for="it">Italian</label> 
+    <input type="radio" id="it" name="it" value="it" class="radio-buttons">
+    <label for="es">Spanish</label> 
+    <input type="radio" id="es" name="es" value="es" class="radio-buttons">
+  </fieldset>
+
+</div>
+
+<script type="text/javascript">
+  function yesnoCheck(interpreterSelect) {   
+    if(interpreterSelect){
+        interpreterOptionValue = document.getElementById("languageOption").value;
+        if(interpreterOptionValue == interpreterSelect.value){
+            document.getElementById("interpreterCheck").style.display = "block";
+        }
+        else{
+            document.getElementById("interpreterCheck").style.display = "none";
+        }
+    }
+    else {
+        document.getElementById("interpreterCheck").style.display = "none";
+    }
+}
+</script>
 
   <label for="input-password">Password</label>
   <input type="password" name="password" id="input-password" placeholder="A Strong Password" />
