@@ -18,7 +18,7 @@ const schema = new mongoose.Schema({
   },
   role: {
     type: String,
-    enum: ['Publisher', 'Interpreter'],
+    enum: ['Publisher', 'Viewer'],
     required: true
   },
   /*we have to figure out, how to deal best with the languages*/
