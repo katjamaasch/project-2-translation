@@ -19,41 +19,33 @@ and need to add enctype="multipart/form-data" in form tag--}}
   <select name="roles" id="role-select" onchange="yesnoCheck(this)" class="role-select">
     <option value="">--Please choose an option--</option>
     <option value="publisher" class="selected-option">Publisher</option>
-    <option id="languageOption" value="interpreter" class="selected-option">Interpreter</option>
+    <option id="viewOption" value="viewer" class="selected-option">Viewer</option>
 </select>
 
-<div id="interpreterCheck" style="display:none">
-<p>Interpretation languages</p>
+<div id="viewerCheck" style="display:none">
+<p>Department</p>
 <fieldset>
-    <label for="en-us">English (US)</label> 
-    <input type="radio" id="en-us" name="en-us" value="en-us" class="radio-buttons">
-    <label for="en-gb">English (GB)</label> 
-    <input type="radio" id="en-gb" name="en-gb" value="en-gb" class="radio-buttons">
-    <label for="ZH">Chinese</label> 
-    <input type="radio" id="zh" name="zh" value="zh" class="radio-buttons">
-    <label for="fr">French</label> 
-    <input type="radio" id="fr" name="fr" value="fr" class="radio-buttons">
-    <label for="it">Italian</label> 
-    <input type="radio" id="it" name="it" value="it" class="radio-buttons">
-    <label for="es">Spanish</label> 
-    <input type="radio" id="es" name="es" value="es" class="radio-buttons">
+    <label for="dtp">DTP</label> 
+    <input type="radio" id="dtp" name="dtp" value="dtp" class="radio-buttons">
+    <label for="experienceDesign">Experience Design</label> 
+    <input type="radio" id="experienceDesign" name="experienceDesign" value="experienceDesign" class="radio-buttons">
   </fieldset>
 
 </div>
 
 <script type="text/javascript">
-  function yesnoCheck(interpreterSelect) {   
-    if(interpreterSelect){
-        interpreterOptionValue = document.getElementById("languageOption").value;
-        if(interpreterOptionValue == interpreterSelect.value){
-            document.getElementById("interpreterCheck").style.display = "block";
+  function yesnoCheck(viewerSelect) {   
+    if(viewerSelect){
+        interpreterOptionValue = document.getElementById("viewOption").value;
+        if(interpreterOptionValue == viewerSelect.value){
+            document.getElementById("viewerCheck").style.display = "block";
         }
         else{
-            document.getElementById("interpreterCheck").style.display = "none";
+            document.getElementById("viewerCheck").style.display = "none";
         }
     }
     else {
-        document.getElementById("interpreterCheck").style.display = "none";
+        document.getElementById("viewerCheck").style.display = "none";
     }
 }
 </script>
