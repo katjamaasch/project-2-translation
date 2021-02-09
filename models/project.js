@@ -10,14 +10,17 @@ const projectSchema = new mongoose.Schema(
       type: String,
       required: true
     },
-    project: {
+    projectname: {
       type: String,
       required: true
     },
+    projectimage: {
+      type: String
+    },
     status: {
       type: String,
-      enum: ['In Progress', 'Completed'],
-      required: true
+      enum: ['in progress', 'completed'],
+      default: 'in progress'
     },
     creator: {
       type: mongoose.Types.ObjectId,

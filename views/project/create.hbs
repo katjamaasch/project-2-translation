@@ -1,1 +1,18 @@
-<h1>Test create project page (Frame 2)</h1>
+<h1>Create a new project</h1>
+
+<form action="/project/confirmation" method="POST" enctype="multipart/form-data">
+
+
+  <label for="input-client">Client: </label>
+  <input type="text" id="input-client" name="client" placeholder="Client" />
+
+  <label for="projectname">Project: </label>
+  <input type="text" id="projectname" name="projectname" placeholder="Project Name" />
+
+  <label for="projectimage">Upload a thumbnail:</label>
+  <input id="projectimage" type="file" name="projectimage">
+
+<button>Submit!</button>
+</form>
+
+  <h2>Enter texts and add translation languages where needed</h2>

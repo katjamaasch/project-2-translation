@@ -6,21 +6,12 @@ body {
   max-width: 52em;
   padding: 0 1em;
   margin: 0 auto;
-<<<<<<< HEAD
-  font-family: sans-serif;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-=======
   font-family: "Spartan", sans-serif;
->>>>>>> 3cc0e9ee1af946c258ce656e3c99a525af9aae48
   line-height: 2;
 }
 
 a {
-<<<<<<< HEAD
-  color: inherit;
-=======
   color: #7e2013;
->>>>>>> 3cc0e9ee1af946c258ce656e3c99a525af9aae48
   text-decoration: none;
 }
 
@@ -70,18 +61,11 @@ form {
 }
 
 input:not([type='checkbox']),
-<<<<<<< HEAD
-input:not([type='radio']),
-=======
->>>>>>> 3cc0e9ee1af946c258ce656e3c99a525af9aae48
 input:not([type='range']),
 textarea,
 select,
 button,
-<<<<<<< HEAD
-=======
 fieldset,
->>>>>>> 3cc0e9ee1af946c258ce656e3c99a525af9aae48
 .btn {
   padding: 1em;
   border: 1px solid #e6e6e6;
@@ -92,8 +76,6 @@ fieldset,
   background-color: transparent;
 }
 
-<<<<<<< HEAD
-=======
 /* why is this not working but only radio-buttons?: 
 input [type='radio'] {
     margin-right: 2em;
@@ -124,7 +106,6 @@ input [type='radio'] {
 }
 
 /*why is selected role not displayed in black?*/
->>>>>>> 3cc0e9ee1af946c258ce656e3c99a525af9aae48
 textarea {
   min-height: 8em;
   resize: vertical;
@@ -134,8 +115,6 @@ label {
   margin-bottom: 0.5em;
 }
 
-<<<<<<< HEAD
-=======
 .home_view {
   background-image: url("/images/letter.jpeg");
   height: 640px;
@@ -162,5 +141,4 @@ label {
   color: #817f7f;
 }
 
->>>>>>> 3cc0e9ee1af946c258ce656e3c99a525af9aae48
 /*# sourceMappingURL=style.css.map */
