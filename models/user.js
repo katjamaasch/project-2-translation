@@ -24,14 +24,8 @@ const schema = new mongoose.Schema({
     required: true
   },
   /*we have to figure out, how to deal best with the languages*/
-<<<<<<< HEAD
-
-  language: {
-    type: [String]
-=======
   department: {
     type: String
->>>>>>> 46e02b8e724883087e568ca3026594b9ec499eca
   }
 });
 
