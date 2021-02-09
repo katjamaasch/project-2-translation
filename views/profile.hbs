@@ -1,5 +1,6 @@
-<h1>Profile</h1>
-<p>This page should only be accessible to authenticated users.</p>
+<div>
+    <h2>User Profile</h2>
+{{!<p>This page should only be accessible to authenticated users.</p>--}}
 <span><strong>Name</strong>: {{user.name}}</span>
 <br />
 <span><strong>Email</strong>: {{user.email}}</span>
@@ -7,3 +8,42 @@
 <span><strong>Role</strong>: {{user.role}}</span>
 <br />
 <span><strong>Department</strong>: {{user.department}}</span>
+</div>
+
+<hr>
+
+<div class="live-projects-section">
+   <h2>Review Active Projects</h2>
+   {{!--
+<ul>
+    {{#each projects}}
+    <li>
+        <h3>Project name: {{project}}</h3>
+        <h4>Project status: {{status}}</h4>
+        <h4>Created by: </h4>
+        <h4>Created on: </h4>
+        <a href="/project/{{_id}}">Review</a> 
+    </li>
+
+    {{/each}}
+</ul>
+--}}
+</div>
+<hr>
+
+<div>
+     {{!--<h2>List all translation projects</h2>--}}
+     {{!--<a href="/project/all">Get list!</a>--}}
+     <form action="/project/all">
+     <button type="submit">List all projects</button>
+     </form>
+</div>
+
+
+
+<div>
+    {{!--<a href="/project/create">Create new project!</a>--}}
+    <form action="/project/create">
+    <button type="submit">Create new project</button>
+    </form>
+</div>

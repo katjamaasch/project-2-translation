@@ -13,14 +13,23 @@
 
 const express = require('express');
 const router = new express.Router();
-const bcryptjs = require('bcryptjs');
+//const bcryptjs = require('bcryptjs');
 const routeGuard = require('./../middleware/route-guard');
 
-/*router.get('/', (req, res, next) => {
-  res.render('home');
-});*/
+// Project = require('./../models/project');
 
 router.get('/', routeGuard, (req, res, next) => {
+  /*Project.find()
+.then((projects) =>{
+    res.render('profile', {status: 'In Progress'});
+})
+.catch((error)=>{
+    next((error));
+});
+});
+
+
+*/
   res.render('profile');
 });
 
