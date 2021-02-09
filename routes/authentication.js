@@ -11,7 +11,7 @@ const User = require('./../models/user');
 const router = new Router();
 
 router.get('/sign-up', (req, res, next) => {
-  res.render('sign-up');
+  res.render('authentication/sign-up');
 });
 
 // If we want to have profile picture  upload,
@@ -20,21 +20,22 @@ router.get('/sign-up', (req, res, next) => {
 // Shall we add code to check if the user already exists?
 // Should we redirect after sign-up to res.redirect('/sign-in')?
 router.post('/sign-up', (req, res, next) => {
-
-  const { name, email, password } = req.body;
-
+  const { name, email, password, role, department } = req.body;
+  console.log(req.body);
   bcryptjs
     .hash(password, 10)
     .then((hash) => {
       return User.create({
         name,
         email,
+        role,
+        department,
         passwordHashAndSalt: hash
       });
     })
     .then((user) => {
       req.session.userId = user._id;
-      res.redirect('/private');
+      res.redirect('sign-in');
     })
     .catch((error) => {
       next(error);
@@ -42,7 +43,7 @@ router.post('/sign-up', (req, res, next) => {
 });
 
 router.get('/sign-in', (req, res, next) => {
-  res.render('sign-in');
+  res.render('authentication/sign-in');
 });
 
 // Need to decide if publisher, where to direct user to and which view to render
