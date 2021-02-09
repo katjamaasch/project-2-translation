@@ -13,12 +13,22 @@ const basicAuthenticationDeserializer = require('./middleware/basic-authenticati
 const bindUserToViewLocals = require('./middleware/bind-user-to-view-locals.js');
 const baseRouter = require('./routes/index');
 const authenticationRouter = require('./routes/authentication');
+//const profileRouter = require('./routes/profile');
+//const projectRouter = require('./routes/project');
+
+// Codes added by Sok Mun but not yet activated until needed in the future:
 // const MongoStore = connectMongo(expressSession);
+// const hbs = require('hbs');
+// const hbsDateHelper = require('helper-date');
 
 const app = express();
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
+
+// Codes added by Sok Mun but not yet activated until needed in the future:
+// hbs.registerPartials('views/partials');
+// hbs.registerHelper('date', hbsDateHelper);
 
 app.use(serveFavicon(path.join(__dirname, 'public/images', 'favicon.ico')));
 app.use(
@@ -55,6 +65,8 @@ app.use(bindUserToViewLocals);
 
 app.use('/', baseRouter);
 app.use('/authentication', authenticationRouter);
+//app.use('/profile', profileRouter);
+//app.use('/project', projectRouter);
 
 // Catch missing routes and forward to error handler
 app.use((req, res, next) => {

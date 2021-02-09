@@ -2,7 +2,6 @@
 
 //const { Router } = require('express');
 
-// const User = require('./../models/user');
 //const Project = require('./../models/project');
 //const Textblock = require('./../models/textblock');
 
