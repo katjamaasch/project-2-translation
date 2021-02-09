@@ -1,12 +1,13 @@
 {
   "name": "project-2-translation",
   "version": "0.1.0",
-  "private": true,
+  "engines": {
+    "node": "14.x"
+  },
+  
   "scripts": {
     "start": "node ./server",
-    "dev": "nodemon ./server",
-    "dev:debug": "DEBUG=project-2-translation* npm run dev",
-    "lint": "eslint ."
+    "dev": "nodemon ./server"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
