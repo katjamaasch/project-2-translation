@@ -142,3 +142,17 @@ label {
     color: $middle-grey;
   }
 }
+
+.status {
+  color: $red;
+  margin-top: 2em;
+  border: #7e2013 solid 1px;
+  border-radius: 25px;
+  padding: 3px 10px;
+}
+
+.projectname {
+  color: $middle-grey;
+  font-weight: 200;
+  line-height: 1;
+}

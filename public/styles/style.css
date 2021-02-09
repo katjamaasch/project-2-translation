@@ -141,4 +141,18 @@ label {
   color: #817f7f;
 }
 
+.status {
+  color: #7e2013;
+  margin-top: 2em;
+  border: #7e2013 solid 1px;
+  border-radius: 25px;
+  padding: 3px 10px;
+}
+
+.projectname {
+  color: #817f7f;
+  font-weight: 200;
+  line-height: 1;
+}
+
 /*# sourceMappingURL=style.css.map */

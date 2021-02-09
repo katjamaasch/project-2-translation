@@ -1,1 +1,15 @@
-<h1>Test confirmation page (Frame 8)</h1>
+
+{{#with project}}
+<p>The project has been successfully created by {{creator}} at {{creationDate}}.</p>
+
+
+<br>
+
+<h1>{{client}}</h1>
+<h1 class="projectname">
+{{projectname}}
+</h1>
+
+<small class="status">
+{{status}}</small>
+{{/with}}
