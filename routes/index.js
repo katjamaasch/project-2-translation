@@ -8,8 +8,8 @@ router.get('/', (req, res, next) => {
   res.render('home');
 });
 
-router.get('/private', routeGuard, (req, res, next) => {
-  res.render('private');
-});
+/*router.get('/profile', routeGuard, (req, res, next) => {
+  res.render('profile');
+});*/
 
 module.exports = router;
