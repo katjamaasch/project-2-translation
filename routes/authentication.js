@@ -21,7 +21,7 @@ router.get('/sign-up', (req, res, next) => {
 // Should we redirect after sign-up to res.redirect('/sign-in')?
 router.post('/sign-up', (req, res, next) => {
   const { name, email, password, role, department } = req.body;
-  console.log(req.body);
+  //console.log(req.body);
   bcryptjs
     .hash(password, 10)
     .then((hash) => {
