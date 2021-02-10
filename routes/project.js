@@ -25,7 +25,7 @@ router.get('/create', routeGuard, (req, res, next) => {
 });
 
 router.post(
-  '/confirmation',
+  '/create',
   uploadMiddleware.single('projectimage'),
   (req, res, next) => {
     //console.log(req.body);

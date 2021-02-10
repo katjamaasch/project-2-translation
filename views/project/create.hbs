@@ -1,6 +1,6 @@
 <h1>Create a new project</h1>
 
-<form action="/project/confirmation" method="POST" enctype="multipart/form-data">
+<form action="/project/create" method="POST" enctype="multipart/form-data">
 
 
   <label for="input-client">Client: </label>
@@ -11,6 +11,29 @@
 
   <label for="projectimage">Upload a thumbnail:</label>
   <input id="projectimage" type="file" name="projectimage">
+
+
+
+  <label for="add-textblock">Add a new textblock</label>
+  <select name="textblock" id="add-textblock" onchange="yesnoCheck(this)" class="add-textblock">
+    <option value="">--Please choose an option--</option>
+    <option id="viewOption" value="title" class="selected-option">Title</option>
+    <option id="viewOption" value="headline" class="selected-option">Headline</option>
+    <option id="viewOption" value="subheadline" class="selected-option">Subheadline</option>
+    <option id="viewOption" value="copytext" class="selected-option">Copytext</option>
+</select>
+
+
+<script>
+const container = document.getElementById("add-textblock");
+//Create an <input> element, set its type and name attributes 
+const input = document.createElement("add-textblock");
+input.type = "text";
+input.name = "blog_linku_" + i;
+input.required = "required";
+//Add Element to div
+container.appendChild(input);
+</script>
 
 <button>Submit!</button>
 </form>
