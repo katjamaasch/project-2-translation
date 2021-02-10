@@ -1,6 +1,4 @@
-*,
-*:before,
-*:after {
+*, *:before, *:after {
   box-sizing: border-box;
 }
 
@@ -8,7 +6,7 @@ body {
   max-width: 52em;
   padding: 0 1em;
   margin: 0 auto;
-  font-family: 'Spartan', sans-serif;
+  font-family: "Spartan", sans-serif;
   line-height: 2;
 }
 
@@ -118,7 +116,7 @@ label {
 }
 
 .home_view {
-  background-image: url('/images/letter.jpeg');
+  background-image: url("/images/letter.jpeg");
   height: 640px;
   width: 1460px;
   margin-left: -330px;
@@ -141,6 +139,20 @@ label {
 
 .home_view span {
   color: #817f7f;
+}
+
+.status {
+  color: #7e2013;
+  margin-top: 2em;
+  border: #7e2013 solid 1px;
+  border-radius: 25px;
+  padding: 3px 10px;
+}
+
+.projectname {
+  color: #817f7f;
+  font-weight: 200;
+  line-height: 1;
 }
 
 /*# sourceMappingURL=style.css.map */

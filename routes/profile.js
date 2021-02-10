@@ -21,7 +21,7 @@ const routeGuard = require('./../middleware/route-guard');
 router.get('/', routeGuard, (req, res, next) => {
   /*Project.find()
 .then((projects) =>{
-    res.render('profile', {status: 'In Progress'});
+    res.render('profile', {status: 'in progress'});
 })
 .catch((error)=>{
     next((error));

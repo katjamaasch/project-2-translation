@@ -14,7 +14,7 @@ const bindUserToViewLocals = require('./middleware/bind-user-to-view-locals.js')
 const baseRouter = require('./routes/index');
 const authenticationRouter = require('./routes/authentication');
 const profileRouter = require('./routes/profile');
-//const projectRouter = require('./routes/project');
+const projectRouter = require('./routes/project');
 
 // Codes added by Sok Mun but not yet activated until needed in the future:
 // const MongoStore = connectMongo(expressSession);
@@ -66,7 +66,7 @@ app.use(bindUserToViewLocals);
 app.use('/', baseRouter);
 app.use('/authentication', authenticationRouter);
 app.use('/profile', profileRouter);
-//app.use('/project', projectRouter);
+app.use('/project', projectRouter);
 
 // Catch missing routes and forward to error handler
 app.use((req, res, next) => {
