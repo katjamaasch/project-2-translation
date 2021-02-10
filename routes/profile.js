@@ -16,21 +16,20 @@ const router = new express.Router();
 //const bcryptjs = require('bcryptjs');
 const routeGuard = require('./../middleware/route-guard');
 
-// Project = require('./../models/project');
+const Project = require('./../models/project');
 
 router.get('/', routeGuard, (req, res, next) => {
-  /*Project.find()
-.then((projects) =>{
-    res.render('profile', {status: 'in progress'});
-})
-.catch((error)=>{
-    next((error));
-});
+  Project.find({ status: 'in progress' })
+    .then((projects) => {
+      res.render('profile', { projects });
+    })
+    .catch((error) => {
+      next(error);
+    });
 });
 
-
-*/
+/* {}
   res.render('profile');
-});
+});*/
 
 module.exports = router;
