@@ -92,7 +92,7 @@ router.get('/:id/delete', (req, res, next) => {
 });
 
 router.post('/:id/delete', (req, res, next) => {
-  const id = req.params.id;
+  let id = req.params.id;
   Project.findByIdAndDelete(id)
     .then(() => {
       console.log(id);
