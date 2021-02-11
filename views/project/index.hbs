@@ -1,10 +1,9 @@
-{{!--<h1>Test Display page for all projects (Frame 9)</h1>--}}
 
 
 <div class="list-all-projects-section">
    <h2>List All Projects</h2>
    
-<ul>
+{{!--<ul>
     {{#each projects}}
     <li>
         <h3>Project name: {{projectname}}</h3>
@@ -16,6 +15,23 @@
     </li>
 
     {{/each}}
-</ul>
+</ul> --}}
 
 </div>
+<h1>All projects from A–Z</h1>
+    {{#each projects}}
+    <div class="allprojects">
+        <img src="{{projectimage}}" alt="" class="projectimage">
+        <a href="/project/{{_id}}"><h3 class="projectname_list">{{projectname}} ({{client}})</h3></a>
+</div>
+
+<div class="index-projects-details">
+            <small class="status">{{status}}</small>
+        <p>Created by <b>{{creator.name}}</b> on {{{date creationDate "DD/MM/YYYY"}}}</p>
+    </div>
+
+    <div>
+         <a href="/project/{{_id}}">Edit</a> 
+        <a href="/{{_id}}/delete">Delete</a>
+    </div>
+    {{/each}}

@@ -31,17 +31,19 @@ router.post(
     //console.log(req.body);
     //console.log('req.file: ', req.file);
     const data = req.body;
-    const imagepath = req.file.path;
-    const newProject = new Project({
+    let projectimage;
+    if (req.file) {
+      projectimage = req.file.path;
+    }
+
+    Project.create({
       client: data.client,
       projectname: data.projectname,
-      projectimage: imagepath,
+      projectimage: projectimage,
       creator: req.user._id
-    });
-    newProject
-      .save()
+    })
       .then((project) => {
-        res.render('project/confirmation', { project });
+        res.redirect(`/project/${project._id}`);
       })
       .catch((error) => {
         next(error);
@@ -49,10 +51,27 @@ router.post(
   }
 );
 
-router.get('/all', routeGuard, (req, res, next) => {
-  Project.find({})
+router.get('/all', (req, res, next) => {
+  Project.find()
+    .sort([['projectname', 1]])
     .then((projects) => {
       res.render('project/index', { projects });
+    });
+});
+
+router.get('/:id', (req, res, next) => {
+  const id = req.params.id;
+  Project.findById(id)
+    .populate('creator')
+    .then((project) => {
+      console.log(project);
+      res.render('project/confirmation', {
+        projectname: project.projectname,
+        projectimage: project.projectimage,
+        client: project.client,
+        status: project.status,
+        creator: project.creator.name
+      });
     })
     .catch((error) => {
       next(error);

@@ -1,10 +1,10 @@
 
-{{#with project}}
-<p>The project has been successfully created by {{creator}} at {{creationDate}}.</p>
+
+<p class="projecthasbeencreated">Project created by {{creator}} on {{{ date creationDate "DD.MM.YYYY" }}} at {{{ date creationDate "HH:mm" }}}</p>
 
 
 <br>
-
+<img src="{{projectimage}}" alt="projectimage" class="projectimage">
 <h1>{{client}}</h1>
 <h1 class="projectname">
 {{projectname}}
@@ -12,4 +12,3 @@
 
 <small class="status">
 {{status}}</small>
-{{/with}}

@@ -151,8 +151,105 @@ label {
   padding: 3px 10px;
 }
 
+/*
+.status-completed {
+  color: $red;
+  margin-top: 2em;
+  border: #1b998b solid 1px;
+  border-radius: 25px;
+  padding: 3px 10px;
+}
+*/
+
 .projectname {
   color: $middle-grey;
   font-weight: 200;
   line-height: 1;
+}
+
+.projecthasbeencreated {
+  background-color: #1b998b;
+  border: 1px solid #1b998b;
+  border-radius: 25px;
+  color: white;
+  text-align: center;
+}
+
+.projectimage {
+  border-radius: 50px;
+  height: 100px;
+  width: 100px;
+  margin-right: 2em;
+}
+
+.projectsinprogresslist {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: $middle-grey;
+  line-height: 2em;
+  margin-bottom: 4em;
+  h3 {
+    line-height: 1.5em;
+    margin-right: 1em;
+    //align-content: center;
+  }
+  img {
+    height: 50px;
+    width: 50px;
+  }
+}
+
+.allprojects {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: $middle-grey;
+  h3 {
+    line-height: 1.5em;
+    margin-right: 1em;
+    //align-content: center;
+  }
+  img {
+    height: 50px;
+    width: 50px;
+  }
+}
+
+.profile-header {
+  display: flex;
+  flex-direction: row;
+  img {
+    border-radius: 50px;
+    height: 100px;
+    width: 100px;
+    margin: 0 2em 2em 0;
+  }
+}
+
+.profile-contact-information {
+  color: $middle-grey;
+  font-size: 0.8em;
+  margin-left: 10.6em;
+  margin-bottom: 2em;
+}
+
+.profile-button-1 {
+  width: 20em;
+  margin-left: 8.5em;
+}
+
+.profile-button-2 {
+  width: 20em;
+  margin-left: 1.5em;
+}
+
+.profile-buttons {
+  display: flex;
+  flex-direction: row;
+}
+
+.index-projects-details {
+  margin-bottom: 3em;
+  margin-left: 5em;
 }

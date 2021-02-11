@@ -1,49 +1,51 @@
-<div>
-    <h2>User Profile</h2>
+<div class="profile-header">
+    <img src="{{profileUser.image}}" alt="profile picture">
+    <h2>Welcome in your personal work space, <br>{{profileUser.name}}!</h2>
+</div>
+<div class="profile-contact-information">
 {{!<p>This page should only be accessible to authenticated users.</p>--}}
-<span><strong>Name</strong>: {{user.name}}</span>
-<br />
-<span><strong>Email</strong>: {{user.email}}</span>
-<br />
-<span><strong>Role</strong>: {{user.role}}</span>
-<br />
-<span><strong>Department</strong>: {{user.department}}</span>
+<span><strong>Email</strong>: {{profileUser.email}}</span> //
+<span><strong>Role</strong>: {{profileUser.role}}</span>
+//
+<span><strong>Department</strong>: {{profileUser.department}}</span>
 </div>
 
-<hr>
 
-<div class="active-projects-section">
-   <h2>Review Active Projects</h2>
-   
-<ul>
-    {{#each projects}}
-    <li>
-        <h3>Project name: {{projectname}}</h3>
-        {{!--<h4>Project status: {{status}}</h4>
-        <h4>Created by: </h4>
-        <h4>Created on: {{{date creationDate "DD/MM/YYYY"}}}</h4>--}}
-        <a href="/project/{{_id}}">Review Project</a> 
-    </li>
-
-    {{/each}}
-</ul>
-
-</div>
-<hr>
-
-<div>
+<div class="profile-buttons">
      {{!--<h2>List all translation projects</h2>--}}
      {{!--<a href="/project/all">Get list!</a>--}}
      <form action="/project/all">
-     <button type="submit">List all projects</button>
+     <button class="profile-button-1">List all projects</button>
      </form>
+
+{{!- To be fixed :
+    {{!--<a href="/project/create">Create new project!</a>--}} --}}
+    {{#if user.role}}
+    {{!--{{#if profileUser.role.[0]}}--}}
+      <form action="/project/all">
+     <button class="profile-button-1">List all projects</button>
+     </form>
+    
+    {{/if}}
 </div>
+<hr>
+<div class="live-projects-section">
+  <br>
+   <h2>Ongoing Projects</h2>
+   <br>
+    {{#each projects}}
+    
+    <div class="projectsinprogresslist">
+        <img src="{{projectimage}}" class="projectimage" alt="">
+        <a href="/project/{{_id}}"><h3 class="projectname_list">{{projectname}} ({{client}})</h3></a>
+        <!-- 
+            <small class="status-{{status}}">{{status}}</small>
+        -->
 
+        <p> Created by <b>{{creator.name}}</b> on {{{date creationDate "DD/MM/YYYY"}}}</p>
+    </div>
+    {{/each}}
 
-
-<div>
-    {{!--<a href="/project/create">Create new project!</a>--}}
-    <form action="/project/create">
-    <button type="submit">Create new project</button>
-    </form>
 </div>
+<hr>
+
