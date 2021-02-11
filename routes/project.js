@@ -31,15 +31,17 @@ router.post(
     //console.log(req.body);
     //console.log('req.file: ', req.file);
     const data = req.body;
-    const imagepath = req.file.path;
-    const newProject = new Project({
+    let projectimage;
+    if (req.file) {
+      projectimage = req.file.path;
+    }
+
+    Project.create({
       client: data.client,
       projectname: data.projectname,
-      projectimage: imagepath,
+      projectimage: projectimage,
       creator: req.user._id
-    });
-    newProject
-      .save()
+    })
       .then((project) => {
         res.render('project/confirmation', { project });
       })
