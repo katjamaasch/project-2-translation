@@ -25,7 +25,8 @@ const schema = new mongoose.Schema({
   },
   /*we have to figure out, how to deal best with the languages*/
   department: {
-    type: String
+    type: String,
+    default: 'Editorial Department'
   }
 });
 

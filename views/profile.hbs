@@ -13,20 +13,17 @@
 <hr>
 
 <div class="live-projects-section">
+  <br>
    <h2>Review Active Projects</h2>
-   
-<ul>
+   <br>
     {{#each projects}}
-    <li>
-        <h3>Project name: {{projectname}}</h3>
-        <h4>Project status: {{status}}</h4>
-        <h4>Created by: </h4>
-        <h4>Created on: {{{date creationDate "DD/MM/YYYY"}}}</h4>
+    <div class="projectsinprogresslist">
+        <h3 class="projectname_list">{{projectname}} ({{client}})</h3>
+        <small class="status">{{status}}</small>
+        <p>Created by {{creator.name}} on {{{date creationDate "DD/MM/YYYY"}}}</p>
         <a href="/project/{{_id}}">Review Project</a> 
-    </li>
-
+    </div>
     {{/each}}
-</ul>
 
 </div>
 <hr>

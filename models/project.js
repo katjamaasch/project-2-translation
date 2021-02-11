@@ -15,7 +15,9 @@ const projectSchema = new mongoose.Schema(
       required: true
     },
     projectimage: {
-      type: String
+      type: String,
+      default:
+        'https://res.cloudinary.com/drqqpp/image/upload/c_scale,w_300/v1613041505/pexels-anni-roenkae-3109821_gtgdys.jpg'
     },
     status: {
       type: String,

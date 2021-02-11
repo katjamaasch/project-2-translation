@@ -156,3 +156,25 @@ label {
   font-weight: 200;
   line-height: 1;
 }
+
+.projecthasbeencreated {
+  background-color: #1b998b;
+  border: 1px solid #1b998b;
+  border-radius: 25px;
+  color: white;
+  text-align: center;
+}
+
+.projectimage {
+  border-radius: 50px;
+  height: 100px;
+  width: 100px;
+}
+
+.projectsinprogresslist {
+  line-height: 2em;
+  margin-bottom: 4em;
+  h3 {
+    line-height: 1em;
+  }
+}
