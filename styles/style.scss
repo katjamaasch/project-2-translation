@@ -145,7 +145,8 @@ label {
 }
 
 .status-ongoing {
-  color: $red;
+  color: white;
+  background-color: #7e2013;
   margin-top: 2em;
   border: #7e2013 solid 1px;
   border-radius: 25px;
@@ -156,7 +157,8 @@ label {
 }
 
 .status-completed {
-  color: $green;
+  color: white;
+  background-color: $green;
   margin-top: 2em;
   border: $green solid 1px;
   border-radius: 25px;

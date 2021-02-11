@@ -142,7 +142,8 @@ label {
 }
 
 .status-ongoing {
-  color: #7e2013;
+  color: white;
+  background-color: #7e2013;
   margin-top: 2em;
   border: #7e2013 solid 1px;
   border-radius: 25px;
@@ -153,7 +154,8 @@ label {
 }
 
 .status-completed {
-  color: #1b998b;
+  color: white;
+  background-color: #1b998b;
   margin-top: 2em;
   border: #1b998b solid 1px;
   border-radius: 25px;
@@ -274,7 +276,6 @@ label {
   margin-left: 1.5em;
 }
 
-<<<<<<< HEAD
 .statusses {
   display: flex;
   flex-direction: row;
@@ -308,14 +309,14 @@ label {
   width: 13em;
   height: 2em;
   line-height: normal;
-=======
+}
+
 .projectcreation_info {
   display: flex;
   flex-direction: row;
   align-items: center;
   margin-left: 5.2em;
   margin-top: 0;
->>>>>>> 38578b51dbc1f7be5af83f914304f31585d706c1
 }
 
 /*# sourceMappingURL=style.css.map */
