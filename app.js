@@ -18,8 +18,8 @@ const projectRouter = require('./routes/project');
 
 // Codes added by Sok Mun but not yet activated until needed in the future:
 // const MongoStore = connectMongo(expressSession);
-// const hbs = require('hbs');
-// const hbsDateHelper = require('helper-date');
+const hbs = require('hbs');
+const hbsDateHelper = require('helper-date');
 
 const app = express();
 
@@ -28,7 +28,7 @@ app.set('view engine', 'hbs');
 
 // Codes added by Sok Mun but not yet activated until needed in the future:
 // hbs.registerPartials('views/partials');
-// hbs.registerHelper('date', hbsDateHelper);
+hbs.registerHelper('date', hbsDateHelper);
 
 app.use(serveFavicon(path.join(__dirname, 'public/images', 'favicon.ico')));
 app.use(
