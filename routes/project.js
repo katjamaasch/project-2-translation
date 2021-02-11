@@ -80,4 +80,27 @@ router.get('/:id', (req, res, next) => {
     });
 });
 
+router.get('/:id/delete', (req, res, next) => {
+  const id = req.params.id;
+  Project.findById(id)
+    .then((project) => {
+      res.render('project/delete', { project: project });
+    })
+    .catch((error) => {
+      next(error);
+    });
+});
+
+router.post('/:id/delete', (req, res, next) => {
+  const id = req.params.id;
+  Project.findByIdAndDelete(id)
+    .then(() => {
+      console.log(id);
+      res.redirect('/all');
+    })
+    .catch((error) => {
+      next(error);
+    });
+});
+
 module.exports = router;

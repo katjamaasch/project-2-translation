@@ -18,11 +18,14 @@
      <button class="profile-button-1">List all projects</button>
      </form>
 
-    {{!--<a href="/project/create">Create new project!</a>--}}
-    {{#if user.role}}
-    <form action="/project/create">
-    <button class="profile-button-2">Create new project</button>
-    </form>
+{{!- To be fixed :
+    {{!--<a href="/project/create">Create new project!</a>--}} 
+   
+    {{!--{{#if profileUser.role.[0]}}--}}
+     {{#if user.role}}
+      <form action="/project/create">
+     <button class="profile-button-2">Create Project</button>
+     </form>
     {{/if}}
 </div>
 <hr>

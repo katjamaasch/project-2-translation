@@ -254,14 +254,17 @@ label {
   margin-left: 5em;
 }
 
-.project-log {
-  color: $middle-grey;
-  margin-left: 0;
-  padding-left: 1em;
-  font-size: 0.8em;
-  border: solid 1px $grey;
-  //background-color: $grey;
-  border-radius: 25px;
+.list-buttons {
+  display: flex;
+  flex-direction: row;
 }
 
+.list-button-1 {
+  width: 5em;
+  margin-left: 3.5em;
+}
 
+.list-button-2 {
+  width: 5em;
+  margin-left: 1.5em;
+}
