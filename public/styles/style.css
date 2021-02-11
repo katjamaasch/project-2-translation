@@ -254,15 +254,6 @@ label {
   margin-left: 5em;
 }
 
-<<<<<<< HEAD
-.project-log {
-  color: #817f7f;
-  margin-left: 0;
-  padding-left: 1em;
-  font-size: 0.8em;
-  border: solid 1px #e6e6e6;
-  border-radius: 25px;
-=======
 .list-buttons {
   display: flex;
   flex-direction: row;
@@ -276,7 +267,6 @@ label {
 .list-button-2 {
   width: 5em;
   margin-left: 1.5em;
->>>>>>> c0e858112952800d88111a1a39620f8f7dd9e714
 }
 
 /*# sourceMappingURL=style.css.map */
