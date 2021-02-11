@@ -1,14 +1,5 @@
 
 
-<p class="projecthasbeencreated">Project created by {{creator}} on {{{ date creationDate "DD.MM.YYYY" }}} at {{{ date creationDate "HH:mm" }}}</p>
+<p class="projecthasbeencreated">The project <strong>"{{project.projectname}}"</strong> for the client <strong>{{project.client}}</strong> has been successfully created.</p>
 
-
-<br>
-<img src="{{projectimage}}" alt="projectimage" class="projectimage">
-<h1>{{client}}</h1>
-<h1 class="projectname">
-{{projectname}}
-</h1>
-
-<small class="status">
-{{status}}</small>
+<a href="/project/{{project._id}}">Edit the project</a>
