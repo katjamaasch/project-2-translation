@@ -254,4 +254,13 @@ label {
   margin-left: 5em;
 }
 
+.project-log {
+  color: #817f7f;
+  margin-left: 0;
+  padding-left: 1em;
+  font-size: 0.8em;
+  border: solid 1px #e6e6e6;
+  border-radius: 25px;
+}
+
 /*# sourceMappingURL=style.css.map */
