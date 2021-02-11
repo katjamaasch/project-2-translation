@@ -141,23 +141,28 @@ label {
   color: #817f7f;
 }
 
-.status {
+.status-ongoing {
   color: #7e2013;
   margin-top: 2em;
   border: #7e2013 solid 1px;
   border-radius: 25px;
   padding: 3px 10px;
+  margin-right: 2em;
+  width: 10em;
+  height: 3em;
 }
 
-/*
 .status-completed {
-  color: $red;
+  color: #1b998b;
   margin-top: 2em;
   border: #1b998b solid 1px;
   border-radius: 25px;
   padding: 3px 10px;
+  margin-right: 2em;
+  width: 10em;
+  height: 3em;
 }
-*/
+
 .projectname {
   color: #817f7f;
   font-weight: 200;
@@ -267,6 +272,41 @@ label {
 .list-button-2 {
   width: 5em;
   margin-left: 1.5em;
+}
+
+.statusses {
+  display: flex;
+  flex-direction: row;
+}
+
+.status-updates {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2em;
+}
+
+.finished-button {
+  font-size: 0.6em;
+  color: #1b998b;
+  border: #e6e6e6 solid 1px;
+  border-radius: 25px;
+  margin-right: 2em;
+  padding-top: 0.3em;
+  width: 13em;
+  height: 2em;
+  line-height: normal;
+}
+
+.ongoing-button {
+  font-size: 0.6em;
+  color: #7e2013;
+  border: #e6e6e6 solid 1px;
+  border-radius: 25px;
+  margin-right: 2em;
+  padding-top: 0.3em;
+  width: 13em;
+  height: 2em;
+  line-height: normal;
 }
 
 /*# sourceMappingURL=style.css.map */

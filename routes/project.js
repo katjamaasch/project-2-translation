@@ -19,6 +19,7 @@ const uploadMiddleware = multer({
 const express = require('express');
 const router = new express.Router();
 const routeGuard = require('./../middleware/route-guard');
+const project = require('./../models/project');
 
 router.get('/create', routeGuard, (req, res, next) => {
   res.render('project/create');
@@ -60,6 +61,21 @@ router.get('/all', (req, res, next) => {
     });
 });
 
+router.post('/:id/ongoing', (req, res, next) => {
+  const id = req.params.id;
+  // const data = req.body;
+  Project.findByIdAndUpdate(id, {
+    project: project,
+    status: 'ongoing'
+  })
+    .then((project) => {
+      res.redirect(`/project/${project._id}`);
+    })
+    .catch((error) => {
+      next(error);
+    });
+});
+
 router.get('/:id', (req, res, next) => {
   const id = req.params.id;
   Project.findById(id)
@@ -69,11 +85,27 @@ router.get('/:id', (req, res, next) => {
       res.render('project/single', {
         projectname: project.projectname,
         projectimage: project.projectimage,
+        _id: project._id,
         client: project.client,
         status: project.status,
         creator: project.creator.name,
         creationDate: project.creationDate
       });
+    })
+    .catch((error) => {
+      next(error);
+    });
+});
+
+router.post('/:id', (req, res, next) => {
+  const id = req.params.id;
+  // const data = req.body;
+  Project.findByIdAndUpdate(id, {
+    project: project,
+    status: 'completed'
+  })
+    .then((project) => {
+      res.redirect(`/project/${project._id}`);
     })
     .catch((error) => {
       next(error);

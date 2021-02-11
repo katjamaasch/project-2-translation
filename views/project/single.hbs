@@ -14,7 +14,17 @@
 {{projectname}}
 </h1>
 
-<small class="status">
-{{status}}</small>
+<div class="statusses">
+<button class="status-{{status}}">
+{{status}}</button>
+<div class="status-updates">
+<form method="POST">
+<button class="finished-button"> ✓ Mark as finished</button>
+</form>
+<form method="POST" action="/project/{{_id}}/ongoing">
+<button class="ongoing-button"> x Mark as ongoing</button>
+</form>
+</div>
+</div>
 </div>
 </div>

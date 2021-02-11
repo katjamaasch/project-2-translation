@@ -2,6 +2,7 @@ $font-family: 'Spartan', sans-serif;
 $grey: hsl(0, 0, 90%);
 $middle-grey: rgb(129, 127, 127);
 $red: #7e2013;
+$green: #1b998b;
 
 * {
   &,
@@ -143,23 +144,27 @@ label {
   }
 }
 
-.status {
+.status-ongoing {
   color: $red;
   margin-top: 2em;
   border: #7e2013 solid 1px;
   border-radius: 25px;
   padding: 3px 10px;
+  margin-right: 2em;
+  width: 10em;
+  height: 3em;
 }
 
-/*
 .status-completed {
-  color: $red;
+  color: $green;
   margin-top: 2em;
-  border: #1b998b solid 1px;
+  border: $green solid 1px;
   border-radius: 25px;
   padding: 3px 10px;
+  margin-right: 2em;
+  width: 10em;
+  height: 3em;
 }
-*/
 
 .projectname {
   color: $middle-grey;
@@ -267,4 +272,39 @@ label {
 .list-button-2 {
   width: 5em;
   margin-left: 1.5em;
+}
+
+.statusses {
+  display: flex;
+  flex-direction: row;
+}
+
+.status-updates {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2em;
+}
+
+.finished-button {
+  font-size: 0.6em;
+  color: $green;
+  border: $grey solid 1px;
+  border-radius: 25px;
+  margin-right: 2em;
+  padding-top: 0.3em;
+  width: 13em;
+  height: 2em;
+  line-height: normal;
+}
+
+.ongoing-button {
+  font-size: 0.6em;
+  color: $red;
+  border: $grey solid 1px;
+  border-radius: 25px;
+  margin-right: 2em;
+  padding-top: 0.3em;
+  width: 13em;
+  height: 2em;
+  line-height: normal;
 }
