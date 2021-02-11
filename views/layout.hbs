@@ -13,12 +13,15 @@
       <a href="/">Home</a>
       {{#if user}}
         <a href="/profile/{{user._id}}">{{user.name}}'s Profile</a>
+        <a href="/project/all">All Projects</a>
         <form action="/authentication/sign-out" method="POST">
           <button>Sign Out</button>
         </form>
+        
         {{else}}
         <a href="/authentication/sign-in">Sign In</a>
         <a href="/authentication/sign-up">Sign Up</a>
+        
       {{/if}}
     </nav>
     {{{body}}}

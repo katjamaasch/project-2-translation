@@ -5,6 +5,7 @@ module.exports = (req, res, next) => {
   if (req.user) {
     res.locals.userIsPublisher = req.user.role === 'publisher';
     res.locals.userIsViewer = req.user.role === 'viewer';
+    res.locals.userAndSignedIn = req.user;
   }
   next();
 };
