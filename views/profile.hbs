@@ -22,11 +22,14 @@
     {{!--<a href="/project/create">Create new project!</a>--}} 
    
     {{!--{{#if profileUser.role.[0]}}--}}
-     {{#if user.role}}
+     {{#if userIsPublisher}}
       <form action="/project/create">
      <button class="profile-button-2">Create Project</button>
      </form>
     {{/if}}
+
+
+
 </div>
 <hr>
 <div class="live-projects-section">
