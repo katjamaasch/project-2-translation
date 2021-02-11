@@ -49,4 +49,14 @@ router.post(
   }
 );
 
+router.get('/all', routeGuard, (req, res, next) => {
+  Project.find({})
+    .then((projects) => {
+      res.render('project/index', { projects });
+    })
+    .catch((error) => {
+      next(error);
+    });
+});
+
 module.exports = router;

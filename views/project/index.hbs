@@ -1,1 +1,21 @@
-<h1>Test Display page for all projects (Frame 9)</h1>
+{{!--<h1>Test Display page for all projects (Frame 9)</h1>--}}
+
+
+<div class="list-all-projects-section">
+   <h2>List All Projects</h2>
+   
+<ul>
+    {{#each projects}}
+    <li>
+        <h3>Project name: {{projectname}}</h3>
+        <h4>Project status: {{status}}</h4>
+        <h4>Created by: </h4>
+        <h4>Created on: {{{date creationDate "DD/MM/YYYY"}}}</h4>
+        <a href="/project/{{_id}}">Edit</a> 
+        <a href="/{{_id}}/delete">Delete</a>
+    </li>
+
+    {{/each}}
+</ul>
+
+</div>
