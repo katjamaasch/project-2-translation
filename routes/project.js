@@ -92,11 +92,16 @@ router.get('/:id/delete', (req, res, next) => {
 });
 
 router.post('/:id/delete', (req, res, next) => {
+<<<<<<< HEAD
   let id = req.params.id;
+=======
+  const id = req.params.id;
+  console.log(id);
+>>>>>>> 48c9ea2bbb9eca30d48033033414d9d5e29a291f
   Project.findByIdAndDelete(id)
     .then(() => {
-      console.log(id);
-      res.redirect('/all');
+      console.log('yes the project got deleted!');
+      res.redirect('/project/all');
     })
     .catch((error) => {
       next(error);

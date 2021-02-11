@@ -27,6 +27,10 @@ const projectSchema = new mongoose.Schema(
     creator: {
       type: mongoose.Types.ObjectId,
       ref: 'User'
+    },
+    text: {
+      type: mongoose.Types.ObjectId,
+      ref: 'Textblock'
     }
   },
   {
