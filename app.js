@@ -20,6 +20,7 @@ const projectRouter = require('./routes/project');
 // const MongoStore = connectMongo(expressSession);
 const hbs = require('hbs');
 const hbsDateHelper = require('helper-date');
+hbs.registerPartials('views/partials');
 
 const app = express();
 
