@@ -30,8 +30,14 @@
         <p>Created by <b>{{creator.name}}</b> on {{{date creationDate "DD/MM/YYYY"}}}</p>
     </div>
 
-    <div>
-         <a href="/project/{{_id}}">Edit</a> 
-        <a href="/{{_id}}/delete">Delete</a>
+    <div class="list-buttons">
+         {{!--<a href="/project/{{_id}}">Edit</a> 
+        <a href="/{{_id}}/delete">Delete</a> --}}
+     <form action="/project/{{_id}}">
+     <button class="list-button-1">Edit</button>
+     </form>
+     <form action="/project/{{_id}}/delete">
+     <button class="list-button-2">Delete</button>
+     </form>
     </div>
     {{/each}}

@@ -254,4 +254,19 @@ label {
   margin-left: 5em;
 }
 
+.list-buttons {
+  display: flex;
+  flex-direction: row;
+}
+
+.list-button-1 {
+  width: 5em;
+  margin-left: 3.5em;
+}
+
+.list-button-2 {
+  width: 5em;
+  margin-left: 1.5em;
+}
+
 /*# sourceMappingURL=style.css.map */
