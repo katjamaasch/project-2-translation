@@ -43,7 +43,8 @@ router.post(
       creator: req.user._id
     })
       .then((project) => {
-        res.redirect(`/project/${project._id}`);
+        //res.redirect(`/project/${project._id}`);
+        res.render('project/confirmation', { project });
       })
       .catch((error) => {
         next(error);
@@ -65,12 +66,13 @@ router.get('/:id', (req, res, next) => {
     .populate('creator')
     .then((project) => {
       console.log(project);
-      res.render('project/confirmation', {
+      res.render('project/single', {
         projectname: project.projectname,
         projectimage: project.projectimage,
         client: project.client,
         status: project.status,
-        creator: project.creator.name
+        creator: project.creator.name,
+        creationDate: project.creationDate
       });
     })
     .catch((error) => {
