@@ -71,7 +71,8 @@ router.get('/:id', (req, res, next) => {
         projectimage: project.projectimage,
         client: project.client,
         status: project.status,
-        creator: project.creator.name
+        creator: project.creator.name,
+        creationDate: project.creationDate
       });
     })
     .catch((error) => {
