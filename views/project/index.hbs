@@ -1,1 +1,13 @@
-<h1>Test Display page for all projects (Frame 9)</h1>
+<h1>All projects from A–Z</h1>
+
+    {{#each projects}}
+    <div class="allprojects">
+        <img src="{{projectimage}}" alt="" class="projectimage">
+        <a href="/project/{{_id}}"><h3 class="projectname_list">{{projectname}} ({{client}})</h3></a>
+</div>
+
+<div class="index-projects-details">
+            <small class="status">{{status}}</small>
+        <p>Created by <b>{{creator.name}}</b> on {{{date creationDate "DD/MM/YYYY"}}}</p>
+    </div>
+    {{/each}}

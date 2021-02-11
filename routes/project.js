@@ -51,6 +51,14 @@ router.post(
   }
 );
 
+router.get('/all', (req, res, next) => {
+  Project.find()
+    .sort([['projectname', 1]])
+    .then((projects) => {
+      res.render('project/index', { projects });
+    });
+});
+
 router.get('/:id', (req, res, next) => {
   const id = req.params.id;
   Project.findById(id)

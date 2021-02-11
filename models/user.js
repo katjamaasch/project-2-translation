@@ -15,6 +15,11 @@ const schema = new mongoose.Schema({
     lowercase: true,
     trim: true
   },
+  image: {
+    type: String,
+    default:
+      'https://res.cloudinary.com/drqqpp/image/upload/c_scale,w_300/v1613047716/pexels-luca-fontana-4224333_llelle.jpg'
+  },
   passwordHashAndSalt: {
     type: String
   },
