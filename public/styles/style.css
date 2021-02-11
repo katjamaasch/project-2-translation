@@ -274,6 +274,7 @@ label {
   margin-left: 1.5em;
 }
 
+<<<<<<< HEAD
 .statusses {
   display: flex;
   flex-direction: row;
@@ -307,6 +308,14 @@ label {
   width: 13em;
   height: 2em;
   line-height: normal;
+=======
+.projectcreation_info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 5.2em;
+  margin-top: 0;
+>>>>>>> 38578b51dbc1f7be5af83f914304f31585d706c1
 }
 
 /*# sourceMappingURL=style.css.map */
