@@ -66,7 +66,7 @@ router.get('/all', (req, res, next) => {
       res.render('project/index', {
         projects,
         previousPage: page - 1,
-        nextPage: page + 1
+        nextPage: projects.length ? page + 1 : 0
       });
     })
     .catch((error) => {
