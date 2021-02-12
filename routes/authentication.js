@@ -34,7 +34,7 @@ router.post('/sign-up', (req, res, next) => {
       });
     })
     .then((user) => {
-      req.session.userId = user._id;
+      //req.session.userId = user._id;
       res.redirect('sign-in');
     })
     .catch((error) => {
