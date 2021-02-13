@@ -42,7 +42,7 @@
 <h3>Add textblocks</h3>
 
 
-  <form id="add-textblock-form" name="textblockform[0]" class="dash-input" method="POST" action="/project/{{_id}}/add-textblock">
+  <form id="add-textblock-form" name="textblockform[0]" class="dash-input" method="POST" action="/project/{{_id}}/texts">
   <div id="top_level">
       
    <select name="select[0]">
@@ -54,13 +54,13 @@
    <textarea name="textarea[0]" form="add-textblock-form" placeholder="Enter Text here..."></textarea>
    </div>
    <div class="dash-submit">
-    <input class="dash-submit-button" type="submit" value="Submit" />
+    <input class="dash-submit-button" type="submit" value="Submit all texts" />
    </div>
   </form>
 
 
 <div class="dash-add">
-    <button name="addbutton" class="dash-add-button" onclick="addTextblockFunction()">ADD</button>
+    <button name="addbutton" class="dash-add-button" onclick="addTextblockFunction()">Add Textblock</button>
 </div>
 
 

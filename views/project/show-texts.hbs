@@ -1,0 +1,19 @@
+
+
+
+
+<h2 class="entered-text-display-header"><strong>{{projectname}}</strong> ({{client}}):</h2>
+
+<p class="project-log">Language: <strong>{{language}}</strong>, Author: <strong>{{author}}</strong>, Last updated on <strong>{{date updateDate "DD/MM/YYYY"}}</strong> at <strong>{{date updateDate "HH:mm"}}</strong>.</p>
+<br>
+
+    {{#each data}}
+
+
+
+    <p class= "display-{{this.texttype}}"> {{this.textarea}}</p>
+    <small class="marking-texttype">{{this.texttype}}</small>
+
+
+    {{/each}}
+

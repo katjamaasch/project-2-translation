@@ -40,7 +40,7 @@ const projectSchema = new mongoose.Schema(
     translations: [
       {
         type: mongoose.Types.ObjectId,
-        ref: 'textSubmissionSchema'
+        ref: 'textSubmission'
       }
     ]
   },
