@@ -163,10 +163,10 @@ router.post('/:id', (req, res, next) => {
     });
 });
 
-router.post('/:id/add-textblock', (req, res, next) => {
+router.post('/:id/texts', (req, res, next) => {
   const id = req.params.id;
-  console.log('This is the req.body:', req.body);
-  console.log('This is the:', id);
+  //console.log('This is the req.body:', req.body);
+  //console.log('This is the id: ', id);
   Textsubmission.create({
     textareas: req.body.textarea,
     author: req.user._id
@@ -174,9 +174,32 @@ router.post('/:id/add-textblock', (req, res, next) => {
     return Project.findByIdAndUpdate(id, {
       textstructure: req.body.select,
       originalText: transmissionText
-    }).then((foundproject) => {
-      res.render('project/confirmation', { foundproject });
-    });
+    })
+      .populate({
+        path: 'originalText',
+        populate: {
+          path: 'author'
+        }
+      })
+      .then((foundproject) => {
+        const data = [];
+
+        for (let i = 0; i < foundproject.textstructure.length; ++i)
+          data.push({
+            texttype: foundproject.textstructure[i],
+            textarea: foundproject.originalText.textareas[i]
+          });
+
+        console.log(foundproject.originalText);
+        res.render('project/show-texts', {
+          projectname: foundproject.projectname,
+          client: foundproject.client,
+          language: foundproject.originalText.language,
+          author: foundproject.originalText.author.name,
+          updateDate: foundproject.updateDate,
+          data: data
+        });
+      });
   });
 });
 

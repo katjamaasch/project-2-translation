@@ -1,4 +1,6 @@
-*, *:before, *:after {
+*,
+*:before,
+*:after {
   box-sizing: border-box;
 }
 
@@ -6,9 +8,9 @@ body {
   max-width: 52em;
   padding: 0 1em;
   margin: 0 auto;
-  font-family: "Spartan", sans-serif;
+  font-family: 'Spartan', sans-serif;
   line-height: 2;
-  background-image: url("/images/whitediamond.png");
+  background-image: url('/images/whitediamond.png');
 }
 
 a {
@@ -74,7 +76,7 @@ fieldset,
   margin-bottom: 1em;
   font: inherit;
   color: inherit;
-  background-color: transparent;
+  background-color: white;
 }
 
 /* why is this not working but only radio-buttons?: 
@@ -117,7 +119,7 @@ label {
 }
 
 .home_view {
-  background-image: url("/images/letter.jpeg");
+  background-image: url('/images/letter.jpeg');
   height: 640px;
   width: 1460px;
   margin-left: -330px;
@@ -345,9 +347,52 @@ label {
   margin-top: 0;
 }
 
-.footer-notes {
-  background-color: white;
+.entered-text-display-header {
+  background-color: #e6e6e6;
+  color: #817f7f;
+  font-weight: 200;
+  border-radius: 25px;
+}
+
+textarea {
+  width: 294px;
+}
+
+.dash-add-button {
+  width: 294px;
   height: 2em;
+  line-height: 0.3;
+  background-color: #1b998b;
+  color: white;
+}
+
+.dash-submit {
+  padding-top: 0;
+  line-height: 0;
+}
+
+.dash-submit-button {
+  width: 294px;
+  height: 2em;
+  line-height: 0.3;
+}
+
+.project-log {
+  color: #817f7f;
+  font-size: 0.7em;
+}
+
+.display-headline {
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 0;
+}
+
+.marking-texttype {
+  color: #817f7f;
+  margin-top: 0;
+  padding-top: 0;
+  line-height: 0;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -76,7 +76,7 @@ fieldset,
   margin-bottom: 1em;
   font: inherit;
   color: inherit;
-  background-color: transparent;
+  background-color: white;
 }
 
 /* why is this not working but only radio-buttons?: 
@@ -344,7 +344,48 @@ label {
   margin-top: 0;
 }
 
-.footer-notes {
-  background-color: white;
+.entered-text-display-header {
+  background-color: $grey;
+  color: $middle-grey;
+  font-weight: 200;
+  border-radius: 25px;
+}
+
+textarea {
+  width: 294px;
+}
+
+.dash-add-button {
+  width: 294px;
   height: 2em;
+  line-height: 0.3;
+  background-color: $green;
+  color: white;
+}
+.dash-submit {
+  padding-top: 0;
+  line-height: 0;
+}
+.dash-submit-button {
+  width: 294px;
+  height: 2em;
+  line-height: 0.3;
+}
+
+.project-log {
+  color: $middle-grey;
+  font-size: 0.7em;
+}
+
+.display-headline {
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 0;
+}
+
+.marking-texttype {
+  color: $middle-grey;
+  margin-top: 0;
+  padding-top: 0;
+  line-height: 0;
 }
