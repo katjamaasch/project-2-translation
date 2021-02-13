@@ -55,10 +55,23 @@ router.post(
 );
 
 router.get('/all', (req, res, next) => {
+  const page = Number(req.query.page) || 1;
+  const limit = 5;
+  const skip = (page - 1) * limit;
+
   Project.find()
+    .skip(skip)
+    .limit(limit)
     .sort([['projectname', 1]])
     .then((projects) => {
-      res.render('project/index', { projects });
+      res.render('project/index', {
+        projects,
+        previousPage: page - 1,
+        nextPage: projects.length ? page + 1 : 0
+      });
+    })
+    .catch((error) => {
+      next(error);
     });
 });
 

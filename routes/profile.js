@@ -17,7 +17,7 @@ router.get('/:id', routeGuard, (req, res, next) => {
       if (!profileUser) {
         throw new Error('User not found!');
       } else {
-        return Project.find({ status: 'in progress' }).populate('creator');
+        return Project.find({ status: 'ongoing' }).populate('creator');
       }
     })
     .then((projects) => {

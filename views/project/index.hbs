@@ -41,3 +41,12 @@
      </form>
     </div>
     {{/each}}
+
+<div>
+    {{#if previousPage}} 
+    <a href="/project/all/?page={{previousPage}}">Previous</a>
+    {{/if}}
+    {{#if nextPage}}
+    <a href="/project/all/?page={{nextPage}}">Next</a>
+    {{/if}}
+</div>
