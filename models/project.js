@@ -28,10 +28,21 @@ const projectSchema = new mongoose.Schema(
       type: mongoose.Types.ObjectId,
       ref: 'User'
     },
-    text: {
+
+    textstructure: {
+      type: [String],
+      enum: ['title', 'subtitle', 'headline', 'subheadline', 'copytext']
+    },
+    originalText: {
       type: mongoose.Types.ObjectId,
-      ref: 'Textblock'
-    }
+      ref: 'textSubmission'
+    },
+    translations: [
+      {
+        type: mongoose.Types.ObjectId,
+        ref: 'textSubmissionSchema'
+      }
+    ]
   },
   {
     timestamps: {

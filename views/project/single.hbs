@@ -1,30 +1,112 @@
 
+<div class="project-single-view-header">
+    <div>
+    <img src="{{projectimage}}" alt="projectimage">
+    </div>
 
-<p class="project-log">Project created by <strong>{{creator}}</strong> on {{{ date creationDate "DD.MM.YYYY" }}} at {{{ date creationDate "HH:mm" }}}</p>
+    <div>
+    <h1>{{client}}</h1>
+    <h1 class="projectname">
+    {{projectname}}
+    </h1>
+    <p>Project created by <strong>{{creator}}</strong> on {{{ date creationDate "DD.MM.YYYY" }}} at {{{ date creationDate "HH:mm" }}}</p>
 
 
-<br>
-<div class="projectsinprogresslist">
+        <div class="statusses">
+        <button class="status-{{status}}">
+        {{status}}</button>
+
+            <div class="status-updates">
+
+            <form method="POST">
+            <button class="finished-button"> ✓ completed!</button>
+            </form>
+
+            <form method="POST" action="/project/{{_id}}/ongoing">
+            <button class="ongoing-button"> x ongoing</button>
+            </form>
+
+            </div>
+
+        </div>
+                    
+    </div>
+
+</div>
+
+    <hr>
+    <br>
+
 <div>
-<img src="{{projectimage}}" alt="projectimage" class="projectimage">
-</div>
-<div>
-<h1>{{client}}</h1>
-<h1 class="projectname">
-{{projectname}}
-</h1>
 
-<div class="statusses">
-<button class="status-{{status}}">
-{{status}}</button>
-<div class="status-updates">
-<form method="POST">
-<button class="finished-button"> ✓ Mark as finished</button>
-</form>
-<form method="POST" action="/project/{{_id}}/ongoing">
-<button class="ongoing-button"> x Mark as ongoing</button>
-</form>
+<h3>Add textblocks</h3>
+
+
+  <form id="add-textblock-form" name="textblockform[0]" class="dash-input" method="POST" action="/project/{{_id}}/add-textblock">
+  <div id="top_level">
+      
+   <select name="select[0]">
+      <option name="default" value="mt">--Please choose an option--</option>
+      <option name="headline" value="headline" class="selected-option">Headline</option>
+      <option name="copytext" value="copytext" class="selected-option">Copytext</option>
+   </select>    
+   <br>
+   <textarea name="textarea[0]" form="add-textblock-form" placeholder="Enter Text here..."></textarea>
+   </div>
+   <div class="dash-submit">
+    <input class="dash-submit-button" type="submit" value="Submit" />
+   </div>
+  </form>
+
+
+<div class="dash-add">
+    <button name="addbutton" class="dash-add-button" onclick="addTextblockFunction()">ADD</button>
 </div>
-</div>
-</div>
-</div>
+
+
+
+<script>
+
+let i = 0;
+
+function addTextblockFunction() {    
+i+=1;
+
+let topleveldiv=document.createElement('DIV');
+let textblockForm = document.createElement('FORM');
+let select = document.createElement('SELECT');
+let optionDefault = document.createElement('OPTION');
+let optionHeadline = document.createElement('OPTION');
+let optionCopytext = document.createElement('OPTION');
+let breakel=document.createElement('BR');
+let textarea = document.createElement('TEXTAREA');
+let addbutton= document.createElement('BUTTON');
+
+optionDefault.innerText = "--Please choose an option--"
+optionDefault.setAttribute("value", "mt")
+optionHeadline.innerText = "Headline"
+optionHeadline.setAttribute("value", "headline")
+optionHeadline.setAttribute("class", "selected-option")
+optionCopytext.innerText = "Copytext"
+optionCopytext.setAttribute("value", "copytext")
+optionCopytext.setAttribute("class", "selected-option")
+
+select.appendChild(optionDefault)
+select.appendChild(optionHeadline)
+select.appendChild(optionCopytext)
+select.setAttribute("name", "select[" + i +"]"); 
+
+textarea.setAttribute("name", "textarea[" + i +"]");
+textarea.setAttribute("placeholder", "Enter Text here...");
+
+topleveldiv.appendChild(select);
+topleveldiv.appendChild(breakel);
+topleveldiv.appendChild(textarea);
+
+
+
+
+document.getElementById("top_level").appendChild(topleveldiv);
+}
+
+</script>

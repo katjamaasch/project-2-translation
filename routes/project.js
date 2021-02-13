@@ -1,5 +1,6 @@
 const Project = require('./../models/project');
 const User = require('./../models/user');
+const Textsubmission = require('./../models/textSubmission');
 //const Textblock = require('./../models/textblock');
 
 ('use strict');
@@ -81,7 +82,6 @@ router.get('/:id', (req, res, next) => {
   Project.findById(id)
     .populate('creator')
     .then((project) => {
-      console.log(project);
       res.render('project/single', {
         projectname: project.projectname,
         projectimage: project.projectimage,
@@ -112,6 +112,23 @@ router.post('/:id', (req, res, next) => {
     });
 });
 
+router.post('/:id/add-textblock', (req, res, next) => {
+  const id = req.params.id;
+  console.log('This is the req.body:', req.body);
+  console.log('This is the:', id);
+  Textsubmission.create({
+    textareas: req.body.textarea,
+    author: req.user._id
+  }).then((transmissionText) => {
+    return Project.findByIdAndUpdate(id, {
+      textstructure: req.body.select,
+      originalText: transmissionText
+    }).then((foundproject) => {
+      res.render('project/confirmation', { foundproject });
+    });
+  });
+});
+
 router.get('/:id/delete', (req, res, next) => {
   const id = req.params.id;
   Project.findById(id)
@@ -127,7 +144,6 @@ router.post('/:id/delete', (req, res, next) => {
   let id = req.params.id;
   Project.findByIdAndDelete(id)
     .then(() => {
-      console.log(id);
       res.redirect('/project/all');
     })
     .catch((error) => {

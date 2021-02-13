@@ -8,6 +8,7 @@ body {
   margin: 0 auto;
   font-family: "Spartan", sans-serif;
   line-height: 2;
+  background-image: url("/images/whitediamond.png");
 }
 
 a {
@@ -203,6 +204,31 @@ label {
 .projectsinprogresslist img {
   height: 50px;
   width: 50px;
+}
+
+.project-single-view-header {
+  display: flex;
+  flex-direction: row;
+  color: #817f7f;
+  line-height: 2em;
+}
+
+.project-single-view-header h1:first-child {
+  margin-top: 0.5em;
+  text-transform: uppercase;
+}
+
+.project-single-view-header p {
+  color: #817f7f;
+  font-size: 0.6em;
+  margin-bottom: 0;
+}
+
+.project-single-view-header img {
+  border-radius: 70px;
+  height: 130px;
+  width: 130px;
+  margin-right: 2em;
 }
 
 .allprojects {
