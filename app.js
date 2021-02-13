@@ -28,7 +28,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
 // Codes added by Sok Mun but not yet activated until needed in the future:
-// hbs.registerPartials('views/partials');
+hbs.registerPartials('views/partials');
 hbs.registerHelper('date', hbsDateHelper);
 
 app.use(serveFavicon(path.join(__dirname, 'public/images', 'favicon.ico')));
