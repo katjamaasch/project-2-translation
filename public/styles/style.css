@@ -461,4 +461,13 @@ textarea {
   width: 1600px;
 }
 
+footer {
+  position: fixed;
+  bottom: 0;
+  /* Height of the footer*/
+  height: 40px;
+  background-color: white;
+  width: 960px;
+}
+
 /*# sourceMappingURL=style.css.map */

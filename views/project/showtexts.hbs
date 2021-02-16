@@ -4,7 +4,7 @@
 
 <h2 class="entered-text-display-header"><strong>{{projectname}}</strong> ({{client}}):</h2>
 
-<p class="project-log">Language: <strong><span>{{language}}</span></strong>, Author: <strong>{{author}}</strong>, created on {{date creationDate "DD/MM/YYYY"}}, last updated on <strong>{{date updateDate "DD/MM/YYYY"}}</strong> at <strong>{{date updateDate "HH:mm"}}</strong>.</p>
+<p class="project-log">author: <strong>{{author}}</strong>, created on {{date creationDate "DD/MM/YYYY"}}, last updated on <strong>{{date updateDate "DD/MM/YYYY"}}</strong> at <strong>{{date updateDate "HH:mm"}}</strong>.</p>
         <div class="statusses">
         <button class="status-{{status}}">
         {{status}}</button>
@@ -26,15 +26,28 @@
 
 <div class="container customwidth">
 
-    {{#each data}}
-<div class="row" >
+<div class="row customwidth">
     <div class="col-3">
         <h5>Texttype</h5>
+    </div>
+    <div class="col-3">
+        <h5>German Text</h5>
+    </div>
+        <div class="col-3">
+        <h5>English Text</h5>
+    </div>
+        <div class="col-3">
+        <h5>French Text</h5>
+    </div>
+</div>
+
+    {{#each data}}
+<div class="row customwidth" >
+    <div class="col-3">
     <p class="marking-texttype">({{this.texttype}})</p>
     </div>
 
     <div class="col-3">
-    <h5>German Text</h5>
     <p class= "display-{{this.texttype}}"> {{this.textarea}}</p>
     {{/each}}
     <a class="add-texts-button" href="/project/{{_id}}/edit">Edit german text</a>
@@ -43,14 +56,12 @@
 </div>
 
 <div class= "col-3">
-    <h5>English Text</h5>
     <a class="add-texts-button" href="">Edit english text</a>
     <br>
     <a class="add-texts-button" href="">Import csv</a>
 </div>
 
 <div class= "col-3">
-    <h5>French Text</h5>
     <a class="add-texts-button" href="">Edit french text</a>
     <br>
     <a class="add-texts-button" href="">Import csv</a>
