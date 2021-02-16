@@ -50,7 +50,9 @@ router.get('/sign-in', (req, res, next) => {
 // Need to decide if interpreter, where to direct user to and which view to render
 router.post('/sign-in', (req, res, next) => {
   let user;
-  const { email, password } = req.body;
+  let userRole;
+  const { email, password, role } = req.body;
+
   User.findOne({ email })
     .then((document) => {
       if (!document) {
@@ -64,6 +66,13 @@ router.post('/sign-in', (req, res, next) => {
       if (result) {
         req.session.userId = user._id;
         res.redirect(`/profile/${user._id}`);
+        /*userRole = [user.role];
+        console.log(userRole);
+        if (userRole === ['publisher']) {
+          res.redirect(`/profile/${user._id}/publisher`);
+        } else {
+          res.redirect(`/profile/${user._id}/viewer`);
+        }*/
       } else {
         return Promise.reject(new Error('Wrong password.'));
       }
