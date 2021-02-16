@@ -1,6 +1,4 @@
-*,
-*:before,
-*:after {
+*, *:before, *:after {
   box-sizing: border-box;
 }
 
@@ -8,9 +6,9 @@ body {
   max-width: 52em;
   padding: 0 1em;
   margin: 0 auto;
-  font-family: 'Spartan', sans-serif;
+  font-family: "Spartan", sans-serif;
   line-height: 2;
-  background-image: url('/images/whitediamond.png');
+  background-image: url("/images/whitediamond.png");
 }
 
 a {
@@ -119,7 +117,7 @@ label {
 }
 
 .home_view {
-  background-image: url('/images/letter.jpeg');
+  background-image: url("/images/letter.jpeg");
   height: 640px;
   width: 1460px;
   margin-left: -330px;

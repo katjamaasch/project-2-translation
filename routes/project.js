@@ -21,6 +21,8 @@ const express = require('express');
 const router = new express.Router();
 const routeGuard = require('./../middleware/route-guard');
 const project = require('./../models/project');
+const { locals } = require('../app');
+const roleMiddleware = require('./../middleware/role-middleware');
 
 router.get('/create', routeGuard, (req, res, next) => {
   res.render('project/create');
@@ -54,37 +56,78 @@ router.post(
   }
 );
 
-router.get('/all', (req, res, next) => {
+// Tried getting the count methods, but did not work:
+/*router.get('/all', routeGuard, (req, res, next) => {
   const page = Number(req.query.page) || 1;
   const limit = 3;
   const skip = (page - 1) * limit;
-  const lastPageQueried = Number(req.query.page);
+  //const lastPageQueried = Number(req.query.page);
 
   Project.find()
     .skip(skip)
     .limit(limit)
     .sort([['projectname', 1]])
     .then((projects) => {
-      let projectIndex = projects.length;
-      //let projectIndex = projects.length;
-      // let projectsDisplayed = projects[projectIndex];
-      console.log(projectIndex);
-
-      //if (projectsDisplayed <= projects[projects.length - 1]) {
-      if (projects[projects.length - 1]) {
+      //let numberOfProjects = projects.count;
+      //let numberOfProjects = projects.countDocuments();
+      //return numberOfProjects;
+    })
+    .aggregrate([{ $count: 'numberOfProjects' }])
+    //.countDocuments((number) => {
+    //let numberOfProjects = number;
+    // return numberOfProjects;
+    //})
+    // .count(data) => {
+    // let numberOfProjects = data;
+    // return numberOfProjects;
+    //})
+    // .countDocument(projects)
+    .then((numberOfProjects) => {
+      const numberOfPages = numberOfProjects / limit;
+      if (numberOfPages < page) {
         res.render('project/index', {
           projects,
           previousPage: page - 1,
           nextPage: projects.length ? page + 1 : 0
         });
-      } else {
-        res.redirect('/project/all/?page =${lastPageQueried}');
-        // res.render('project/index', {
-        //projects
-        //currentPage: page
-        //currentPage: projects.length ? page : 0
-        // });
+      } else if (numberOfPages >= page) {
+        res.render('project/index', {
+          projects,
+          previousPage: page - 1
+        });
       }
+    })
+    .catch((error) => {
+      next(error);
+    });
+}); */
+
+router.get('/all', routeGuard, (req, res, next) => {
+  const page = Number(req.query.page) || 1;
+  const limit = 5;
+  const skip = (page - 1) * limit;
+  //const lastPageQueried = Number(req.query.page);
+
+  Project.find()
+    .skip(skip)
+    .limit(limit)
+    .sort([['projectname', 1]])
+    .then((projects) => {
+      //let projectIndex = projects.length;
+      //if (projects[projects.length - 1] ) {
+      // if (projects.length - 1 < page * limit) {
+      res.render('project/index', {
+        projects,
+        previousPage: page - 1,
+        nextPage: projects.length ? page + 1 : 0
+      });
+      //} else {
+      // res.redirect('/project/all/?page =${lastPageQueried}');
+      //} else if (projects.length >= page * limit) {
+      // res.render('project/index', {
+      //  projects
+      // });
+      //}
     })
     .catch((error) => {
       next(error);
