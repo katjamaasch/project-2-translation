@@ -20,6 +20,7 @@ const uploadMiddleware = multer({
 const express = require('express');
 const router = new express.Router();
 const routeGuard = require('./../middleware/route-guard');
+<<<<<<< HEAD
 const project = require('./../models/project');
 const { locals } = require('../app');
 
@@ -54,6 +55,8 @@ router.post(
       });
   }
 );
+=======
+>>>>>>> 6bda104a52195bd701c31b275b79ff1c79fd4535
 
 router.get('/all', routeGuard, (req, res, next) => {
   const page = Number(req.query.page) || 1;
@@ -71,11 +74,33 @@ router.get('/all', routeGuard, (req, res, next) => {
         .sort([['projectname', 1]]);
     })
     .then((projects) => {
+<<<<<<< HEAD
       res.render('project/index', {
         projects,
         previousPage: page - 1,
         nextPage: isLastPage ? 0 : page + 1
       });
+=======
+      let projectIndex = projects.length;
+      //let projectIndex = projects.length;
+      // let projectsDisplayed = projects[projectIndex];
+
+      //if (projectsDisplayed <= projects[projects.length - 1]) {
+      if (projects[projects.length - 1]) {
+        res.render('project/index', {
+          projects,
+          previousPage: page - 1,
+          nextPage: projects.length ? page + 1 : 0
+        });
+      } else {
+        res.redirect('/project/all/?page =${lastPageQueried}');
+        // res.render('project/index', {
+        //projects
+        //currentPage: page
+        //currentPage: projects.length ? page : 0
+        // });
+      }
+>>>>>>> 6bda104a52195bd701c31b275b79ff1c79fd4535
     })
     .catch((error) => {
       next(error);
@@ -104,46 +129,59 @@ router.get('/all', routeGuard, (req, res, next) => {
     });
 });*/
 
-router.post('/:id/ongoing', (req, res, next) => {
-  const id = req.params.id;
-  // const data = req.body;
-  Project.findByIdAndUpdate(id, {
-    project: project,
-    status: 'ongoing'
-  })
-    .then((project) => {
-      res.redirect(`/project/${project._id}`);
-    })
-    .catch((error) => {
-      next(error);
-    });
+router.get('/create', routeGuard, (req, res, next) => {
+  res.render('project/create');
 });
 
-router.get('/:id', (req, res, next) => {
+router.post(
+  '/create',
+  uploadMiddleware.single('projectimage'),
+  (req, res, next) => {
+    //console.log(req.body);
+    //console.log('req.file: ', req.file);
+    const data = req.body;
+    let projectimage;
+    if (req.file) {
+      projectimage = req.file.path;
+    }
+
+    Project.create({
+      client: data.client,
+      projectname: data.projectname,
+      projectimage: projectimage,
+      creator: req.user._id
+    })
+      .then((project) => {
+        console.log('project._id: ', project._id);
+        //res.redirect(`/project/${project._id}`);
+        res.render('project/confirmation', { project });
+      })
+      .catch((error) => {
+        next(error);
+      });
+  }
+);
+
+router.get('/:id/add', (req, res, next) => {
   const id = req.params.id;
   Project.findById(id)
-    .populate('creator')
-    .then((project) => {
-      res.render('project/single', {
-        projectname: project.projectname,
-        projectimage: project.projectimage,
-        _id: project._id,
-        client: project.client,
-        status: project.status,
-        creator: project.creator.name,
-        creationDate: project.creationDate
-      });
+    .populate({
+      path: 'originalText',
+      populate: {
+        path: 'author'
+      }
     })
-    .catch((error) => {
-      next(error);
+    .then((foundproject) => {
+      res.render('project/addtextblocks', {
+        foundproject: foundproject
+      });
     });
 });
 
-router.post('/:id', (req, res, next) => {
+router.post('/:id/completed', (req, res, next) => {
   const id = req.params.id;
   // const data = req.body;
   Project.findByIdAndUpdate(id, {
-    project: project,
     status: 'completed'
   })
     .then((project) => {
@@ -152,46 +190,6 @@ router.post('/:id', (req, res, next) => {
     .catch((error) => {
       next(error);
     });
-});
-
-router.post('/:id/texts', (req, res, next) => {
-  const id = req.params.id;
-  //console.log('This is the req.body:', req.body);
-  //console.log('This is the id: ', id);
-  Textsubmission.create({
-    textareas: req.body.textarea,
-    author: req.user._id
-  }).then((transmissionText) => {
-    return Project.findByIdAndUpdate(id, {
-      textstructure: req.body.select,
-      originalText: transmissionText
-    })
-      .populate({
-        path: 'originalText',
-        populate: {
-          path: 'author'
-        }
-      })
-      .then((foundproject) => {
-        const data = [];
-
-        for (let i = 0; i < foundproject.textstructure.length; ++i)
-          data.push({
-            texttype: foundproject.textstructure[i],
-            textarea: foundproject.originalText.textareas[i]
-          });
-
-        console.log(foundproject.originalText);
-        res.render('project/show-texts', {
-          projectname: foundproject.projectname,
-          client: foundproject.client,
-          language: foundproject.originalText.language,
-          author: foundproject.originalText.author.name,
-          updateDate: foundproject.updateDate,
-          data: data
-        });
-      });
-  });
 });
 
 router.get('/:id/delete', (req, res, next) => {
@@ -214,6 +212,146 @@ router.post('/:id/delete', (req, res, next) => {
     .catch((error) => {
       next(error);
     });
+});
+
+router.get('/:id/edit', (req, res, next) => {
+  const id = req.params.id;
+  Project.findById(id)
+    .populate({
+      path: 'originalText',
+      populate: {
+        path: 'author'
+      }
+    })
+    .then((foundproject) => {
+      const data = [];
+      for (let i = 0; i < foundproject.textstructure.length; ++i)
+        data.push({
+          texttype: foundproject.textstructure[i],
+          textarea: foundproject.originalText.textareas[i]
+        });
+      //console.log(foundproject.originalText);
+      res.render('project/edit', {
+        projectname: foundproject.projectname,
+        projectimage: foundproject.projectimage,
+        status: foundproject.status,
+        client: foundproject.client,
+        language: foundproject.originalText.language,
+        author: foundproject.originalText.author.name,
+        updateDate: foundproject.updateDate,
+        _id: foundproject._id,
+        data: data
+      });
+    });
+});
+
+router.post('/:id/edit', (req, res, next) => {
+  const id = req.params.id;
+  let originalTextId;
+
+  console.log(req.body);
+  // get from the body the texttypes
+  const texttypes = req.body.select;
+  const textareas = req.body.textarea;
+  Project.findById(id)
+    .then((foundProject) => {
+      originalTextId = foundProject.originalText;
+      console.log(originalTextId);
+      return Project.findByIdAndUpdate(id, texttypes);
+    })
+    .then(() => {
+      return Textsubmission.findByIdAndUpdate(originalTextId, textareas);
+    })
+    .then(() => {
+      res.redirect(`/project/${id}`);
+    })
+    .catch((error) => {
+      next(error);
+    });
+});
+
+router.post('/:id/ongoing', (req, res, next) => {
+  const id = req.params.id;
+  // const data = req.body;
+  Project.findByIdAndUpdate(id, {
+    status: 'ongoing'
+  })
+    .then((project) => {
+      res.redirect(`/project/${project._id}`);
+    })
+    .catch((error) => {
+      next(error);
+    });
+});
+
+router.get('/:id', (req, res, next) => {
+  const id = req.params.id;
+  Project.findById(id)
+    .populate('creator')
+    .then((foundproject) => {
+      res.render('project/showtexts', {
+        projectname: foundproject.projectname,
+        projectimage: foundproject.projectimage,
+        _id: foundproject._id,
+        client: foundproject.client,
+        status: foundproject.status,
+        creator: foundproject.creator.name,
+        creationDate: foundproject.creationDate
+      });
+    })
+    .catch((error) => {
+      next(error);
+    });
+});
+
+router.post('/:id', (req, res, next) => {
+  const id = req.params.id;
+  //console.log('This is the req.body:', req.body);
+  //console.log('This is the id: ', id);
+  Textsubmission.create({
+    textareas: req.body.textarea,
+    author: req.user._id
+  }).then((transmissionText) => {
+    console.log("I'm the transmissioned text: ", transmissionText);
+    return Project.findByIdAndUpdate(
+      id,
+      {
+        textstructure: req.body.select,
+        originalText: transmissionText
+      },
+      { new: true }
+    )
+
+      .populate({
+        path: 'originalText',
+        populate: {
+          path: 'author'
+        }
+      })
+      .then((foundproject) => {
+        console.log("I'm the foundproject: ", foundproject);
+        const data = [];
+
+        for (let i = 0; i < foundproject.textstructure.length; ++i)
+          data.push({
+            texttype: foundproject.textstructure[i],
+            textarea: foundproject.originalText.textareas[i]
+          });
+
+        //console.log(foundproject.originalText);
+        res.render('project/showtexts', {
+          projectname: foundproject.projectname,
+          projectimage: foundproject.projectimage,
+          status: foundproject.status,
+          client: foundproject.client,
+          //          language: foundproject.originalText.language,
+          author: foundproject.originalText.author.name,
+          updateDate: foundproject.updateDate,
+          _id: foundproject._id,
+          data: data
+        });
+      });
+  });
 });
 
 module.exports = router;

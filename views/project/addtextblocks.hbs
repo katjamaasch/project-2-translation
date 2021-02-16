@@ -1,4 +1,4 @@
-
+{{#with foundproject}}
 <div class="project-single-view-header">
     <div>
     <img src="{{projectimage}}" alt="projectimage">
@@ -9,26 +9,7 @@
     <h1 class="projectname">
     {{projectname}}
     </h1>
-    <p>Project created by <strong>{{creator}}</strong> on {{{ date creationDate "DD.MM.YYYY" }}} at {{{ date creationDate "HH:mm" }}}</p>
-
-
-        <div class="statusses">
-        <button class="status-{{status}}">
-        {{status}}</button>
-
-            <div class="status-updates">
-
-            <form method="POST">
-            <button class="finished-button"> ✓ completed!</button>
-            </form>
-
-            <form method="POST" action="/project/{{_id}}/ongoing">
-            <button class="ongoing-button"> x ongoing</button>
-            </form>
-
-            </div>
-
-        </div>
+    <p>Project created by <strong>{{author.name}}</strong> on {{{ date creationDate "DD.MM.YYYY" }}} at {{{ date creationDate "HH:mm" }}}</p>
                     
     </div>
 
@@ -37,22 +18,25 @@
     <hr>
     <br>
 
-<div>
 
 <h3>Add textblocks</h3>
 
-
-  <form id="add-textblock-form" name="textblockform[0]" class="dash-input" method="POST" action="/project/{{_id}}/texts">
+<div>
+  <form id="add-textblock-form" name="textblockform[0]" class="dash-input" method="POST" action="/project/{{_id}}">
   <div id="top_level">
-      
-   <select name="select[0]">
+      {{/with}}
+   <select name="select[0]" >
       <option name="default" value="mt">--Please choose an option--</option>
+      <option name="title" value="title" class="selected-option">Title</option>
+      <option name="title" value="subtitle" class="selected-option">Subtitle</option>
       <option name="headline" value="headline" class="selected-option">Headline</option>
+      <option name="subheadline" value="subheadline" class="selected-option">Subheadline</option>
       <option name="copytext" value="copytext" class="selected-option">Copytext</option>
    </select>    
    <br>
-   <textarea name="textarea[0]" form="add-textblock-form" placeholder="Enter Text here..."></textarea>
+   <textarea name="textarea[0]" form="add-textblock-form" class="select-area" placeholder="Enter Text here..."></textarea>
    </div>
+
    <div class="dash-submit">
     <input class="dash-submit-button" type="submit" value="Submit all texts" />
    </div>
@@ -72,11 +56,15 @@ let i = 0;
 function addTextblockFunction() {    
 i+=1;
 
+
 let topleveldiv=document.createElement('DIV');
 let textblockForm = document.createElement('FORM');
 let select = document.createElement('SELECT');
 let optionDefault = document.createElement('OPTION');
+let optionTitle = document.createElement('OPTION');
+let optionSubtitle = document.createElement('OPTION');
 let optionHeadline = document.createElement('OPTION');
+let optionSubheadline = document.createElement('OPTION');
 let optionCopytext = document.createElement('OPTION');
 let breakel=document.createElement('BR');
 let textarea = document.createElement('TEXTAREA');
@@ -84,15 +72,27 @@ let addbutton= document.createElement('BUTTON');
 
 optionDefault.innerText = "--Please choose an option--"
 optionDefault.setAttribute("value", "mt")
+optionTitle.innerText = "Title"
+optionTitle.setAttribute("value", "title")
+optionTitle.setAttribute("class", "selected-option")
+optionSubtitle.innerText = "Subtitle"
+optionSubtitle.setAttribute("value", "subtitle")
+optionSubtitle.setAttribute("class", "selected-option")
 optionHeadline.innerText = "Headline"
 optionHeadline.setAttribute("value", "headline")
 optionHeadline.setAttribute("class", "selected-option")
+optionSubheadline.innerText = "Subheadline"
+optionSubheadline.setAttribute("value", "subheadline")
+optionSubheadline.setAttribute("class", "selected-option")
 optionCopytext.innerText = "Copytext"
 optionCopytext.setAttribute("value", "copytext")
 optionCopytext.setAttribute("class", "selected-option")
 
 select.appendChild(optionDefault)
+select.appendChild(optionTitle)
+select.appendChild(optionSubtitle)
 select.appendChild(optionHeadline)
+select.appendChild(optionSubheadline)
 select.appendChild(optionCopytext)
 select.setAttribute("name", "select[" + i +"]"); 
 
