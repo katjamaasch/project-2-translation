@@ -197,32 +197,26 @@ router.get('/:id/edit', (req, res, next) => {
 
 router.post('/:id/edit', (req, res, next) => {
   const id = req.params.id;
+  let originalTextId;
+
+  console.log(req.body);
+  // get from the body the texttypes
+  const texttypes = req.body.select;
+  const textareas = req.body.textarea;
   Project.findById(id)
-    .populate({
-      path: 'originalText',
-      populate: {
-        path: 'author'
-      }
+    .then((foundProject) => {
+      originalTextId = foundProject.originalText;
+      console.log(originalTextId);
+      return Project.findByIdAndUpdate(id, texttypes);
     })
-    .then((foundproject) => {
-      // const data = [];
-      // for (let i = 0; i < foundproject.textstructure.length; ++i)
-      //   data.push({
-      //     texttype: foundproject.textstructure[i],
-      //     textarea: foundproject.originalText.textareas[i]
-      //   });
-      //console.log(foundproject.originalText);
-      res.render('project/showtexts', {
-        projectname: foundproject.projectname,
-        projectimage: foundproject.projectimage,
-        status: foundproject.status,
-        client: foundproject.client,
-        language: foundproject.originalText.language,
-        author: foundproject.originalText.author.name,
-        updateDate: foundproject.updateDate,
-        _id: foundproject._id
-        //data: data
-      });
+    .then(() => {
+      return Textsubmission.findByIdAndUpdate(originalTextId, textareas);
+    })
+    .then(() => {
+      res.redirect(`/project/${id}`);
+    })
+    .catch((error) => {
+      next(error);
     });
 });
 
@@ -269,10 +263,15 @@ router.post('/:id', (req, res, next) => {
     author: req.user._id
   }).then((transmissionText) => {
     console.log("I'm the transmissioned text: ", transmissionText);
-    return Project.findByIdAndUpdate(id, {
-      textstructure: req.body.select,
-      originalText: transmissionText
-    })
+    return Project.findByIdAndUpdate(
+      id,
+      {
+        textstructure: req.body.select,
+        originalText: transmissionText
+      },
+      { new: true }
+    )
+
       .populate({
         path: 'originalText',
         populate: {
@@ -295,7 +294,7 @@ router.post('/:id', (req, res, next) => {
           projectimage: foundproject.projectimage,
           status: foundproject.status,
           client: foundproject.client,
-          language: foundproject.originalText.language,
+          //          language: foundproject.originalText.language,
           author: foundproject.originalText.author.name,
           updateDate: foundproject.updateDate,
           _id: foundproject._id,

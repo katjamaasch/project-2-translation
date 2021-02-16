@@ -33,9 +33,11 @@
     <div class="list-buttons">
          {{!--<a href="/project/{{_id}}">Edit</a> 
         <a href="/{{_id}}/delete">Delete</a> --}}
+             {{#if userIsPublisher}}
      <form action="/project/{{_id}}">
      <button class="list-button-1">Edit</button>
      </form>
+          {{/if}}
      <form action="/project/{{_id}}/delete">
      <button class="list-button-2">Delete</button>
      </form>
