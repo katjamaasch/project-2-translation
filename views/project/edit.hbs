@@ -2,7 +2,7 @@
 
 
 <div>
-  <form id="add-textblock-form" name="textblockform[0]" class="dash-input" method="POST" action="/project/{{_id}}/texts">
+  <form id="add-textblock-form" name="textblockform[0]" class="dash-input" method="POST" action="/project/{{_id}}/edit">
 {{#each data}}
 <select name="select">
     <option value="title" {{ifSelected this.texttype "title"}}>Title</option>

@@ -21,55 +21,6 @@ const express = require('express');
 const router = new express.Router();
 const routeGuard = require('./../middleware/route-guard');
 
-router.get('/create', routeGuard, (req, res, next) => {
-  res.render('project/create');
-});
-
-router.post(
-  '/create',
-  uploadMiddleware.single('projectimage'),
-  (req, res, next) => {
-    //console.log(req.body);
-    //console.log('req.file: ', req.file);
-    const data = req.body;
-    let projectimage;
-    if (req.file) {
-      projectimage = req.file.path;
-    }
-
-    Project.create({
-      client: data.client,
-      projectname: data.projectname,
-      projectimage: projectimage,
-      creator: req.user._id
-    })
-      .then((project) => {
-        console.log('project._id: ', project._id);
-        //res.redirect(`/project/${project._id}`);
-        res.render('project/confirmation', { project });
-      })
-      .catch((error) => {
-        next(error);
-      });
-  }
-);
-
-router.get('/:id/add', (req, res, next) => {
-  const id = req.params.id;
-  Project.findById(id)
-    .populate({
-      path: 'originalText',
-      populate: {
-        path: 'author'
-      }
-    })
-    .then((foundproject) => {
-      res.render('project/addtextblocks', {
-        foundproject: foundproject
-      });
-    });
-});
-
 router.get('/all', (req, res, next) => {
   const page = Number(req.query.page) || 1;
   const limit = 3;
@@ -128,17 +79,52 @@ router.get('/all', (req, res, next) => {
     });
 });*/
 
-router.post('/:id/ongoing', (req, res, next) => {
-  const id = req.params.id;
-  // const data = req.body;
-  Project.findByIdAndUpdate(id, {
-    status: 'ongoing'
-  })
-    .then((project) => {
-      res.redirect(`/project/${project._id}`);
+router.get('/create', routeGuard, (req, res, next) => {
+  res.render('project/create');
+});
+
+router.post(
+  '/create',
+  uploadMiddleware.single('projectimage'),
+  (req, res, next) => {
+    //console.log(req.body);
+    //console.log('req.file: ', req.file);
+    const data = req.body;
+    let projectimage;
+    if (req.file) {
+      projectimage = req.file.path;
+    }
+
+    Project.create({
+      client: data.client,
+      projectname: data.projectname,
+      projectimage: projectimage,
+      creator: req.user._id
     })
-    .catch((error) => {
-      next(error);
+      .then((project) => {
+        console.log('project._id: ', project._id);
+        //res.redirect(`/project/${project._id}`);
+        res.render('project/confirmation', { project });
+      })
+      .catch((error) => {
+        next(error);
+      });
+  }
+);
+
+router.get('/:id/add', (req, res, next) => {
+  const id = req.params.id;
+  Project.findById(id)
+    .populate({
+      path: 'originalText',
+      populate: {
+        path: 'author'
+      }
+    })
+    .then((foundproject) => {
+      res.render('project/addtextblocks', {
+        foundproject: foundproject
+      });
     });
 });
 
@@ -156,33 +142,95 @@ router.post('/:id/completed', (req, res, next) => {
     });
 });
 
-router.get('/:id', (req, res, next) => {
+router.get('/:id/delete', (req, res, next) => {
   const id = req.params.id;
   Project.findById(id)
-    .populate('creator')
-    .then((foundproject) => {
-      res.render('project/showtexts', {
-        projectname: foundproject.projectname,
-        projectimage: foundproject.projectimage,
-        _id: foundproject._id,
-        client: foundproject.client,
-        status: foundproject.status,
-        creator: foundproject.creator.name,
-        creationDate: foundproject.creationDate
-      });
+    .then((project) => {
+      res.render('project/delete', { project: project });
     })
     .catch((error) => {
       next(error);
     });
 });
 
-router.post('/:id', (req, res, next) => {
+router.post('/:id/delete', (req, res, next) => {
+  let id = req.params.id;
+  Project.findByIdAndDelete(id)
+    .then(() => {
+      res.redirect('/project/all');
+    })
+    .catch((error) => {
+      next(error);
+    });
+});
+
+router.get('/:id/edit', (req, res, next) => {
   const id = req.params.id;
-  const data = req.body;
+  Project.findById(id)
+    .populate({
+      path: 'originalText',
+      populate: {
+        path: 'author'
+      }
+    })
+    .then((foundproject) => {
+      const data = [];
+      for (let i = 0; i < foundproject.textstructure.length; ++i)
+        data.push({
+          texttype: foundproject.textstructure[i],
+          textarea: foundproject.originalText.textareas[i]
+        });
+      //console.log(foundproject.originalText);
+      res.render('project/edit', {
+        projectname: foundproject.projectname,
+        projectimage: foundproject.projectimage,
+        status: foundproject.status,
+        client: foundproject.client,
+        language: foundproject.originalText.language,
+        author: foundproject.originalText.author.name,
+        updateDate: foundproject.updateDate,
+        _id: foundproject._id,
+        data: data
+      });
+    });
+});
+
+router.post('/:id/edit', (req, res, next) => {
+  const id = req.params.id;
+  Project.findById(id)
+    .populate({
+      path: 'originalText',
+      populate: {
+        path: 'author'
+      }
+    })
+    .then((foundproject) => {
+      // const data = [];
+      // for (let i = 0; i < foundproject.textstructure.length; ++i)
+      //   data.push({
+      //     texttype: foundproject.textstructure[i],
+      //     textarea: foundproject.originalText.textareas[i]
+      //   });
+      //console.log(foundproject.originalText);
+      res.render('project/showtexts', {
+        projectname: foundproject.projectname,
+        projectimage: foundproject.projectimage,
+        status: foundproject.status,
+        client: foundproject.client,
+        language: foundproject.originalText.language,
+        author: foundproject.originalText.author.name,
+        updateDate: foundproject.updateDate,
+        _id: foundproject._id
+        //data: data
+      });
+    });
+});
+
+router.post('/:id/ongoing', (req, res, next) => {
+  const id = req.params.id;
+  // const data = req.body;
   Project.findByIdAndUpdate(id, {
-    status: 'completed',
-    textareas: data.textarea,
-    textstructure: data.texttype
+    status: 'ongoing'
   })
     .then((project) => {
       res.redirect(`/project/${project._id}`);
@@ -236,53 +284,36 @@ router.post('/:id/texts', (req, res, next) => {
   });
 });
 
-router.get('/:id/edit', (req, res, next) => {
+router.get('/:id', (req, res, next) => {
   const id = req.params.id;
   Project.findById(id)
-    .populate({
-      path: 'originalText',
-      populate: {
-        path: 'author'
-      }
-    })
+    .populate('creator')
     .then((foundproject) => {
-      const data = [];
-      for (let i = 0; i < foundproject.textstructure.length; ++i)
-        data.push({
-          texttype: foundproject.textstructure[i],
-          textarea: foundproject.originalText.textareas[i]
-        });
-      //console.log(foundproject.originalText);
-      res.render('project/edit', {
+      res.render('project/showtexts', {
         projectname: foundproject.projectname,
         projectimage: foundproject.projectimage,
-        status: foundproject.status,
-        client: foundproject.client,
-        language: foundproject.originalText.language,
-        author: foundproject.originalText.author.name,
-        updateDate: foundproject.updateDate,
         _id: foundproject._id,
-        data: data
+        client: foundproject.client,
+        status: foundproject.status,
+        creator: foundproject.creator.name,
+        creationDate: foundproject.creationDate
       });
-    });
-});
-
-router.get('/:id/delete', (req, res, next) => {
-  const id = req.params.id;
-  Project.findById(id)
-    .then((project) => {
-      res.render('project/delete', { project: project });
     })
     .catch((error) => {
       next(error);
     });
 });
 
-router.post('/:id/delete', (req, res, next) => {
-  let id = req.params.id;
-  Project.findByIdAndDelete(id)
-    .then(() => {
-      res.redirect('/project/all');
+router.post('/:id', (req, res, next) => {
+  const id = req.params.id;
+  const data = req.body;
+  Project.findByIdAndUpdate(id, {
+    status: 'completed',
+    textareas: data.textarea,
+    textstructure: data.texttype
+  })
+    .then((project) => {
+      res.redirect(`/project/${project._id}`);
     })
     .catch((error) => {
       next(error);
