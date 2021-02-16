@@ -30,6 +30,11 @@ app.set('view engine', 'hbs');
 // Codes added by Sok Mun but not yet activated until needed in the future:
 hbs.registerPartials('views/partials');
 hbs.registerHelper('date', hbsDateHelper);
+hbs.registerHelper('ifSelected', (arg1, arg2) => {
+  if (arg1 === arg2) {
+    return 'selected';
+  }
+});
 
 app.use(serveFavicon(path.join(__dirname, 'public/images', 'favicon.ico')));
 app.use(

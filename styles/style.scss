@@ -28,6 +28,7 @@ a {
 
 nav {
   display: flex;
+
   a,
   button {
     padding: 1em 0;
@@ -304,6 +305,7 @@ label {
 .statusses {
   display: flex;
   flex-direction: row;
+  padding-bottom: 4em;
 }
 
 .status-updates {
@@ -349,10 +351,16 @@ label {
   color: $middle-grey;
   font-weight: 200;
   border-radius: 25px;
+  margin-bottom: 1em;
+  text-align: center;
 }
 
 textarea {
   width: 294px;
+}
+
+.select-area {
+  width: 100%;
 }
 
 .dash-add-button {
@@ -375,12 +383,56 @@ textarea {
 .project-log {
   color: $middle-grey;
   font-size: 0.7em;
+  text-align: center;
+  span {
+    text-transform: capitalize;
+  }
+}
+
+.display-title {
+  text-transform: uppercase;
+  font-size: 3em;
+  font-weight: 200;
+  margin-bottom: 0;
+  line-height: 0;
+  margin-left: 100px;
+}
+
+.display-subtitle {
+  text-transform: uppercase;
+  font-size: 3em;
+  color: $middle-grey;
+  font-weight: 200;
+  margin-bottom: 0;
+  line-height: 0;
+  margin-left: 100px;
 }
 
 .display-headline {
-  text-transform: uppercase;
-  font-weight: 700;
+  font-weight: 500;
   margin-bottom: 0;
+  line-height: 0;
+  margin-left: 100px;
+  font-weight: 500;
+  font-size: 2em;
+  margin-top: 1.2em;
+}
+
+.display-subheadline {
+  font-weight: 500;
+  margin-bottom: 0;
+  line-height: 0;
+  margin-left: 100px;
+  font-weight: 500;
+  font-size: 2em;
+  color: $middle-grey;
+}
+
+.display-copytext {
+  font-weight: 500;
+  margin-bottom: 0;
+  line-height: 0;
+  margin-left: 100px;
 }
 
 .marking-texttype {
@@ -388,4 +440,20 @@ textarea {
   margin-top: 0;
   padding-top: 0;
   line-height: 0;
+  text-transform: capitalize;
+}
+
+.add-texts-button {
+  background-color: $red;
+  width: 50em;
+  color: white;
+}
+
+.update-button {
+  color: $green;
+  margin-bottom: 3em;
+}
+
+.secondary-select {
+  background-color: $grey;
 }

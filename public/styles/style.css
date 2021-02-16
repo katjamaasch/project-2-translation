@@ -1,6 +1,4 @@
-*,
-*:before,
-*:after {
+*, *:before, *:after {
   box-sizing: border-box;
 }
 
@@ -8,9 +6,9 @@ body {
   max-width: 52em;
   padding: 0 1em;
   margin: 0 auto;
-  font-family: 'Spartan', sans-serif;
+  font-family: "Spartan", sans-serif;
   line-height: 2;
-  background-image: url('/images/whitediamond.png');
+  background-image: url("/images/whitediamond.png");
 }
 
 a {
@@ -119,7 +117,7 @@ label {
 }
 
 .home_view {
-  background-image: url('/images/letter.jpeg');
+  background-image: url("/images/letter.jpeg");
   height: 640px;
   width: 1460px;
   margin-left: -330px;
@@ -307,6 +305,7 @@ label {
 .statusses {
   display: flex;
   flex-direction: row;
+  padding-bottom: 4em;
 }
 
 .status-updates {
@@ -352,10 +351,16 @@ label {
   color: #817f7f;
   font-weight: 200;
   border-radius: 25px;
+  margin-bottom: 1em;
+  text-align: center;
 }
 
 textarea {
   width: 294px;
+}
+
+.select-area {
+  width: 100%;
 }
 
 .dash-add-button {
@@ -380,12 +385,57 @@ textarea {
 .project-log {
   color: #817f7f;
   font-size: 0.7em;
+  text-align: center;
+}
+
+.project-log span {
+  text-transform: capitalize;
+}
+
+.display-title {
+  text-transform: uppercase;
+  font-size: 3em;
+  font-weight: 200;
+  margin-bottom: 0;
+  line-height: 0;
+  margin-left: 100px;
+}
+
+.display-subtitle {
+  text-transform: uppercase;
+  font-size: 3em;
+  color: #817f7f;
+  font-weight: 200;
+  margin-bottom: 0;
+  line-height: 0;
+  margin-left: 100px;
 }
 
 .display-headline {
-  text-transform: uppercase;
-  font-weight: 700;
+  font-weight: 500;
   margin-bottom: 0;
+  line-height: 0;
+  margin-left: 100px;
+  font-weight: 500;
+  font-size: 2em;
+  margin-top: 1.2em;
+}
+
+.display-subheadline {
+  font-weight: 500;
+  margin-bottom: 0;
+  line-height: 0;
+  margin-left: 100px;
+  font-weight: 500;
+  font-size: 2em;
+  color: #817f7f;
+}
+
+.display-copytext {
+  font-weight: 500;
+  margin-bottom: 0;
+  line-height: 0;
+  margin-left: 100px;
 }
 
 .marking-texttype {
@@ -393,6 +443,22 @@ textarea {
   margin-top: 0;
   padding-top: 0;
   line-height: 0;
+  text-transform: capitalize;
+}
+
+.add-texts-button {
+  background-color: #7e2013;
+  width: 50em;
+  color: white;
+}
+
+.update-button {
+  color: #1b998b;
+  margin-bottom: 3em;
+}
+
+.secondary-select {
+  background-color: #e6e6e6;
 }
 
 /*# sourceMappingURL=style.css.map */

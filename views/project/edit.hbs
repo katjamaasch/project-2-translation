@@ -1,0 +1,23 @@
+
+
+
+<div>
+  <form id="add-textblock-form" name="textblockform[0]" class="dash-input" method="POST" action="/project/{{_id}}/texts">
+{{#each data}}
+<select name="select">
+    <option value="title" {{ifSelected this.texttype "title"}}>Title</option>
+    <option value="subtitle" {{ifSelected this.texttype "subtitle"}}>Subtitle</option>
+    <option value="headline" {{ifSelected this.texttype "headline"}}>Headline</option>
+    <option value="subheadline" {{ifSelected this.texttype "subheadline"}}>Subheadline</option>
+    <option value="copytext" {{ifSelected this.texttype "copytext"}}>Copytext</option>
+</select>
+
+<label for="textarea" hidden="true">{{this.textarea}} </label>
+<input type="text" name="textarea" placeholder="Text" value="{{this.textarea}}">
+
+
+   <div class="dash-submit">
+    <input class="dash-submit-button" type="submit" value="Submit all texts" />
+   </div>
+{{/each}}
+</form>
