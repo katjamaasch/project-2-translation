@@ -20,8 +20,7 @@ const uploadMiddleware = multer({
 const express = require('express');
 const router = new express.Router();
 const routeGuard = require('./../middleware/route-guard');
-<<<<<<< HEAD
-const project = require('./../models/project');
+
 const { locals } = require('../app');
 
 router.get('/create', routeGuard, (req, res, next) => {
@@ -55,8 +54,6 @@ router.post(
       });
   }
 );
-=======
->>>>>>> 6bda104a52195bd701c31b275b79ff1c79fd4535
 
 router.get('/all', routeGuard, (req, res, next) => {
   const page = Number(req.query.page) || 1;
@@ -74,60 +71,16 @@ router.get('/all', routeGuard, (req, res, next) => {
         .sort([['projectname', 1]]);
     })
     .then((projects) => {
-<<<<<<< HEAD
       res.render('project/index', {
         projects,
         previousPage: page - 1,
         nextPage: isLastPage ? 0 : page + 1
       });
-=======
-      let projectIndex = projects.length;
-      //let projectIndex = projects.length;
-      // let projectsDisplayed = projects[projectIndex];
-
-      //if (projectsDisplayed <= projects[projects.length - 1]) {
-      if (projects[projects.length - 1]) {
-        res.render('project/index', {
-          projects,
-          previousPage: page - 1,
-          nextPage: projects.length ? page + 1 : 0
-        });
-      } else {
-        res.redirect('/project/all/?page =${lastPageQueried}');
-        // res.render('project/index', {
-        //projects
-        //currentPage: page
-        //currentPage: projects.length ? page : 0
-        // });
-      }
->>>>>>> 6bda104a52195bd701c31b275b79ff1c79fd4535
     })
     .catch((error) => {
       next(error);
     });
 });
-
-/*router.get('/all', (req, res, next) => {
-  const page = Number(req.query.page) || 1;
-  const limit = 5;
-  const skip = (page - 1) * limit;
-
-  Project.find()
-    .skip(skip)
-    .limit(limit)
-    .sort([['projectname', 1]])
-    .then((projects) => {
-      res.render('project/index', {
-        projects,
-        previousPage: page - 1,
-        nextPage: projects.length ? page + 1 : 0
-        //lastPage: projects[projects.length - 1] ? page - 1 : page
-      });
-    })
-    .catch((error) => {
-      next(error);
-    });
-});*/
 
 router.get('/create', routeGuard, (req, res, next) => {
   res.render('project/create');
