@@ -394,30 +394,27 @@ textarea {
 
 .display-title {
   text-transform: uppercase;
-  font-size: 3em;
+  font-size: 1em;
   font-weight: 200;
   margin-bottom: 0;
   line-height: 0;
-  margin-left: 100px;
 }
 
 .display-subtitle {
   text-transform: uppercase;
-  font-size: 3em;
+  font-size: 1em;
   color: #817f7f;
   font-weight: 200;
   margin-bottom: 0;
   line-height: 0;
-  margin-left: 100px;
 }
 
 .display-headline {
   font-weight: 500;
   margin-bottom: 0;
   line-height: 0;
-  margin-left: 100px;
   font-weight: 500;
-  font-size: 2em;
+  font-size: 0.8em;
   margin-top: 1.2em;
 }
 
@@ -425,17 +422,15 @@ textarea {
   font-weight: 500;
   margin-bottom: 0;
   line-height: 0;
-  margin-left: 100px;
   font-weight: 500;
-  font-size: 2em;
+  font-size: 0.8em;
   color: #817f7f;
 }
 
 .display-copytext {
-  font-weight: 500;
+  font-weight: 300;
   margin-bottom: 0;
   line-height: 0;
-  margin-left: 100px;
 }
 
 .marking-texttype {
@@ -459,6 +454,11 @@ textarea {
 
 .secondary-select {
   background-color: #e6e6e6;
+}
+
+.customwidth {
+  margin-left: -250px;
+  width: 1600px;
 }
 
 /*# sourceMappingURL=style.css.map */

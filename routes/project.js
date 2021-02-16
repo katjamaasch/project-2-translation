@@ -240,50 +240,6 @@ router.post('/:id/ongoing', (req, res, next) => {
     });
 });
 
-router.post('/:id/texts', (req, res, next) => {
-  const id = req.params.id;
-  //console.log('This is the req.body:', req.body);
-  //console.log('This is the id: ', id);
-  Textsubmission.create({
-    textareas: req.body.textarea,
-    author: req.user._id
-  }).then((transmissionText) => {
-    console.log("I'm the transmissioned text: ", transmissionText);
-    return Project.findByIdAndUpdate(id, {
-      textstructure: req.body.select,
-      originalText: transmissionText
-    })
-      .populate({
-        path: 'originalText',
-        populate: {
-          path: 'author'
-        }
-      })
-      .then((foundproject) => {
-        const data = [];
-
-        for (let i = 0; i < foundproject.textstructure.length; ++i)
-          data.push({
-            texttype: foundproject.textstructure[i],
-            textarea: foundproject.originalText.textareas[i]
-          });
-
-        //console.log(foundproject.originalText);
-        res.render('project/showtexts', {
-          projectname: foundproject.projectname,
-          projectimage: foundproject.projectimage,
-          status: foundproject.status,
-          client: foundproject.client,
-          language: foundproject.originalText.language,
-          author: foundproject.originalText.author.name,
-          updateDate: foundproject.updateDate,
-          _id: foundproject._id,
-          data: data
-        });
-      });
-  });
-});
-
 router.get('/:id', (req, res, next) => {
   const id = req.params.id;
   Project.findById(id)
@@ -306,18 +262,47 @@ router.get('/:id', (req, res, next) => {
 
 router.post('/:id', (req, res, next) => {
   const id = req.params.id;
-  const data = req.body;
-  Project.findByIdAndUpdate(id, {
-    status: 'completed',
-    textareas: data.textarea,
-    textstructure: data.texttype
-  })
-    .then((project) => {
-      res.redirect(`/project/${project._id}`);
+  //console.log('This is the req.body:', req.body);
+  //console.log('This is the id: ', id);
+  Textsubmission.create({
+    textareas: req.body.textarea,
+    author: req.user._id
+  }).then((transmissionText) => {
+    console.log("I'm the transmissioned text: ", transmissionText);
+    return Project.findByIdAndUpdate(id, {
+      textstructure: req.body.select,
+      originalText: transmissionText
     })
-    .catch((error) => {
-      next(error);
-    });
+      .populate({
+        path: 'originalText',
+        populate: {
+          path: 'author'
+        }
+      })
+      .then((foundproject) => {
+        console.log("I'm the foundproject: ", foundproject);
+        const data = [];
+
+        for (let i = 0; i < foundproject.textstructure.length; ++i)
+          data.push({
+            texttype: foundproject.textstructure[i],
+            textarea: foundproject.originalText.textareas[i]
+          });
+
+        //console.log(foundproject.originalText);
+        res.render('project/showtexts', {
+          projectname: foundproject.projectname,
+          projectimage: foundproject.projectimage,
+          status: foundproject.status,
+          client: foundproject.client,
+          language: foundproject.originalText.language,
+          author: foundproject.originalText.author.name,
+          updateDate: foundproject.updateDate,
+          _id: foundproject._id,
+          data: data
+        });
+      });
+  });
 });
 
 module.exports = router;
