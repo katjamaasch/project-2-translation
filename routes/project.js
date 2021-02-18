@@ -242,8 +242,26 @@ router.post('/:id/edit', (req, res, next) => {
   // get from the body the texttypes
   const texttypes = req.body.select;
   const textareas = req.body.textarea;
+
+  console.log(
+    'types length ' + texttypes.length + 'areas length ' + textareas.length
+  );
+  for (let i = 0; i < texttypes.length; i++) {
+    let el = texttypes[i];
+    let al = textareas[i];
+    if ((el === 'mt') | (al === '')) {
+      console.log('working element ' + el);
+      texttypes.splice(i, 1);
+      textareas.splice(i, 1);
+      i--;
+    }
+  }
+
+  console.log(texttypes, textareas);
+
   Project.findById(id).then((foundProject) => {
     //console.log('A project with or without an original text: ', foundProject);
+
     if (!foundProject.originalText) {
       console.log('There is NO originaltext in the project!');
       Textsubmission.create({
@@ -275,10 +293,6 @@ router.post('/:id/edit', (req, res, next) => {
               texttype: populatedproject.textstructure[i],
               textarea: populatedproject.originalText.textareas[i]
             });
-          // console.log(data);
-          // console.log('new textareas: ', textareas);
-          // console.log('I am the Textsubmission Update: ', whateveritis);
-          // console.log('I am the projectinquestion: ', populatedproject);
 
           res.redirect(`/project/${populatedproject._id}`);
         })
@@ -317,19 +331,25 @@ router.post('/:id/edit', (req, res, next) => {
           });
         })
         .then((populatedproject) => {
+          populatedproject.textstructure.splice(
+            populatedproject.textstructure.findIndex((v) => v.textarea === 'mt')
+          );
           //console.log("I'm the populatedproject: ", populatedproject);
-          const data = [];
+          const rawdata = [];
 
           for (let i = 0; i < populatedproject.textstructure.length; ++i)
-            data.push({
+            rawdata.push({
               texttype: populatedproject.textstructure[i],
               textarea: populatedproject.originalText.textareas[i]
             });
 
-          // console.log(data);
-          // console.log('new textareas: ', textareas);
-          // console.log('I am the Textsubmission Update: ', whateveritis);
-          // console.log('I am the projectinquestion: ', populatedproject);
+          // console.log('I am the cleaned data: ', rawdata);
+
+          // rawdata.splice(
+          //   rawdata.findIndex(
+          //     (v) => (v.texttype === 'mt') | (v.textarea === '')
+          //   )
+          // );
 
           res.redirect(`/project/${populatedproject._id}`);
         })
@@ -364,7 +384,7 @@ router.get('/:id', (req, res, next) => {
       }
     })
     .then((foundproject) => {
-      console.log(foundproject);
+      //console.log(foundproject);
       const data = [];
       for (let i = 0; i < foundproject.textstructure.length; ++i)
         data.push({
@@ -394,12 +414,12 @@ router.post('/:id', (req, res, next) => {
   const id = req.params.id;
   //console.log('This is the req.body:', req.body);
   //console.log('This is the id: ', id);
-  console.log(req.body);
+  //console.log(req.body);
   Textsubmission.create({
     textareas: req.body.textarea,
     author: req.user._id
   }).then((transmissionText) => {
-    console.log("I'm the transmissioned text: ", transmissionText);
+    //console.log("I'm the transmissioned text: ", transmissionText);
     return Project.findByIdAndUpdate(
       id,
       {
@@ -416,14 +436,14 @@ router.post('/:id', (req, res, next) => {
         }
       })
       .then((foundproject) => {
-        console.log("I'm the foundproject: ", foundproject);
         const data = [];
-
+        //console.log("I'm the foundproject: ", foundproject);
         for (let i = 0; i < foundproject.textstructure.length; ++i)
           data.push({
             texttype: foundproject.textstructure[i],
             textarea: foundproject.originalText.textareas[i]
           });
+
         //console.log(foundproject.originalText);
         res.render('project/showtexts', {
           projectname: foundproject.projectname,
