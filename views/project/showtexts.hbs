@@ -52,10 +52,10 @@
     <p class= "display-{{this.texttype}}"> {{this.textarea}}</p>
     </div>
 
+
     <div class="grid-item"></div>
     <div class="grid-item"></div>
 </div>
-
     {{/each}}
 <div class="subgrid" >  <!--  -->
     <div class= "grid-item"></div>
@@ -65,13 +65,19 @@
     <br>
     {{/if}}
     {{#if userIsPublisher}}
-    <a class="edit-or-csv-button" href="">Export csv</a>
+    <form action="/project/{{_id}}/exportgermancsv" method="POST">
+    <button class="edit-or-csv-button">Export csv</button>
+    </form>
 </div>
 
 <div class= "grid-item">
     <a class="edit-or-csv-button" href="">Edit english text</a>
     <br>
-    <a class="edit-or-csv-button" href="">Import csv</a>
+    <form action="/project/csv-file-upload" method="POST" enctype="multipart/form-data">
+        <input type="file" id="myFile" name="filename" class="edit-or-csv-button">
+        <input type="submit" class="edit-or-csv-button">
+    </form>
+
 </div>
 
 <div class= "grid-item">

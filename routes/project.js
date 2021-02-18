@@ -1,6 +1,7 @@
 const Project = require('./../models/project');
 const User = require('./../models/user');
 const Textsubmission = require('./../models/textSubmission');
+const Papa = require('papaparse');
 //const Textblock = require('./../models/textblock');
 
 ('use strict');
@@ -15,6 +16,10 @@ const storage = new multerStorageCloudinary.CloudinaryStorage({
 
 const uploadMiddleware = multer({
   storage: storage
+});
+
+const uploadCSV = multer({
+  dest: './csv-uploads'
 });
 
 const express = require('express');
@@ -115,6 +120,45 @@ router.post(
       });
   }
 );
+
+router.post(
+  '/csv-file-upload',
+  uploadCSV.single('filename'),
+  (req, res, next) => {
+    console.log(req.file, req.body);
+    res.end();
+  }
+);
+
+router.post('/:id/exportgermancsv', (req, res, next) => {
+  console.log('exportgermancsv is triggered');
+  const id = req.params.id;
+  Project.findById(id)
+    .populate({
+      path: 'originalText'
+    })
+    .then((foundproject) => {
+      const data = [];
+      for (let i = 0; i < foundproject.textstructure.length; ++i)
+        data.push({
+          texttype: foundproject.textstructure[i],
+          textarea: foundproject.originalText.textareas[i]
+        });
+      //console.log('consolidated areas ', data);
+      let csvExport = Papa.unparse(data, {
+        quotes: false, //or array of booleans
+        quoteChar: '"',
+        escapeChar: '"',
+        delimiter: ';',
+        header: true,
+        newline: '\r\n',
+        skipEmptyLines: false, //other option is 'greedy', meaning skip delimiters, quotes, and whitespace.
+        columns: null //or array of strings
+      });
+      res.set('Content-Type', 'text/csv');
+      res.send(csvExport);
+    });
+});
 
 router.get('/:id/add', (req, res, next) => {
   const id = req.params.id;
