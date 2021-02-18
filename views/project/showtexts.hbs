@@ -60,8 +60,11 @@
 <div class="subgrid" >  <!--  -->
     <div class= "grid-item"></div>
     <div class= "grid-item">
+            {{#if @root.userIsPublisher}}
     <a class="edit-or-csv-button" href="/project/{{_id}}/edit">Edit german text</a>
     <br>
+    {{/if}}
+    {{#if userIsPublisher}}
     <a class="edit-or-csv-button" href="">Export csv</a>
 </div>
 
@@ -77,6 +80,7 @@
     <a class="edit-or-csv-button" href="">Import csv</a>
 </div>
 </div>
+{{/if}}
 
 </div>
 </div>
