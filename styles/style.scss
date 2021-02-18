@@ -416,8 +416,7 @@ textarea {
   font-weight: 500;
   margin-bottom: 0;
   font-weight: 500;
-  font-size: 0.8em;
-  margin-top: 1.2em;
+  font-size: 1em;
 }
 
 .display-subheadline {
@@ -491,4 +490,14 @@ textarea {
   position: fixed;
   padding-top: 20px;
   text-align: center;
+}
+
+.steps {
+  font-size: 2em;
+  font-weight: 800;
+  color: rgb(2, 185, 155);
+}
+
+.specifica {
+  color: black;
 }
