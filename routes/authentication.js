@@ -14,16 +14,25 @@ router.get('/sign-up', (req, res, next) => {
   res.render('authentication/sign-up');
 });
 
-// If we want to have profile picture  upload,
-// we need to create uploadMiddleWare codes
-// and add uploadMiddleware.single('picture'), after '/sign-up' in router.post('/sign-up', )
-// Shall we add code to check if the user already exists?
-// Should we redirect after sign-up to res.redirect('/sign-in')?
 router.post('/sign-up', (req, res, next) => {
   const { name, email, password, role, department } = req.body;
-  //console.log(req.body);
-  bcryptjs
-    .hash(password, 10)
+  let data = req.body.email;
+  // ??Here are new codes ??
+  User.findOne({
+    email: data
+  })
+    .then((user) => {
+      if (user) {
+        throw new Error('There is already a user with that email');
+        //return;
+      } else {
+        return bcryptjs.hash(password, 10);
+      }
+    })
+
+    //console.log(req.body);
+    // bcryptjs
+    //  .hash(password, 10)
     .then((hash) => {
       return User.create({
         name,
@@ -50,7 +59,9 @@ router.get('/sign-in', (req, res, next) => {
 // Need to decide if interpreter, where to direct user to and which view to render
 router.post('/sign-in', (req, res, next) => {
   let user;
-  const { email, password } = req.body;
+  let userRole;
+  const { email, password, role } = req.body;
+
   User.findOne({ email })
     .then((document) => {
       if (!document) {
@@ -64,6 +75,13 @@ router.post('/sign-in', (req, res, next) => {
       if (result) {
         req.session.userId = user._id;
         res.redirect(`/profile/${user._id}`);
+        /*userRole = [user.role];
+        console.log(userRole);
+        if (userRole === ['publisher']) {
+          res.redirect(`/profile/${user._id}/publisher`);
+        } else {
+          res.redirect(`/profile/${user._id}/viewer`);
+        }*/
       } else {
         return Promise.reject(new Error('Wrong password.'));
       }
