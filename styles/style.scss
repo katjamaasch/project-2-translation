@@ -490,14 +490,28 @@ label {
   padding: 2px 40px;
 }
 
-.footer-notes {
+.footer.notes {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 30px;
+  //padding-bottom: 30px;
+  margin-top: 30px;
+  //margin-bottom: 30px;
+}
+
+/*.footer-notes {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding-top: 20px;
-  margin-bottom: 0;
+  margin-bottom: 20px;
   font-size: 1em;
-}
+  height: 100%;
+  color: $middle-grey;
+  //border-top: solid 1px $grey;
+  margin-top: 30px;
+}*/
 
 /*.footer-notes {
   //display: flex;
