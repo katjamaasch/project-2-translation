@@ -66,6 +66,7 @@ router.get('/all', routeGuard, (req, res, next) => {
     .then((total) => {
       isLastPage = total / limit <= page;
       return Project.find()
+        .populate('creator')
         .skip(skip)
         .limit(limit)
         .sort([['projectname', 1]]);
