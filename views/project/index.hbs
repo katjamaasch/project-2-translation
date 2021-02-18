@@ -27,7 +27,8 @@
 
 <div class="index-projects-details">
             <small class="status-{{this.status}}">{{status}}</small>
-     <p>Created by <b> {{creator.name}} </b> on {{{date creationDate "DD/MM/YYYY"}}}</p>
+            <p>Created by {{#if @root.userIsPublisher }}{{creator.name}} {{/if}} on {{{date creationDate "DD/MM/YYYY"}}}</p>
+     <!--<p>Created by <b> {{this.creator.name}} </b> on {{{date creationDate "DD/MM/YYYY"}}}</p>-->
     </div>
 
 
