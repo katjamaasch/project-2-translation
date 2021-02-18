@@ -122,9 +122,10 @@ router.get('/:id/add', (req, res, next) => {
       }
     })
     .then((foundproject) => {
-      res.render('project/addtextblocks', {
-        foundproject: foundproject
-      });
+      res.render(`project/edit`, { _id: foundproject._id });
+      // res.render('project/addtextblocks', {
+      //   foundproject: foundproject
+      // });
     });
 });
 
@@ -195,6 +196,7 @@ router.get('/:id/edit', (req, res, next) => {
     });
 });
 
+/*
 router.post('/:id/edit', (req, res, next) => {
   const id = req.params.id;
   let originalTextId;
@@ -210,14 +212,129 @@ router.post('/:id/edit', (req, res, next) => {
       return Project.findByIdAndUpdate(id, texttypes);
     })
     .then(() => {
-      return Textsubmission.findByIdAndUpdate(originalTextId, textareas);
+      console.log('textareas', textareas);
+      return Textsubmission.findByIdAndUpdate(
+        originalTextId,
+        { textareas },
+        {
+          new: true
+        }
+      );
     })
-    .then(() => {
+    .then((updatedtext) => {
+      console.log(updatedtext);
       res.redirect(`/project/${id}`);
     })
     .catch((error) => {
       next(error);
     });
+});
+*/
+
+router.post('/:id/edit', (req, res, next) => {
+  const id = req.params.id;
+  let originalTextId;
+  let projectinquestion;
+  // console.log(req.body);
+  // get from the body the texttypes
+  const texttypes = req.body.select;
+  const textareas = req.body.textarea;
+  Project.findById(id).then((foundProject) => {
+    //console.log('A project with or without an original text: ', foundProject);
+    if (!foundProject.originalText) {
+      console.log('There is NO originaltext in the project!');
+      Textsubmission.create({
+        textareas: req.body.textarea,
+        author: req.user._id
+      })
+        .then((transmissionText) => {
+          //console.log("I'm the transmissioned text: ", transmissionText);
+          return Project.findByIdAndUpdate(
+            id,
+            {
+              textstructure: req.body.select,
+              originalText: transmissionText
+            },
+            { new: true }
+          ).populate({
+            path: 'originalText',
+            populate: {
+              path: 'author'
+            }
+          });
+        })
+        .then((populatedproject) => {
+          //console.log("I'm the populatedproject: ", populatedproject);
+          const data = [];
+
+          for (let i = 0; i < populatedproject.textstructure.length; ++i)
+            data.push({
+              texttype: populatedproject.textstructure[i],
+              textarea: populatedproject.originalText.textareas[i]
+            });
+          // console.log(data);
+          // console.log('new textareas: ', textareas);
+          // console.log('I am the Textsubmission Update: ', whateveritis);
+          // console.log('I am the projectinquestion: ', populatedproject);
+
+          res.redirect(`/project/${populatedproject._id}`);
+        })
+        .catch((error) => {
+          next(error);
+        });
+    } else {
+      originalTextId = foundProject.originalText;
+      //console.log('There is an originaltext in the project!');
+      return Project.findByIdAndUpdate(
+        id,
+        { textstructure: texttypes },
+        {
+          new: true
+        }
+      )
+        .then((foundProject) => {
+          projectinquestion = foundProject;
+          //console.log('I am the project which gets updated: ', foundProject);
+          return Textsubmission.findByIdAndUpdate(
+            originalTextId,
+            { textareas },
+            {
+              new: true
+            }
+          );
+        })
+        .then((updatedTextAreas) => {
+          //console.log('I am the updated text: ', updatedTextAreas);
+          //console.log('I am the _id: 'projectinquestion._id');
+          return Project.findById(projectinquestion._id).populate({
+            path: 'originalText creator',
+            populate: {
+              path: 'author'
+            }
+          });
+        })
+        .then((populatedproject) => {
+          //console.log("I'm the populatedproject: ", populatedproject);
+          const data = [];
+
+          for (let i = 0; i < populatedproject.textstructure.length; ++i)
+            data.push({
+              texttype: populatedproject.textstructure[i],
+              textarea: populatedproject.originalText.textareas[i]
+            });
+
+          // console.log(data);
+          // console.log('new textareas: ', textareas);
+          // console.log('I am the Textsubmission Update: ', whateveritis);
+          // console.log('I am the projectinquestion: ', populatedproject);
+
+          res.redirect(`/project/${populatedproject._id}`);
+        })
+        .catch((error) => {
+          next(error);
+        });
+    }
+  });
 });
 
 router.post('/:id/ongoing', (req, res, next) => {
@@ -237,8 +354,20 @@ router.post('/:id/ongoing', (req, res, next) => {
 router.get('/:id', (req, res, next) => {
   const id = req.params.id;
   Project.findById(id)
-    .populate('creator')
+    .populate({
+      path: 'originalText creator',
+      populate: {
+        path: 'author'
+      }
+    })
     .then((foundproject) => {
+      console.log(foundproject);
+      const data = [];
+      for (let i = 0; i < foundproject.textstructure.length; ++i)
+        data.push({
+          texttype: foundproject.textstructure[i],
+          textarea: foundproject.originalText.textareas[i]
+        });
       res.render('project/showtexts', {
         projectname: foundproject.projectname,
         projectimage: foundproject.projectimage,
@@ -246,7 +375,11 @@ router.get('/:id', (req, res, next) => {
         client: foundproject.client,
         status: foundproject.status,
         creator: foundproject.creator.name,
-        creationDate: foundproject.creationDate
+        creationDate: foundproject.creationDate,
+        language: foundproject.originalText.language,
+        author: foundproject.originalText.author.name,
+        updateDate: foundproject.updateDate,
+        data
       });
     })
     .catch((error) => {
@@ -258,6 +391,7 @@ router.post('/:id', (req, res, next) => {
   const id = req.params.id;
   //console.log('This is the req.body:', req.body);
   //console.log('This is the id: ', id);
+  console.log(req.body);
   Textsubmission.create({
     textareas: req.body.textarea,
     author: req.user._id
@@ -287,7 +421,6 @@ router.post('/:id', (req, res, next) => {
             texttype: foundproject.textstructure[i],
             textarea: foundproject.originalText.textareas[i]
           });
-
         //console.log(foundproject.originalText);
         res.render('project/showtexts', {
           projectname: foundproject.projectname,

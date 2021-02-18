@@ -2,9 +2,9 @@
 
 
 
-<h2 class="entered-text-display-header"><strong>{{projectname}}</strong> ({{client}}):</h2>
+<h2 class="entered-text-display-header"><strong>{{projectname}}</strong> ({{client}})</h2>
 
-<p class="project-log">author: <strong>{{author}}</strong>, created on {{date creationDate "DD/MM/YYYY"}}, last updated on <strong>{{date updateDate "DD/MM/YYYY"}}</strong> at <strong>{{date updateDate "HH:mm"}}</strong>.</p>
+<p class="project-log">author: <strong>{{author}}</strong>, created on <strong>{{date creationDate "DD/MM/YYYY"}}</strong>, last updated on <strong>{{date updateDate "DD/MM/YYYY"}}</strong> at <strong>{{date updateDate "HH:mm"}}</strong>.</p>
         <div class="statusses">
         <button class="status-{{status}}">
         {{status}}</button>
@@ -26,46 +26,58 @@
 
 <div class="container customwidth">
 
-<div class="row customwidth">
-    <div class="col-3">
+<div class="subgrid">
+    <div class="grid-item">
         <h5>Texttype</h5>
     </div>
-    <div class="col-3">
+    <div class="grid-item">
         <h5>German Text</h5>
     </div>
-        <div class="col-3">
+        <div class="grid-item">
         <h5>English Text</h5>
     </div>
-        <div class="col-3">
+        <div class="grid-item">
         <h5>French Text</h5>
     </div>
 </div>
 
-    {{#each data}}
-<div class="row customwidth" >
-    <div class="col-3">
-    <p class="marking-texttype">({{this.texttype}})</p>
+  
+{{#each data}}
+<div class="subgrid" >  
+    <div class="grid-item">
+    <p class="marking-texttype">{{this.texttype}}</p>
     </div>
 
-    <div class="col-3">
+    <div class="grid-item">
     <p class= "display-{{this.texttype}}"> {{this.textarea}}</p>
+    </div>
+
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+</div>
+
     {{/each}}
-    <a class="add-texts-button" href="/project/{{_id}}/edit">Edit german text</a>
+<div class="subgrid" >  <!--  -->
+    <div class= "grid-item"></div>
+    <div class= "grid-item">
+    <a class="edit-or-csv-button" href="/project/{{_id}}/edit">Edit german text</a>
     <br>
-    <a class="add-texts-button" href="">Export csv</a>
+    <a class="edit-or-csv-button" href="">Export csv</a>
 </div>
 
-<div class= "col-3">
-    <a class="add-texts-button" href="">Edit english text</a>
+<div class= "grid-item">
+    <a class="edit-or-csv-button" href="">Edit english text</a>
     <br>
-    <a class="add-texts-button" href="">Import csv</a>
+    <a class="edit-or-csv-button" href="">Import csv</a>
 </div>
 
-<div class= "col-3">
-    <a class="add-texts-button" href="">Edit french text</a>
+<div class= "grid-item">
+    <a class="edit-or-csv-button" href="">Edit french text</a>
     <br>
-    <a class="add-texts-button" href="">Import csv</a>
+    <a class="edit-or-csv-button" href="">Import csv</a>
 </div>
+</div>
+
 </div>
 </div>
 

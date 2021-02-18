@@ -378,6 +378,9 @@ textarea {
   width: 294px;
   height: 2em;
   line-height: 0.3;
+  background-color: #7e2013;
+  color: white;
+  text-transform: uppercase;
 }
 
 .project-log {
@@ -394,7 +397,6 @@ textarea {
   font-size: 1em;
   font-weight: 200;
   margin-bottom: 0;
-  line-height: 0;
 }
 
 .display-subtitle {
@@ -403,13 +405,11 @@ textarea {
   color: $middle-grey;
   font-weight: 200;
   margin-bottom: 0;
-  line-height: 0;
 }
 
 .display-headline {
   font-weight: 500;
   margin-bottom: 0;
-  line-height: 0;
   font-weight: 500;
   font-size: 0.8em;
   margin-top: 1.2em;
@@ -418,23 +418,22 @@ textarea {
 .display-subheadline {
   font-weight: 500;
   margin-bottom: 0;
-  line-height: 0;
   font-weight: 500;
-  font-size: 0.8em;
+  font-size: 1em;
   color: $middle-grey;
 }
 
 .display-copytext {
-  font-weight: 300;
+  font-weight: 400;
   margin-bottom: 0;
-  line-height: 0;
+  line-height: 1em;
+  padding: 8px 0;
 }
 
 .marking-texttype {
   color: $middle-grey;
   margin-top: 0;
   padding-top: 0;
-  line-height: 0;
   text-transform: capitalize;
 }
 
@@ -454,6 +453,37 @@ textarea {
 }
 
 .customwidth {
-  margin-left: -250px;
-  width: 1600px;
+  margin-left: -100px;
+  width: 1030px;
+  display: grid;
+  grid-template-rows: 1fr;
+  background-color: white;
+}
+
+.subgrid {
+  width: 1000px;
+
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  align-content: space-around;
+  border-bottom: 0.1rem dotted rgb(158, 158, 158);
+  padding-top: 5px;
+}
+
+.grid-item {
+  justify-self: start;
+  align-self: start;
+}
+
+.edit-or-csv-button {
+  border: 1px solid rgb(158, 158, 158);
+  padding: 2px 40px;
+}
+
+.footer-notes {
+  display: block;
+  position: fixed;
+  padding-top: 20px;
+  text-align: center;
 }
