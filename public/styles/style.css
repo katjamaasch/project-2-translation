@@ -543,4 +543,8 @@ label {
   color: black;
 }
 
+.sign-out-button {
+  background-color: transparent;
+}
+
 /*# sourceMappingURL=style.css.map */
