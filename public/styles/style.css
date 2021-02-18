@@ -193,7 +193,6 @@ label {
   align-items: center;
   color: #817f7f;
   line-height: 2em;
-  margin-bottom: 4em;
 }
 
 .projectsinprogresslist h3 {
@@ -204,6 +203,11 @@ label {
 .projectsinprogresslist img {
   height: 50px;
   width: 50px;
+}
+
+.project-creator-spacing {
+  margin-top: 0.3em;
+  margin-bottom: 2.5em;
 }
 
 .project-single-view-header {
@@ -360,7 +364,7 @@ label {
   text-align: center;
 }
 
-textarea {
+.textarea {
   width: 294px;
 }
 
@@ -488,13 +492,48 @@ textarea {
   width: 214px;
 }
 
-.footer-notes {
+.footer.notes {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 30px;
+  margin-top: 30px;
+}
+
+/*.footer-notes {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 20px;
+  margin-bottom: 20px;
+  font-size: 1em;
+  height: 100%;
+  color: $middle-grey;
+  //border-top: solid 1px $grey;
+  margin-top: 30px;
+}*/
+/*.footer-notes {
+  //display: flex;
+  //flex-direction: center;
+  //position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  //flex-grow: 1;
+  //align-items: flex-end;
+  width: 100%;
+  padding-top: 20px;
+  font-size: 1em;
+  bottom: 0;
+  text-align: left;
+  // margin-top: 100px;
+}*/
+/*.footer-notes {
   display: block;
   position: fixed;
   padding-top: 20px;
   text-align: center;
-}
-
+}*/
 .steps {
   font-size: 2em;
   font-weight: 800;

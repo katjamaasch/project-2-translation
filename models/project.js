@@ -1,5 +1,3 @@
-// Properties: Client name, project name, status, creator, date
-
 'use strict';
 
 const mongoose = require('mongoose');
