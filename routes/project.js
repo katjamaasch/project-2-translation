@@ -246,7 +246,7 @@ router.get('/:id/add', (req, res, next) => {
       }
     })
     .then((foundproject) => {
-      res.render(`project/edit`, { _id: foundproject._id });
+      res.render(`project/edit`, { _id: foundproject._id, language: 'german' });
       // res.render('project/addtextblocks', {
       //   foundproject: foundproject
       // });
@@ -460,7 +460,8 @@ router.get('/:id/edit/english', (req, res, next) => {
       for (let i = 0; i < foundproject.textstructure.length; ++i)
         data.push({
           texttype: foundproject.textstructure[i],
-          textarea: foundproject.translations[0].textareas[i]
+          textarea: foundproject.translations[0].textareas[i],
+          german: foundproject.originalText.textareas[i]
         });
       //console.log(foundproject.originalText);
       res.render('project/editenglish', {
@@ -468,7 +469,7 @@ router.get('/:id/edit/english', (req, res, next) => {
         projectimage: foundproject.projectimage,
         status: foundproject.status,
         client: foundproject.client,
-        language: foundproject.originalText.language,
+        language: foundproject.translations[0].language,
         author: foundproject.originalText.author.name,
         updateDate: foundproject.updateDate,
         _id: foundproject._id,
@@ -479,7 +480,8 @@ router.get('/:id/edit/english', (req, res, next) => {
       res.render('error', {
         message:
           'Sorry, you have to upload a csv-file with the translation first.',
-        image: 'fail-gifs/fail1.gif'
+        image: '/images/no.gif',
+        id: id
       });
     });
 });
@@ -524,8 +526,11 @@ router.get('/:id', (req, res, next) => {
         data
       });
     })
-    .catch((error) => {
-      next(error);
+    .catch(() => {
+      res.render('errorwithoutlink', {
+        message: 'This project was not properly created.',
+        image: '/images/fail1.gif'
+      });
     });
 });
 

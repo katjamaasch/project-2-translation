@@ -36,7 +36,7 @@ hbs.registerHelper('ifSelected', (arg1, arg2) => {
   }
 });
 
-app.use(serveFavicon(path.join(__dirname, 'public/images', 'favicon.ico')));
+app.use(serveFavicon(path.join(__dirname, 'public/images', 'favicon.png')));
 app.use(
   sassMiddleware({
     src: path.join('styles'),

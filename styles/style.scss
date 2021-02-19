@@ -61,6 +61,22 @@ img {
 form {
   display: flex;
   flex-direction: column;
+  > input[type='text'],
+  > input[type='email'],
+  > input[type='password'] {
+    // show success!
+    &:valid {
+      background-image: url(images/chck.png);
+      background-size: 20px;
+      background-repeat: no-repeat;
+      background-position: 20px 20px;
+
+      // continue to hide the label
+      & + label {
+        opacity: 0;
+      }
+    }
+  }
 }
 
 input:not([type='checkbox']),
@@ -239,10 +255,12 @@ label {
 }
 
 .thumbnail-text-view {
-  border-radius: 70px;
+  border-radius: 200px;
   height: 100px;
-  width: 100px;
-  margin: 1em 0 1em 2em;
+  width: auto;
+  background: transparent no-repeat center;
+  background-size: cover;
+  margin: 1em 0 1em 1em;
 }
 
 .xxx {
@@ -476,6 +494,7 @@ label {
 
 .secondary-select {
   background-color: $grey;
+  width: 294px;
 }
 
 .customwidth {
@@ -591,7 +610,7 @@ label {
 
 .important-note {
   color: $red;
-  padding: 1em 3em;
+  padding: 0.2em 3em;
   background-color: $grey;
   border-radius: 25px;
 }
@@ -602,4 +621,40 @@ label {
 
 .textheader {
   padding: 1em 0;
+}
+
+.error-message {
+  font-size: 1.5em;
+  // text-align: center;
+}
+
+.error-button {
+  width: 300px;
+  height: 20px;
+  line-height: 0;
+  border-color: $red;
+  animation-name: example;
+  animation-duration: 0.2s;
+  animation-iteration-count: 30;
+}
+
+@keyframes example {
+  from {
+    border-color: $red;
+  }
+  to {
+    border-color: rgb(255, 230, 0);
+  }
+}
+
+.error-image {
+  width: 50%;
+  height: 50%;
+}
+
+.originaltext {
+  color: #1b998b;
+  span {
+    text-transform: uppercase;
+  }
 }

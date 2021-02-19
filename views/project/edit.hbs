@@ -1,5 +1,8 @@
 
+<h1>Enter {{language}} text</h1>
+
 <p class="important-note">Note: to delete a text, you only have to erase it from the field.</p>
+
 <br>
 <div>
   <form id="add-textblock-form" name="textblockform[0]" method="POST" action="/project/{{_id}}/edit">
@@ -21,9 +24,9 @@
 
 {{/each}}
 <div id="top_level">
-      <p>Something is missing here?</p>
+      <h5>Add new text blocks</h5>
    <select name="select[{{@index}}]" class="secondary-select">
-      <option name="default" value="mt">--Please choose an option--</option>
+      <option name="default" value="">--Please choose an option--</option>
       <option name="title" value="title" class="selected-option">Title</option>
       <option name="title" value="subtitle" class="selected-option">Subtitle</option>
       <option name="headline" value="headline" class="selected-option">Headline</option>
@@ -86,6 +89,8 @@ optionSubheadline.setAttribute("class", "selected-option")
 optionCopytext.innerText = "Copytext"
 optionCopytext.setAttribute("value", "copytext")
 optionCopytext.setAttribute("class", "selected-option")
+textarea.setAttribute("class", "secondary-select")
+select.setAttribute("class", "secondary-select")
 
 select.appendChild(optionDefault)
 select.appendChild(optionTitle)

@@ -61,6 +61,21 @@ form {
   flex-direction: column;
 }
 
+form > input[type='text']:valid,
+form > input[type='email']:valid,
+form > input[type='password']:valid {
+  background-image: url(images/chck.png);
+  background-size: 20px;
+  background-repeat: no-repeat;
+  background-position: 20px 20px;
+}
+
+form > input[type='text']:valid + label,
+form > input[type='email']:valid + label,
+form > input[type='password']:valid + label {
+  opacity: 0;
+}
+
 input:not([type='checkbox']),
 input:not([type='range']),
 textarea,
@@ -236,10 +251,12 @@ label {
 }
 
 .thumbnail-text-view {
-  border-radius: 70px;
+  border-radius: 200px;
   height: 100px;
-  width: 100px;
-  margin: 1em 0 1em 2em;
+  width: auto;
+  background: transparent no-repeat center;
+  background-size: cover;
+  margin: 1em 0 1em 1em;
 }
 
 .xxx {
@@ -475,6 +492,7 @@ label {
 
 .secondary-select {
   background-color: #e6e6e6;
+  width: 294px;
 }
 
 .customwidth {
@@ -582,7 +600,7 @@ label {
 
 .important-note {
   color: #7e2013;
-  padding: 1em 3em;
+  padding: 0.2em 3em;
   background-color: #e6e6e6;
   border-radius: 25px;
 }
@@ -593,6 +611,42 @@ label {
 
 .textheader {
   padding: 1em 0;
+}
+
+.error-message {
+  font-size: 1.5em;
+}
+
+.error-button {
+  width: 300px;
+  height: 20px;
+  line-height: 0;
+  border-color: #7e2013;
+  animation-name: example;
+  animation-duration: 0.2s;
+  animation-iteration-count: 30;
+}
+
+@keyframes example {
+  from {
+    border-color: #7e2013;
+  }
+  to {
+    border-color: #ffe600;
+  }
+}
+
+.error-image {
+  width: 50%;
+  height: 50%;
+}
+
+.originaltext {
+  color: #1b998b;
+}
+
+.originaltext span {
+  text-transform: uppercase;
 }
 
 /*# sourceMappingURL=style.css.map */
