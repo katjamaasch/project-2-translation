@@ -255,10 +255,12 @@ label {
 }
 
 .thumbnail-text-view {
-  border-radius: 70px;
+  border-radius: 200px;
   height: 100px;
-  width: 100px;
-  margin: 1em 0 1em 2em;
+  width: auto;
+  background: transparent no-repeat center;
+  background-size: cover;
+  margin: 1em 0 1em 1em;
 }
 
 .xxx {
@@ -608,7 +610,7 @@ label {
 
 .important-note {
   color: $red;
-  padding: 1em 3em;
+  padding: 0.2em 3em;
   background-color: $grey;
   border-radius: 25px;
 }

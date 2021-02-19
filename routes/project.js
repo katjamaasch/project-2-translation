@@ -246,7 +246,7 @@ router.get('/:id/add', (req, res, next) => {
       }
     })
     .then((foundproject) => {
-      res.render(`project/edit`, { _id: foundproject._id });
+      res.render(`project/edit`, { _id: foundproject._id, language: 'german' });
       // res.render('project/addtextblocks', {
       //   foundproject: foundproject
       // });
