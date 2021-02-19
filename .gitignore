@@ -5,6 +5,8 @@
 logs
 *.log*
 
+*.css.map
+
 # Runtime data
 pids
 *.pid
