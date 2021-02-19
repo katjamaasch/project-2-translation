@@ -625,3 +625,26 @@ label {
 .textheader {
   padding: 1em 0;
 }
+
+.error-message {
+  font-size: 1.5em;
+  text-align: center;
+}
+
+.error-button {
+  width: 100px;
+  height: 100px;
+  border-color: red;
+  animation-name: example;
+  animation-duration: 0.2s;
+  animation-iteration-count: 30;
+}
+
+@keyframes example {
+  from {
+    border-color: red;
+  }
+  to {
+    border-color: yellow;
+  }
+}
