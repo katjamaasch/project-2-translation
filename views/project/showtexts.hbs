@@ -3,7 +3,9 @@
 
 
 <h2 class="entered-text-display-header"><strong>{{projectname}}</strong> ({{client}})</h2>
-
+{{#each translatedtextarea}}
+<h3>{{this}}</h3>
+{{/each}}
 <p class="project-log">author: <strong>{{author}}</strong>, created on <strong>{{date creationDate "DD/MM/YYYY"}}</strong>, last updated on <strong>{{date updateDate "DD/MM/YYYY"}}</strong> at <strong>{{date updateDate "HH:mm"}}</strong>.</p>
         <div class="statusses">
         <button class="status-{{status}}">
@@ -49,14 +51,14 @@
     </div>
 
     <div class="grid-item">
-    <p class= "display-{{this.texttype}}"> {{this.textarea}}</p>
+    <p class= "display-{{this.texttype}}"> {{this.origtextarea}}</p>
     </div>
 
-
-    <div class="grid-item"></div>
-    <div class="grid-item"></div>
+    <div class="grid-item">{{this.engtextarea}}</div>
+    <div class="grid-item">{{this.frentextarea}}</div>
 </div>
-    {{/each}}
+{{/each}}
+
 <div class="subgrid" >  <!--  -->
     <div class= "grid-item"></div>
     <div class= "grid-item">
@@ -70,15 +72,17 @@
     </form>
 </div>
 
+
 <div class= "grid-item">
     <a class="edit-or-csv-button" href="">Edit english text</a>
     <br>
-    <form action="/project/csv-file-upload" method="POST" enctype="multipart/form-data">
+    <form action="/project/{{_id}}/csv-file-upload" method="POST" enctype="multipart/form-data">
         <input type="file" id="myFile" name="filename" class="edit-or-csv-button">
         <input type="submit" class="edit-or-csv-button">
     </form>
 
 </div>
+
 
 <div class= "grid-item">
     <a class="edit-or-csv-button" href="">Edit french text</a>
