@@ -123,12 +123,53 @@ router.post(
   }
 );
 
+router.post('/:id/edit/english', (req, res, next) => {
+  const id = req.params.id;
+  let projectId = '';
+  // console.log(req.body);
+  // get from the body the texttypes
+  const textareas = req.body.textarea;
+
+  Project.findById(id)
+    .populate({
+      path: 'translations'
+    })
+    .then((foundProject) => {
+      projectId = foundProject._id;
+
+      for (let i = 0; i < foundProject.textstructure.length; i++) {
+        const al = textareas[i];
+        if (al === '') {
+          //console.log('working element ' + el);
+          textareas.splice(i, 1);
+          i--;
+        }
+      }
+      return Textsubmission.findByIdAndUpdate(
+        foundProject.translations[0]._id,
+        { textareas },
+        {
+          new: true
+        }
+      );
+    })
+    .then((updatedTextAreas) => {
+      console.log('I am the updated text: ', updatedTextAreas);
+      //console.log('I am the _id: 'projectinquestion._id');
+      //res.render(`project/showtexts`);
+      res.redirect(`/project/${projectId}`);
+    })
+    .catch((error) => {
+      next(error);
+    });
+});
+
 router.post(
   '/:id/csv-file-upload',
   uploadCSV.single('filename'),
   (req, res, next) => {
     const id = req.params.id;
-    console.log(req.file, req.body);
+    //console.log(req.file, req.body);
     const csvfilepath = path.join(req.file.destination, req.file.filename);
     fs.readFile(csvfilepath, (err, file) => {
       const csvparsed = Papa.parse(file.toString(), { header: true });
@@ -139,7 +180,7 @@ router.post(
         texttypes.push(importData[i].texttype);
         textareas.push(importData[i].textarea);
       }
-      console.log(texttypes, textareas);
+      //console.log(texttypes, textareas);
 
       Textsubmission.create({
         language: 'english',
@@ -166,7 +207,7 @@ router.post(
 );
 
 router.post('/:id/exportgermancsv', (req, res, next) => {
-  console.log('exportgermancsv is triggered');
+  //console.log('exportgermancsv is triggered');
   const id = req.params.id;
   Project.findById(id)
     .populate({
@@ -248,49 +289,23 @@ router.post('/:id/delete', (req, res, next) => {
     });
 });
 
-router.get('/:id/edit/english', (req, res, next) => {
-  const id = req.params.id;
-  Project.findById(id)
-    .populate({
-      path: 'originalText translations',
-      populate: {
-        path: 'author'
-      }
-    })
-    .then((foundproject) => {
-      console.log(foundproject.translations[0].textareas);
-      const data = [];
-      for (let i = 0; i < foundproject.textstructure.length; ++i)
-        data.push({
-          texttype: foundproject.textstructure[i],
-          textarea: foundproject.originalText.textareas[i]
-        });
-      //console.log(foundproject.originalText);
-      res.render('project/edit', {
-        projectname: foundproject.projectname,
-        projectimage: foundproject.projectimage,
-        status: foundproject.status,
-        client: foundproject.client,
-        language: foundproject.originalText.language,
-        author: foundproject.originalText.author.name,
-        updateDate: foundproject.updateDate,
-        _id: foundproject._id,
-        data: data
-      });
-    });
-});
-
 router.get('/:id/edit', (req, res, next) => {
   const id = req.params.id;
-  Project.findById(id)
+  return Project.findById(id)
     .populate({
-      path: 'originalText translations',
+      path: 'originalText',
       populate: {
         path: 'author'
       }
     })
     .then((foundproject) => {
-      console.log(foundproject);
+      foundproject.populate({
+        path: 'translations',
+        populate: {
+          path: 'textareas'
+        }
+      });
+      //console.log(foundproject);
       const data = [];
       for (let i = 0; i < foundproject.textstructure.length; ++i)
         data.push({
@@ -321,21 +336,21 @@ router.post('/:id/edit', (req, res, next) => {
   const texttypes = req.body.select;
   const textareas = req.body.textarea;
 
-  console.log(
-    'types length ' + texttypes.length + 'areas length ' + textareas.length
-  );
+  //console.log(
+  //  'types length ' + texttypes.length + 'areas length ' + textareas.length
+  // );
   for (let i = 0; i < texttypes.length; i++) {
     let el = texttypes[i];
     let al = textareas[i];
     if ((el === 'mt') | (al === '')) {
-      console.log('working element ' + el);
+      //console.log('working element ' + el);
       texttypes.splice(i, 1);
       textareas.splice(i, 1);
       i--;
     }
   }
 
-  console.log(texttypes, textareas);
+  //console.log(texttypes, textareas);
 
   Project.findById(id).then((foundProject) => {
     //console.log('A project with or without an original text: ', foundProject);
@@ -428,6 +443,38 @@ router.post('/:id/edit', (req, res, next) => {
         });
     }
   });
+});
+
+router.get('/:id/edit/english', (req, res, next) => {
+  const id = req.params.id;
+  return Project.findById(id)
+    .populate({
+      path: 'originalText translations',
+      populate: {
+        path: 'author'
+      }
+    })
+    .then((foundproject) => {
+      //console.log(foundproject);
+      const data = [];
+      for (let i = 0; i < foundproject.textstructure.length; ++i)
+        data.push({
+          texttype: foundproject.textstructure[i],
+          textarea: foundproject.translations[0].textareas[i]
+        });
+      //console.log(foundproject.originalText);
+      res.render('project/editenglish', {
+        projectname: foundproject.projectname,
+        projectimage: foundproject.projectimage,
+        status: foundproject.status,
+        client: foundproject.client,
+        language: foundproject.originalText.language,
+        author: foundproject.originalText.author.name,
+        updateDate: foundproject.updateDate,
+        _id: foundproject._id,
+        data: data
+      });
+    });
 });
 
 router.post('/:id/ongoing', (req, res, next) => {
