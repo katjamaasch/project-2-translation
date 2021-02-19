@@ -248,16 +248,49 @@ router.post('/:id/delete', (req, res, next) => {
     });
 });
 
-router.get('/:id/edit', (req, res, next) => {
+router.get('/:id/edit/english', (req, res, next) => {
   const id = req.params.id;
   Project.findById(id)
     .populate({
-      path: 'originalText',
+      path: 'originalText translations',
       populate: {
         path: 'author'
       }
     })
     .then((foundproject) => {
+      console.log(foundproject.translations[0].textareas);
+      const data = [];
+      for (let i = 0; i < foundproject.textstructure.length; ++i)
+        data.push({
+          texttype: foundproject.textstructure[i],
+          textarea: foundproject.originalText.textareas[i]
+        });
+      //console.log(foundproject.originalText);
+      res.render('project/edit', {
+        projectname: foundproject.projectname,
+        projectimage: foundproject.projectimage,
+        status: foundproject.status,
+        client: foundproject.client,
+        language: foundproject.originalText.language,
+        author: foundproject.originalText.author.name,
+        updateDate: foundproject.updateDate,
+        _id: foundproject._id,
+        data: data
+      });
+    });
+});
+
+router.get('/:id/edit', (req, res, next) => {
+  const id = req.params.id;
+  Project.findById(id)
+    .populate({
+      path: 'originalText translations',
+      populate: {
+        path: 'author'
+      }
+    })
+    .then((foundproject) => {
+      console.log(foundproject);
       const data = [];
       for (let i = 0; i < foundproject.textstructure.length; ++i)
         data.push({

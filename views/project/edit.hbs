@@ -1,6 +1,6 @@
 
-
-
+<p class="important-note">Note: to delete a text, you only have to erase it from the field.</p>
+<br>
 <div>
   <form id="add-textblock-form" name="textblockform[0]" method="POST" action="/project/{{_id}}/edit">
 {{#each data}}
@@ -14,7 +14,7 @@
 </select>
 
 <label for="textarea" hidden="true">{{this.textarea}} </label>
-<input type="text" name="textarea" placeholder="Text" value="{{this.textarea}}">
+<input type="text" name="textarea" placeholder="Deleted Text" value="{{this.textarea}}">
 <br>
 <br>
 

@@ -63,35 +63,68 @@
     <div class= "grid-item"></div>
     <div class= "grid-item">
             {{#if @root.userIsPublisher}}
-    <a class="edit-or-csv-button" href="/project/{{_id}}/edit">Edit german text</a>
+            <form action="/project/{{_id}}/edit">
+
+            <button class="edit-or-csv-button">Edit german text</button>
+            </form>
+
     <br>
     {{/if}}
     {{#if userIsPublisher}}
     <form action="/project/{{_id}}/exportgermancsv" method="POST">
-    <button class="edit-or-csv-button">Export csv</button>
+    <button class="edit-or-csv-button">Export csv*</button>
     </form>
+    <p class="important-hint">* Please export only after completion!</p>
 </div>
 
 
 <div class= "grid-item">
-    <a class="edit-or-csv-button" href="">Edit english text</a>
+    <form action="/project/{{_id}}/edit/english">
+    <button class="edit-or-csv-button">
+        Edit english text
+    </button>
+    </form>
+
     <br>
     <form action="/project/{{_id}}/csv-file-upload" method="POST" enctype="multipart/form-data">
-        <input type="file" id="myFile" name="filename" class="edit-or-csv-button">
-        <input type="submit" class="edit-or-csv-button">
+
+<label for="file-upload" class="edit-or-csv-button custom-upload">
+    Upload csv file
+</label>
+        <input id="file-upload" type="file" name="filename" class="edit-or-csv-button hidden-input">
+<button class="edit-or-csv-button">
+Submit
+</button>
+
     </form>
 
 </div>
 
 
 <div class= "grid-item">
-    <a class="edit-or-csv-button" href="">Edit french text</a>
+    <form action="/project/{{_id}}/edit">
+    <button class="edit-or-csv-button">
+        Edit french text
+    </button>
+    </form>
     <br>
-    <a class="edit-or-csv-button" href="">Import csv</a>
+    <form action="/project/{{_id}}/csv-file-upload" method="POST" enctype="multipart/form-data">
+
+<label for="file-upload" class="edit-or-csv-button custom-upload">
+    Upload csv file
+</label>
+        <input id="file-upload" type="file" name="filename" class="edit-or-csv-button hidden-input">
+<button class="edit-or-csv-button">
+Submit
+</button>
+
+    </form>
 </div>
 </div>
 {{/if}}
 
 </div>
-</div>
+
+<br>
+
 
