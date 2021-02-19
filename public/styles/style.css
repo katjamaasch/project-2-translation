@@ -639,4 +639,12 @@ label {
   height: 50%;
 }
 
+.originaltext {
+  color: #1b998b;
+}
+
+.originaltext span {
+  text-transform: uppercase;
+}
+
 /*# sourceMappingURL=style.css.map */
