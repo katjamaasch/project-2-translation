@@ -64,7 +64,7 @@ router.post(
 
 router.get('/all', routeGuard, (req, res, next) => {
   const page = Number(req.query.page) || 1;
-  const limit = 5;
+  const limit = 3;
   const skip = (page - 1) * limit;
 
   let isLastPage;
