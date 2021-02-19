@@ -3,7 +3,9 @@
 
 
 <h2 class="entered-text-display-header"><strong>{{projectname}}</strong> ({{client}})</h2>
-
+{{#each translatedtextarea}}
+<h3>{{this}}</h3>
+{{/each}}
 <p class="project-log">author: <strong>{{author}}</strong>, created on <strong>{{date creationDate "DD/MM/YYYY"}}</strong>, last updated on <strong>{{date updateDate "DD/MM/YYYY"}}</strong> at <strong>{{date updateDate "HH:mm"}}</strong>.</p>
         <div class="statusses">
         <button class="status-{{status}}">
