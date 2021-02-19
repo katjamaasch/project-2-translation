@@ -474,6 +474,12 @@ router.get('/:id/edit/english', (req, res, next) => {
         _id: foundproject._id,
         data: data
       });
+    })
+    .catch(() => {
+      res.render('error', {
+        message:
+          'Sorry, you have to upload a csv-file with the translation first.'
+      });
     });
 });
 
