@@ -511,6 +511,7 @@ label {
 
 .ironhack-image {
   width: 40px;
+  margin-left: 25px;
 }
 
 .footer-notes {
@@ -520,8 +521,16 @@ label {
   color: #817f7f;
   padding-top: 15px;
   padding-bottom: 15px;
-  border-top: 2px;
-  border-top: solid 1 px #817f7f;
+  border-top: 1px;
+  border-top: solid #e6e6e6;
+  font-size: 1em;
+  /*background-color: white;*/
+  width: 100%;
+  margin-top: 20px;
+}
+
+.footer-comments {
+  padding-right: 25px;
 }
 
 /*.footer-notes {
@@ -536,34 +545,6 @@ label {
 }*/
 /*.spacer {
   flex: 1 0 auto;
-}*/
-/*.footer-notes {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-top: 20px;
-  margin-bottom: 20px;
-  font-size: 1em;
-  height: 100%;
-  color: $middle-grey;
-  //border-top: solid 1px $grey;
-  margin-top: 30px;
-}*/
-/*.footer-notes {
-  //display: flex;
-  //flex-direction: center;
-  //position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  //flex-grow: 1;
-  //align-items: flex-end;
-  width: 100%;
-  padding-top: 20px;
-  font-size: 1em;
-  bottom: 0;
-  text-align: left;
-  // margin-top: 100px;
 }*/
 /*.footer-notes {
   display: block;
