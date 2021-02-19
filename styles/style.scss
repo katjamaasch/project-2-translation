@@ -61,6 +61,22 @@ img {
 form {
   display: flex;
   flex-direction: column;
+  > input[type='text'],
+  > input[type='email'],
+  > input[type='password'] {
+    // show success!
+    &:valid {
+      background-image: url(images/chck.png);
+      background-size: 20px;
+      background-repeat: no-repeat;
+      background-position: 20px 20px;
+
+      // continue to hide the label
+      & + label {
+        opacity: 0;
+      }
+    }
+  }
 }
 
 input:not([type='checkbox']),
@@ -476,6 +492,7 @@ label {
 
 .secondary-select {
   background-color: $grey;
+  width: 294px;
 }
 
 .customwidth {
@@ -606,13 +623,14 @@ label {
 
 .error-message {
   font-size: 1.5em;
-  text-align: center;
+  // text-align: center;
 }
 
 .error-button {
-  width: 100px;
-  height: 100px;
-  border-color: red;
+  width: 300px;
+  height: 20px;
+  line-height: 0;
+  border-color: $red;
   animation-name: example;
   animation-duration: 0.2s;
   animation-iteration-count: 30;
@@ -620,9 +638,14 @@ label {
 
 @keyframes example {
   from {
-    border-color: red;
+    border-color: $red;
   }
   to {
-    border-color: yellow;
+    border-color: rgb(255, 230, 0);
   }
+}
+
+.error-image {
+  width: 50%;
+  height: 50%;
 }

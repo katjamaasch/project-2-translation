@@ -525,8 +525,11 @@ router.get('/:id', (req, res, next) => {
         data
       });
     })
-    .catch((error) => {
-      next(error);
+    .catch(() => {
+      res.render('errorwithoutlink', {
+        message: 'This project was not properly created.',
+        image: '/images/fail1.gif'
+      });
     });
 });
 

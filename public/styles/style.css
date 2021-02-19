@@ -61,6 +61,21 @@ form {
   flex-direction: column;
 }
 
+form > input[type='text']:valid,
+form > input[type='email']:valid,
+form > input[type='password']:valid {
+  background-image: url(images/chck.png);
+  background-size: 20px;
+  background-repeat: no-repeat;
+  background-position: 20px 20px;
+}
+
+form > input[type='text']:valid + label,
+form > input[type='email']:valid + label,
+form > input[type='password']:valid + label {
+  opacity: 0;
+}
+
 input:not([type='checkbox']),
 input:not([type='range']),
 textarea,
@@ -475,6 +490,7 @@ label {
 
 .secondary-select {
   background-color: #e6e6e6;
+  width: 294px;
 }
 
 .customwidth {
@@ -524,15 +540,13 @@ label {
   border-top: 1px;
   border-top: solid #e6e6e6;
   font-size: 1em;
-  /*background-color: white;*/
   width: 100%;
   margin-top: 20px;
 }
 
-.footer-comments {
+/*.footer-comments {
   padding-right: 25px;
-}
-
+}*/
 /*.footer-notes {
   display: flex;
   justify-content: space-between;
@@ -599,13 +613,13 @@ label {
 
 .error-message {
   font-size: 1.5em;
-  text-align: center;
 }
 
 .error-button {
-  width: 100px;
-  height: 100px;
-  border-color: red;
+  width: 300px;
+  height: 20px;
+  line-height: 0;
+  border-color: #7e2013;
   animation-name: example;
   animation-duration: 0.2s;
   animation-iteration-count: 30;
@@ -613,11 +627,16 @@ label {
 
 @keyframes example {
   from {
-    border-color: red;
+    border-color: #7e2013;
   }
   to {
-    border-color: yellow;
+    border-color: #ffe600;
   }
+}
+
+.error-image {
+  width: 50%;
+  height: 50%;
 }
 
 /*# sourceMappingURL=style.css.map */
