@@ -1,6 +1,9 @@
 const Project = require('./../models/project');
 const User = require('./../models/user');
 const Textsubmission = require('./../models/textSubmission');
+const Papa = require('papaparse');
+const path = require('path');
+const fs = require('fs');
 //const Textblock = require('./../models/textblock');
 
 ('use strict');
@@ -15,6 +18,10 @@ const storage = new multerStorageCloudinary.CloudinaryStorage({
 
 const uploadMiddleware = multer({
   storage: storage
+});
+
+const uploadCSV = multer({
+  dest: './csv-uploads'
 });
 
 const express = require('express');
@@ -116,6 +123,78 @@ router.post(
   }
 );
 
+router.post(
+  '/:id/csv-file-upload',
+  uploadCSV.single('filename'),
+  (req, res, next) => {
+    const id = req.params.id;
+    console.log(req.file, req.body);
+    const csvfilepath = path.join(req.file.destination, req.file.filename);
+    fs.readFile(csvfilepath, (err, file) => {
+      const csvparsed = Papa.parse(file.toString(), { header: true });
+      const importData = csvparsed.data;
+      const texttypes = [];
+      const textareas = [];
+      for (let i = 0; i < importData.length; ++i) {
+        texttypes.push(importData[i].texttype);
+        textareas.push(importData[i].textarea);
+      }
+      console.log(texttypes, textareas);
+
+      Textsubmission.create({
+        language: 'english',
+        textareas: textareas,
+        author: req.user._id
+      })
+        .then((transmissionText) => {
+          return Project.findByIdAndUpdate(
+            id,
+            {
+              translations: [transmissionText]
+            },
+            { new: true }
+          ).populate({
+            path: 'translations'
+          });
+        })
+        .then((updatedproject) => {
+          const translatedtextarea = updatedproject.translations[0].textareas;
+          res.redirect(`/project/${updatedproject._id}`);
+        });
+    });
+  }
+);
+
+router.post('/:id/exportgermancsv', (req, res, next) => {
+  console.log('exportgermancsv is triggered');
+  const id = req.params.id;
+  Project.findById(id)
+    .populate({
+      path: 'originalText'
+    })
+    .then((foundproject) => {
+      const data = [];
+      for (let i = 0; i < foundproject.textstructure.length; ++i)
+        data.push({
+          texttype: foundproject.textstructure[i],
+          textarea: foundproject.originalText.textareas[i]
+        });
+      //console.log('consolidated areas ', data);
+      let csvExport = Papa.unparse(data, {
+        quotes: false, //or array of booleans
+        quoteChar: '"',
+        escapeChar: '"',
+        delimiter: ';',
+        header: true,
+        newline: '\r\n',
+        skipEmptyLines: false, //other option is 'greedy', meaning skip delimiters, quotes, and whitespace.
+        columns: null //or array of strings
+      });
+      res.set('Content-Type', 'text/csv');
+      res.send(csvExport);
+    });
+});
+
 router.get('/:id/add', (req, res, next) => {
   const id = req.params.id;
   Project.findById(id)
@@ -169,16 +248,17 @@ router.post('/:id/delete', (req, res, next) => {
     });
 });
 
-router.get('/:id/edit', (req, res, next) => {
+router.get('/:id/edit/english', (req, res, next) => {
   const id = req.params.id;
   Project.findById(id)
     .populate({
-      path: 'originalText',
+      path: 'originalText translations',
       populate: {
         path: 'author'
       }
     })
     .then((foundproject) => {
+      console.log(foundproject.translations[0].textareas);
       const data = [];
       for (let i = 0; i < foundproject.textstructure.length; ++i)
         data.push({
@@ -200,40 +280,37 @@ router.get('/:id/edit', (req, res, next) => {
     });
 });
 
-/*
-router.post('/:id/edit', (req, res, next) => {
+router.get('/:id/edit', (req, res, next) => {
   const id = req.params.id;
-  let originalTextId;
-
-  console.log(req.body);
-  // get from the body the texttypes
-  const texttypes = req.body.select;
-  const textareas = req.body.textarea;
   Project.findById(id)
-    .then((foundProject) => {
-      originalTextId = foundProject.originalText;
-      console.log(originalTextId);
-      return Project.findByIdAndUpdate(id, texttypes);
+    .populate({
+      path: 'originalText translations',
+      populate: {
+        path: 'author'
+      }
     })
-    .then(() => {
-      console.log('textareas', textareas);
-      return Textsubmission.findByIdAndUpdate(
-        originalTextId,
-        { textareas },
-        {
-          new: true
-        }
-      );
-    })
-    .then((updatedtext) => {
-      console.log(updatedtext);
-      res.redirect(`/project/${id}`);
-    })
-    .catch((error) => {
-      next(error);
+    .then((foundproject) => {
+      console.log(foundproject);
+      const data = [];
+      for (let i = 0; i < foundproject.textstructure.length; ++i)
+        data.push({
+          texttype: foundproject.textstructure[i],
+          textarea: foundproject.originalText.textareas[i]
+        });
+      //console.log(foundproject.originalText);
+      res.render('project/edit', {
+        projectname: foundproject.projectname,
+        projectimage: foundproject.projectimage,
+        status: foundproject.status,
+        client: foundproject.client,
+        language: foundproject.originalText.language,
+        author: foundproject.originalText.author.name,
+        updateDate: foundproject.updateDate,
+        _id: foundproject._id,
+        data: data
+      });
     });
 });
-*/
 
 router.post('/:id/edit', (req, res, next) => {
   const id = req.params.id;
@@ -279,7 +356,7 @@ router.post('/:id/edit', (req, res, next) => {
             },
             { new: true }
           ).populate({
-            path: 'originalText',
+            path: 'originalText translations',
             populate: {
               path: 'author'
             }
@@ -287,14 +364,6 @@ router.post('/:id/edit', (req, res, next) => {
         })
         .then((populatedproject) => {
           //console.log("I'm the populatedproject: ", populatedproject);
-          const data = [];
-
-          for (let i = 0; i < populatedproject.textstructure.length; ++i)
-            data.push({
-              texttype: populatedproject.textstructure[i],
-              textarea: populatedproject.originalText.textareas[i]
-            });
-
           res.redirect(`/project/${populatedproject._id}`);
         })
         .catch((error) => {
@@ -379,19 +448,14 @@ router.get('/:id', (req, res, next) => {
   const id = req.params.id;
   Project.findById(id)
     .populate({
-      path: 'originalText creator',
+      path: 'originalText creator translations',
       populate: {
         path: 'author'
       }
     })
     .then((foundproject) => {
-      //console.log(foundproject);
-      const data = [];
-      for (let i = 0; i < foundproject.textstructure.length; ++i)
-        data.push({
-          texttype: foundproject.textstructure[i],
-          textarea: foundproject.originalText.textareas[i]
-        });
+      const data = transform_project_for_editviewdata(foundproject);
+
       res.render('project/showtexts', {
         projectname: foundproject.projectname,
         projectimage: foundproject.projectimage,
@@ -431,7 +495,7 @@ router.post('/:id', (req, res, next) => {
     )
 
       .populate({
-        path: 'originalText',
+        path: 'originalText translations',
         populate: {
           path: 'author'
         }
@@ -460,5 +524,32 @@ router.post('/:id', (req, res, next) => {
       });
   });
 });
+
+function transform_project_for_editviewdata(populatedproject) {
+  const data = [];
+  let englt = [];
+  let frent = [];
+
+  for (const t of populatedproject.translations) {
+    if (t.language === 'english') englt = t.textareas;
+    if (t.language === 'french') frent = t.textareas;
+  }
+
+  for (let i = 0; i < populatedproject.textstructure.length; ++i) {
+    let englarea = '';
+    let frenarea = '';
+    if (englt.length > i) englarea = englt[i];
+    if (frent.length > i) frenarea = frent[i];
+
+    data.push({
+      texttype: populatedproject.textstructure[i],
+      origtextarea: populatedproject.originalText.textareas[i],
+      engtextarea: englarea,
+      frentextarea: frenarea
+    });
+  }
+
+  return data;
+}
 
 module.exports = router;

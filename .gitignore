@@ -5,6 +5,10 @@
 logs
 *.log*
 
+*.css.map
+
+csv-uploads/*
+
 # Runtime data
 pids
 *.pid

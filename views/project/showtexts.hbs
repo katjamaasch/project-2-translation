@@ -3,7 +3,9 @@
 
 
 <h2 class="entered-text-display-header"><strong>{{projectname}}</strong> ({{client}})</h2>
-
+{{#each translatedtextarea}}
+<h3>{{this}}</h3>
+{{/each}}
 <p class="project-log">author: <strong>{{author}}</strong>, created on <strong>{{date creationDate "DD/MM/YYYY"}}</strong>, last updated on <strong>{{date updateDate "DD/MM/YYYY"}}</strong> at <strong>{{date updateDate "HH:mm"}}</strong>.</p>
         <div class="statusses">
         <button class="status-{{status}}">
@@ -49,39 +51,80 @@
     </div>
 
     <div class="grid-item">
-    <p class= "display-{{this.texttype}}"> {{this.textarea}}</p>
+    <p class= "display-{{this.texttype}}"> {{this.origtextarea}}</p>
     </div>
 
-    <div class="grid-item"></div>
-    <div class="grid-item"></div>
+    <div class="grid-item">{{this.engtextarea}}</div>
+    <div class="grid-item">{{this.frentextarea}}</div>
 </div>
+{{/each}}
 
-    {{/each}}
 <div class="subgrid" >  <!--  -->
     <div class= "grid-item"></div>
     <div class= "grid-item">
             {{#if @root.userIsPublisher}}
-    <a class="edit-or-csv-button" href="/project/{{_id}}/edit">Edit german text</a>
+            <form action="/project/{{_id}}/edit">
+
+            <button class="edit-or-csv-button">Edit german text</button>
+            </form>
+
     <br>
     {{/if}}
     {{#if userIsPublisher}}
-    <a class="edit-or-csv-button" href="">Export csv</a>
+    <form action="/project/{{_id}}/exportgermancsv" method="POST">
+    <button class="edit-or-csv-button">Export csv*</button>
+    </form>
+    <p class="important-hint">* Please export only after completion!</p>
 </div>
 
-<div class= "grid-item">
-    <a class="edit-or-csv-button" href="">Edit english text</a>
-    <br>
-    <a class="edit-or-csv-button" href="">Import csv</a>
-</div>
 
 <div class= "grid-item">
-    <a class="edit-or-csv-button" href="">Edit french text</a>
+    <form action="/project/{{_id}}/edit/english">
+    <button class="edit-or-csv-button">
+        Edit english text
+    </button>
+    </form>
+
     <br>
-    <a class="edit-or-csv-button" href="">Import csv</a>
+    <form action="/project/{{_id}}/csv-file-upload" method="POST" enctype="multipart/form-data">
+
+<label for="file-upload" class="edit-or-csv-button custom-upload">
+    Upload csv file
+</label>
+        <input id="file-upload" type="file" name="filename" class="edit-or-csv-button hidden-input">
+<button class="edit-or-csv-button">
+Submit
+</button>
+
+    </form>
+
+</div>
+
+
+<div class= "grid-item">
+    <form action="/project/{{_id}}/edit">
+    <button class="edit-or-csv-button">
+        Edit french text
+    </button>
+    </form>
+    <br>
+    <form action="/project/{{_id}}/csv-file-upload" method="POST" enctype="multipart/form-data">
+
+<label for="file-upload" class="edit-or-csv-button custom-upload">
+    Upload csv file
+</label>
+        <input id="file-upload" type="file" name="filename" class="edit-or-csv-button hidden-input">
+<button class="edit-or-csv-button">
+Submit
+</button>
+
+    </form>
 </div>
 </div>
 {{/if}}
 
 </div>
-</div>
+
+<br>
+
 

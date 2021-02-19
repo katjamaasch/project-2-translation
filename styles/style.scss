@@ -467,6 +467,8 @@ label {
   display: grid;
   grid-template-rows: 1fr;
   background-color: white;
+  box-shadow: 6px -5px 10px $middle-grey;
+  margin-bottom: 3em;
 }
 
 .subgrid {
@@ -487,7 +489,9 @@ label {
 
 .edit-or-csv-button {
   border: 1px solid rgb(158, 158, 158);
-  padding: 2px 40px;
+  padding: 2px 10px;
+  width: 214px;
+  cursor: pointer;
 }
 
 .footer.notes {
@@ -554,4 +558,29 @@ label {
 
 .sign-out-button {
   background-color: transparent;
+}
+
+.hidden-input {
+  display: none;
+}
+
+.custom-upload {
+  text-align: center;
+}
+
+.important-hint {
+  color: $red;
+  font-size: 0.68em;
+  line-height: 1.2em;
+}
+
+.important-note {
+  color: $red;
+  padding: 1em 3em;
+  background-color: $grey;
+  border-radius: 25px;
+}
+
+::placeholder {
+  color: $red;
 }
