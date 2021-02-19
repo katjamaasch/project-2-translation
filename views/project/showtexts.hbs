@@ -1,12 +1,14 @@
 
 
 
-
+<div class="container customwidth">
+    <div class="row">
+        <div class="col-sm-2">
+    <img src="{{projectimage}}" alt="thumbnail" class="thumbnail-text-view"></div>
+<div class="col-lg-10 header-and-paragraph">
 <h2 class="entered-text-display-header"><strong>{{projectname}}</strong> ({{client}})</h2>
-{{#each translatedtextarea}}
-<h3>{{this}}</h3>
-{{/each}}
-<p class="project-log">author: <strong>{{author}}</strong>, created on <strong>{{date creationDate "DD/MM/YYYY"}}</strong>, last updated on <strong>{{date updateDate "DD/MM/YYYY"}}</strong> at <strong>{{date updateDate "HH:mm"}}</strong>.</p>
+
+<p>author: <strong>{{author}}</strong>, created on <strong>{{date creationDate "DD/MM/YYYY"}}</strong>, last updated on <strong>{{date updateDate "DD/MM/YYYY"}}</strong> at <strong>{{date updateDate "HH:mm"}}</strong>.</p>
         <div class="statusses">
         <button class="status-{{status}}">
         {{status}}</button>
@@ -24,22 +26,25 @@
             </div>
 
         </div>
-<br>
+</div>
+</div>
+</div>
+
 
 <div class="container customwidth">
 
 <div class="subgrid">
     <div class="grid-item">
-        <h5>Texttype</h5>
+        <h5 class="textheader">Texttype</h5>
     </div>
     <div class="grid-item">
-        <h5>German Text</h5>
+        <h5 class="textheader">German Text</h5>
     </div>
         <div class="grid-item">
-        <h5>English Text</h5>
+        <h5 class="textheader">English Text</h5>
     </div>
         <div class="grid-item">
-        <h5>French Text</h5>
+        <h5 class="textheader">French Text</h5>
     </div>
 </div>
 
@@ -63,7 +68,7 @@
     <div class= "grid-item"></div>
     <div class= "grid-item">
             {{#if @root.userIsPublisher}}
-            <form action="/project/{{_id}}/edit">
+            <form action="/project/{{_id}}/edit" class="textheader">
 
             <button class="edit-or-csv-button">Edit german text</button>
             </form>
@@ -72,14 +77,14 @@
     {{/if}}
     {{#if userIsPublisher}}
     <form action="/project/{{_id}}/exportgermancsv" method="POST">
-    <button class="edit-or-csv-button">Export csv*</button>
+    <button class="edit-or-csv-button custom-upload">Export csv*</button>
     </form>
     <p class="important-hint">* Please export only after completion!</p>
 </div>
 
 
 <div class= "grid-item">
-    <form action="/project/{{_id}}/edit/english">
+    <form action="/project/{{_id}}/edit/english" class="textheader">
     <button class="edit-or-csv-button">
         Edit english text
     </button>
@@ -102,7 +107,7 @@ Submit
 
 
 <div class= "grid-item">
-    <form action="/project/{{_id}}/edit">
+    <form action="/project/{{_id}}/edit" class="textheader">
     <button class="edit-or-csv-button">
         Edit french text
     </button>

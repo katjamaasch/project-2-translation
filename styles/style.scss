@@ -238,6 +238,24 @@ label {
   }
 }
 
+.thumbnail-text-view {
+  border-radius: 70px;
+  height: 100px;
+  width: 100px;
+  margin: 1em 0 1em 2em;
+}
+
+.xxx {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  height: 5em;
+}
+
+.header-and-paragraph {
+  text-align: left;
+  padding: 1em 0 0 1em;
+}
+
 .allprojects {
   display: flex;
   flex-direction: row;
@@ -310,7 +328,11 @@ label {
 .statusses {
   display: flex;
   flex-direction: row;
-  padding-bottom: 4em;
+  //padding-left: 5.4em;
+  padding-bottom: 1em;
+  margin-bottom: 0;
+  //margin-top: 0;
+  //padding-top: 0;
 }
 
 .status-updates {
@@ -357,12 +379,8 @@ label {
 }
 
 .entered-text-display-header {
-  background-color: $grey;
-  color: $middle-grey;
-  font-weight: 200;
   border-radius: 25px;
   margin-bottom: 1em;
-  text-align: center;
 }
 
 .textarea {
@@ -396,7 +414,6 @@ label {
 .project-log {
   color: $middle-grey;
   font-size: 0.7em;
-  text-align: center;
   span {
     text-transform: capitalize;
   }
@@ -468,7 +485,8 @@ label {
   grid-template-rows: 1fr;
   background-color: white;
   box-shadow: 0px 0px 10px $middle-grey;
-  margin-bottom: 3em;
+  margin-bottom: 2em;
+  //margin-bottom: 3em;
 }
 
 .subgrid {
@@ -476,7 +494,7 @@ label {
 
   display: grid;
   grid-template-rows: 1fr;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 0.65fr 1fr 1fr 1fr;
   align-content: space-around;
   border-bottom: 0.1rem dotted rgb(158, 158, 158);
   padding-top: 5px;
@@ -583,6 +601,8 @@ label {
 
 .custom-upload {
   text-align: center;
+  background-color: #7e2013;
+  color: white;
 }
 
 .important-hint {
@@ -600,4 +620,8 @@ label {
 
 ::placeholder {
   color: $red;
+}
+
+.textheader {
+  padding: 1em 0;
 }
