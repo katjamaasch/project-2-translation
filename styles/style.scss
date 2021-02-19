@@ -512,7 +512,24 @@ label {
   cursor: pointer;
 }
 
-.footer.notes {
+.ironhack-image {
+  width: 40px;
+  //padding-top: 15px;
+  //padding-bottom: 15px;
+}
+
+.footer-notes {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  color: $middle-grey;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border-top: 2px;
+  border-top: solid 1 px $middle-grey;
+}
+
+/*.footer-notes {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -521,7 +538,7 @@ label {
   margin-top: 30px;
   background-color: $grey;
   margin-bottom: 30px;
-}
+}*/
 
 /*.spacer {
   flex: 1 0 auto;

@@ -478,7 +478,8 @@ router.get('/:id/edit/english', (req, res, next) => {
     .catch(() => {
       res.render('error', {
         message:
-          'Sorry, you have to upload a csv-file with the translation first.'
+          'Sorry, you have to upload a csv-file with the translation first.',
+        image: 'fail-gifs/fail1.gif'
       });
     });
 });

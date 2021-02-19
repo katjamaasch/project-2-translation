@@ -509,17 +509,31 @@ label {
   cursor: pointer;
 }
 
-.footer.notes {
+.ironhack-image {
+  width: 40px;
+}
+
+.footer-notes {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  color: #817f7f;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border-top: 2px;
+  border-top: solid 1 px #817f7f;
+}
+
+/*.footer-notes {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding-top: 30px;
   padding-bottom: 30px;
   margin-top: 30px;
-  background-color: #e6e6e6;
+  background-color: $grey;
   margin-bottom: 30px;
-}
-
+}*/
 /*.spacer {
   flex: 1 0 auto;
 }*/
