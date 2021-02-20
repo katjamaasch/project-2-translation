@@ -5,51 +5,55 @@
 
 <br>
 <div>
+
   <form id="add-textblock-form" name="textblockform[0]" method="POST" action="/project/{{_id}}/edit">
-{{#each data}}
-<select name="select">
-    <option name="default" value="mt">--Please choose an option--</option>
-    <option value="title" {{ifSelected this.texttype "title"}}>Title</option>
-    <option value="subtitle" {{ifSelected this.texttype "subtitle"}}>Subtitle</option>
-    <option value="headline" {{ifSelected this.texttype "headline"}}>Headline</option>
-    <option value="subheadline" {{ifSelected this.texttype "subheadline"}}>Subheadline</option>
-    <option value="copytext" {{ifSelected this.texttype "copytext"}}>Copytext</option>
-</select>
+  {{#each data}}
+  <select name="select">
+      <option name="default" value="mt">--Please choose an option--</option>
+      <option value="title" {{ifSelected this.texttype "title"}}>Title</option>
+      <option value="subtitle" {{ifSelected this.texttype "subtitle"}}>Subtitle</option>
+      <option value="headline" {{ifSelected this.texttype "headline"}}>Headline</option>
+      <option value="subheadline" {{ifSelected this.texttype "subheadline"}}>Subheadline</option>
+      <option value="copytext" {{ifSelected this.texttype "copytext"}}>Copytext</option>
+  </select>
 
-<label for="textarea" hidden="true">{{this.textarea}} </label>
-<input type="text" name="textarea" placeholder="Deleted Text" value="{{this.textarea}}">
-<br>
-<br>
+  <label for="textarea" hidden="true">{{this.textarea}} </label>
+  <input type="text" name="textarea" placeholder="Deleted Text" value="{{this.textarea}}">
+  <br>
+  <br>
 
 
-{{/each}}
-<div id="top_level">
-      <h5>Add new text blocks</h5>
-   <select name="select[{{@index}}]" class="secondary-select">
-      <option name="default" value="">--Please choose an option--</option>
-      <option name="title" value="title" class="selected-option">Title</option>
-      <option name="title" value="subtitle" class="selected-option">Subtitle</option>
-      <option name="headline" value="headline" class="selected-option">Headline</option>
-      <option name="subheadline" value="subheadline" class="selected-option">Subheadline</option>
-      <option name="copytext" value="copytext" class="selected-option">Copytext</option>
-   </select>    
-   <br>
-   <textarea name="textarea[{{@index}}]" form="add-textblock-form" class="secondary-select" placeholder="Enter Text here..."></textarea>
+  {{/each}}
+
+
+  <div id="top_level">
+        <h5>Add new text blocks</h5>
+    <select name="select[{{@index}}]" class="secondary-select">
+        <option name="default" value="">--Please choose an option--</option>
+        <option name="title" value="title" class="selected-option">Title</option>
+        <option name="title" value="subtitle" class="selected-option">Subtitle</option>
+        <option name="headline" value="headline" class="selected-option">Headline</option>
+        <option name="subheadline" value="subheadline" class="selected-option">Subheadline</option>
+        <option name="copytext" value="copytext" class="selected-option">Copytext</option>
+    </select>    
+    <br>
+    <textarea name="textarea[{{@index}}]" form="add-textblock-form" class="secondary-select" placeholder="Enter Text here..."></textarea>
    </div>
 
-   <div class="dash-submit">
+
+   <div class="dash-submit ">
      <button class="dash-submit-button" type="submit" value="Submit all texts">
 Submit all texts
      </button>
    </div>
-</form>
+  </form>
 
+   <div class="dash-add ">
+      <button name="addbutton" class="dash-add-button" onclick="addTextblockFunction()">Add Textblock</button>
+  </div>
+  
 
-<div class="dash-add">
-    <button name="addbutton" class="dash-add-button" onclick="addTextblockFunction()">Add Textblock</button>
 </div>
-
-
 
 <script>
 

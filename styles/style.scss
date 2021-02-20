@@ -128,6 +128,13 @@ input [type='radio'] {
 
 /*why is selected role not displayed in black?*/
 
+.pagination-button {
+  width: 10em;
+  height: 2em;
+  line-height: normal;
+  padding: 1em 1em;
+}
+
 textarea {
   min-height: 8em;
   resize: vertical;
