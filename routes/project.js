@@ -477,7 +477,7 @@ router.get('/:id/edit/english', (req, res, next) => {
       });
     })
     .catch(() => {
-      res.render('error', {
+      res.render('errorproject', {
         message:
           'Sorry, you have to upload a csv-file with the translation first.',
         image: '/images/no.gif',

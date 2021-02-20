@@ -49,12 +49,17 @@
 
     {{/each}}
 
-<div>
+<div class="pagination-buttons">
     {{#if previousPage}} 
-    <a href="/project/all/?page={{previousPage}}">Previous</a>
+    <form action="/project/all/?page={{previousPage}}">
+        <button class="pagination-button">ᐊ Previous</button>
+    </form>
     {{/if}}
     {{#if nextPage}}
-    <a href="/project/all/?page={{nextPage}}">Next</a>
+
+        <form action="/project/all/?page={{nextPage}}">
+        <button class="pagination-button">Next ᐅ</button>
+    </form>
     {{/if}}
 </div>
 
