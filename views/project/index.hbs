@@ -51,15 +51,10 @@
 
 <div class="pagination-buttons">
     {{#if previousPage}} 
-    <form action="/project/all/?page={{previousPage}}">
-        <button class="pagination-button">ᐊ Previous</button>
-    </form>
+    <a href="/project/all/?page={{previousPage}}">ᐊ Previous</a>
     {{/if}}
     {{#if nextPage}}
-
-        <form action="/project/all/?page={{nextPage}}">
-        <button class="pagination-button">Next ᐅ</button>
-    </form>
+    <a href="/project/all/?page={{nextPage}}">Next ᐅ</a>
     {{/if}}
 </div>
 

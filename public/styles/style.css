@@ -121,14 +121,29 @@ input [type='radio'] {
   color: black;
 }
 
-/*why is selected role not displayed in black?*/
-.pagination-button {
-  width: 10em;
-  height: 2em;
-  line-height: normal;
-  padding: 1em 1em;
+.pagination-buttons {
+  padding-left: 4.5em;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  padding-right: 9em;
+  padding-left: 9em;
+  padding-top: 2em;
+  padding-bottom: 2em;
 }
 
+.pagination-buttons a {
+  width: 10em;
+  text-align: center;
+  background-color: #e6e6e6;
+  height: 2em;
+  line-height: 0.3em;
+  padding: 1em 1em;
+  border-radius: 50px;
+  border: 1px solid #817f7f;
+}
+
+/*why is selected role not displayed in black?*/
 textarea {
   min-height: 8em;
   resize: vertical;
@@ -548,7 +563,6 @@ label {
   padding-bottom: 15px;
   /*border-top: 1px;
   border-top: solid $grey;*/
-  background-color: white;
   font-size: 1em;
   margin-left: -280px;
   width: 1350px;
